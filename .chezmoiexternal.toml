@@ -1,0 +1,14 @@
+[".config/alacritty/catppuccin"]
+  type = "git-repo"
+  url = "https://github.com/catppuccin/alacritty.git"
+  refreshPeriod = "168h"
+
+[".config/nvim"]
+  type = "archive"
+  url = "https://github.com/AstroNvim/AstroNvim/archive/master.tar.gz"
+  stripComponents = 1
+  refreshPeriod = "168h"
+
+[".zgenom"]
+  type = "git-repo"
+  url = "https://github.com/jandamm/zgenom.git"

@@ -1,0 +1,35 @@
+#!/bin/env bash
+
+get() {
+  connection=`nmcli -t connection show --active`
+
+  if [[ -z $connection ]]; then
+    # when there's no network connection
+    jq -ncM "{ device: \"NONE\" }"
+    return 0
+  fi
+
+  ethernet=`echo $connection | grep 'ethernet' | cut -f 1 -d ':'`
+
+  if [[ -n $ethernet ]]; then
+    # connected to ethernet (named $ethernet)
+    jq -ncM "{ device: \"ETHERNET\", name: \"$ethernet\" }"
+    return 0
+  fi
+
+  wifi=`echo $connection | grep 'wireless' | cut -f 1 -d ':'`
+  wifi_signal=`nmcli -t -fields ACTIVE,SIGNAL device wifi | awk -F ':' '{ if ($1 == "yes") print $2 }'`
+
+  jq -ncM "{ device: \"WIFI\", name: \"$wifi\", signal: \"$wifi_signal\" }"
+}
+
+# initial value
+get
+
+# https://github.com/waltinator/net-o-matic/blob/master/net-o-matic#L152
+ip monitor address | \
+  grep -E --line-buffered \
+  '[[:digit:]]+: [[:alnum:]]+[[:space:]]+inet[[:space:]].* scope global ' | \
+  while read line ; do
+    get
+  done

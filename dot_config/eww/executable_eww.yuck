@@ -1,0 +1,24 @@
+; Fetch system info here
+(defpoll bt :interval "1s" :initial "{}" "scripts/bluetooth")
+(defpoll updates :interval "5h" :initial "0" "scripts/updates")
+(deflisten net :initial "{}" "scripts/network")
+(deflisten workspace :initial "[]" "scripts/workspace")
+(deflisten player :initial "[]" "scripts/playerctl.py")
+
+(defpoll time :interval "1s" `date +'{"hour":"%H","min":"%M","sec":"%S","pretty":"%a, %e %b","day":"%A","month":"%B","month_short":"%b","dom":"%e","year":"%Y","day_num":"%d","month_num":"%m","year_num":"%y"}'`)
+(defpoll session :interval "48h" "scripts/session")
+(defpoll uptime :interval "48h" "uptime --pretty | ./scripts/uptime.awk")
+
+(defpoll vol :interval "1s"
+  "amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
+(defpoll muted :interval "1s"
+  "amixer -D pulse sget Master | grep '\\[on\\]' -q && echo 'false' || echo 'true'")
+
+; Some variables
+(defvar player_index 0)
+
+; Include widgets
+(include "bar/eww.yuck")
+(include "calendar/eww.yuck")
+(include "controls/eww.yuck")
+(include "dashboard/eww.yuck")

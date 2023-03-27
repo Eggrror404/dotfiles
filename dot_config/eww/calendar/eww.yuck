@@ -1,0 +1,26 @@
+;; Created   by https://github.com/rxyhn
+;; Designed  by https://github.com/rxyhn
+;; Maintaned by https://github.com/rxyhn
+
+(defpoll calendar :interval "10h"
+  `date +'{"day": "%d", "month": "%m", "year": "%y"}'`)
+
+;; Calendar Widgets ;;
+(defwidget cal []
+  (box :class "cal-box" 
+       :orientation "v"
+   (box :class "cal-inner-box"
+    (calendar :class "cal" 
+              :day {calendar.day}
+              :month {calendar.month}
+              :year {calendar.year}))))
+
+;; Calendar Windows ;;
+(defwindow calendar
+  :monitor 0
+  :geometry (geometry :x "25px" 
+             :y "70%" 
+             :width "270px" 
+             :height "60px")
+  (cal))
+

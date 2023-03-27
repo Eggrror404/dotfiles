@@ -1,0 +1,20 @@
+@import "_macchiato.scss";
+
+@import "bar/eww.scss";
+@import "calendar/eww.scss";
+@import "controls/eww.scss";
+@import "dashboard/eww.scss";
+
+// Global
+* {
+  all: unset;
+}
+
+scale trough {
+  all: unset;
+  background-color: $surface1;
+  border-radius: 5px;
+  min-height: 80px;
+  min-width: 10px;
+  margin: 0.3rem 0 0.3rem 0;
+}

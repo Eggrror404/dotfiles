@@ -1,0 +1,87 @@
+(defwidget db-top []
+  (box :class "db-top"
+       :orientation "h"
+       :vexpand false
+       :hexpand false
+       :height 25
+    (box :orientation "h"
+         :space-evenly false
+         :spacing 10
+      (box :class "pfp"
+           :width 25
+           :halign "start"
+           :style "background-image: url(\"file:////home/eggrror404/Pictures/rosewater-cat.png\");")
+      (label :class "top-welcome"
+             :hailgn "start"
+             :text "Welcome ${session.fullname}"))
+    (box :orientation "h"
+         :space-evenly false
+         :halign "end"
+         :spacing 5
+      (button :class "btn btn-launcher"
+              :onclick "scripts/popup launcher" "")
+      (button :class "btn btn-game"
+              :onclick "scripts/popup game" "󰊗")
+      (button :class "btn btn-screenshot"
+              :onclick "scripts/popup screenshot" ""))))
+
+(defwidget session []
+  (box :class "widget db-session"
+       :orientation "h"
+       :vexpand false
+       :hexpand false
+       :space-evenly false
+       :height 100
+    (box :class "pfp"
+         :width 85
+         :style "background-image: url(\"file:////home/eggrror404/Pictures/rosewater-cat.png\");")
+    (box :class "session-text"
+         :orientation "v"
+         :vexpand false
+         :hexpand true
+         :valign "center"
+         :space-evenly false
+         :spacing 4
+      (label :class "session-name"
+             :halign "center"
+             :text "${session.sessionName}@${session.username}")
+      (label :class "session-uptime"
+             :halign "center"
+             :wrap true
+             :text {session.uptime}))))
+
+(defwidget systray []
+  (box :class "widget db-systray"
+       :orientation "v"
+       :vexpand false
+       :hexpand false
+       :space-evenly false
+       :spacing 6
+    ;; (label :class "label"
+    ;;        :halign "start"
+    ;;        :text "System Tray")
+    (system-tray :class ""
+                 :pack-direction "ltr")))
+
+(defwidget db []
+  (box :class "db"
+       :orientation "v"
+       :vexpand false
+       :hexpand false
+       :space-evenly false
+       :spacing 10
+    (db-top)
+    (session)
+    (systray)))
+
+; dashboard window
+(defwindow dashboard
+  :geometry (geometry :x "4" 
+                      :y "0" 
+                      :height "90%" 
+                      :width "350px"
+                      :anchor "left center")
+  :monitor 0
+  :hexpand "false"
+  :vexpand "false"
+  (db))

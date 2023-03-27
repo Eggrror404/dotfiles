@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+open_widget() {
+    WIDGET_NAME=$1
+    LOCK_FILE="$HOME/.cache/eww-$WIDGET_NAME.lock"
+    EWW_BIN="/usr/bin/eww"
+
+    run() {
+        ${EWW_BIN} open "$WIDGET_NAME"
+    }
+
+    # Run eww daemon if not running
+    if [[ ! $(eww ping) ]]; then
+        ${EWW_BIN} daemon
+        sleep 1
+    fi
+
+    # Open widgets
+    if [[ ! -f "$LOCK_FILE" ]]; then
+        touch "$LOCK_FILE"
+        run
+    else
+        ${EWW_BIN} close "$WIDGET_NAME"
+        rm "$LOCK_FILE"
+    fi
+}
+
+# don't launch immediately so eww doesn't freeze
+sleep 0.05
+
+if [ "$1" = "launcher" ]; then
+    sh "$HOME/.config/rofi/scripts/launcher.sh"
+elif [ "$1" = "bluetooth" ]; then
+    blueman-manager
+elif [ "$1" = "network" ]; then
+    kitty nmtui
+elif [ "$1" = "audio" ]; then
+    sh "$HOME/.config/rofi/scripts/applets/audio.sh"
+elif [ "$1" = "game" ]; then
+    sh "$HOME/.config/rofi/scripts/launch-game-lib.sh"
+elif [ "$1" = "screenshot" ]; then
+    sh "$HOME/.config/rofi/scripts/applets/screenshot.sh"
+elif [ "$1" = "dashboard" ]; then
+    open_widget dashboard
+elif [ "$1" = "more" ]; then
+    open_widget controls
+elif [ "$1" = "calendar" ]; then
+    open_widget calendar
+elif [ "$1" = "update" ]; then
+    alacritty --hold -e sh -c 'yay; eww update updates=`~/.config/eww/scripts/updates`'
+fi

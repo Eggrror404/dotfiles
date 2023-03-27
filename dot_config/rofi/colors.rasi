@@ -1,0 +1,21 @@
+configuration {
+    font:                           "FantasqueSansMono Nerd Font 14";
+    hover-select:                   true;
+    me-select-entry:                "";
+    me-accept-entry:                "MousePrimary";
+}
+
+* {
+    background-color:               transparent;
+    background-solid:               #24273A;
+    background:                     #24273AC8;
+    text-color:                     #CAD3F5;
+    primary:                        #8AADF4;
+    secondary:                      #8BD5CA;
+    urgent:                         #EE99A0;
+
+    background-alt:                 #1E2030C8;
+    foreground:                     @text-color;
+    selected:                       @primary;
+    active:                         @secondary;
+}

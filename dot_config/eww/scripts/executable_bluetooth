@@ -1,0 +1,23 @@
+#!/usr/bin/sh
+
+devices=`bluetoothctl devices Connected | cut -f 3- -d ' '`
+
+if [ -z "$devices" ]; then
+	devices=`bluetoothctl devices Paired | cut -f 3- -d ' '`
+
+  if [ -z "$devices" ]; then
+    devices="No devices"
+  else
+	  devices="Paired Devices:\n${devices}"
+  fi
+else
+	devices="Connected Devices:\n${devices}"
+fi
+
+if ( bluetoothctl show | grep 'Powered: yes' >> /dev/null ); then
+	power='true'
+else
+	power='false'
+fi
+
+jq -n "{ devices: \"$devices\", power: $power }"

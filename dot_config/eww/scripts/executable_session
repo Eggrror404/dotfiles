@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+username=$(whoami)
+fullname=$(getent passwd $username | cut -d ':' -f 5)
+sessionname=$XDG_CURRENT_DESKTOP
+uptime=$(uptime -p)
+
+jq -ncM "{ username: \"$username\", fullname: \"$fullname\", sessionName: \"$sessionname\", uptime: \"$uptime\" }"

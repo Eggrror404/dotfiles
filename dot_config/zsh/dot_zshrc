@@ -1,0 +1,67 @@
+
+# load zgenom
+source "${HOME}/.zgenom/zgenom.zsh"
+
+# Check for plugin and zgenom updates every 7 days
+# Does not increase the startup time.
+zgenom autoupdate
+
+# if the init script doesn't exist
+if ! zgenom saved; then
+    echo "Creating a zgenom save"
+
+    # Ohmyzsh base library
+    zgenom ohmyzsh
+
+    # plugins
+    zgenom ohmyzsh plugins/git
+    zgenom ohmyzsh plugins/sudo
+    zgenom ohmyzsh plugins/command-not-found
+
+    # completions
+    # zgenom load --completion
+
+    # Bulk load
+    zgenom loadall <<EOPLUGINS
+    zsh-users/zsh-syntax-highlighting
+    zsh-users/zsh-autosuggestions
+    zsh-users/zsh-completions
+
+    ael-code/zsh-colored-man-pages
+    reegnz/jq-zsh-plugin
+    hlissner/zsh-autopair
+    clavelm/yt-dlp-omz-plugin
+    b4b4r07/emoji-cli
+EOPLUGINS
+    # ^ Can't indent this EOPLUGINS
+
+    # add binaries
+
+    # theme
+    zgenom load romkatv/powerlevel10k powerlevel10k
+
+    # Save to init script
+    zgenom save
+
+    # Compile zsh files
+    zgenom compile "$XDG_CONFIG_HOME/.zshrc"
+    zgenom compile $ZDOTDIR
+fi
+
+### Configurations
+
+# ZSH options
+unsetopt HIST_VERIFY
+
+ZSH_AUTOSUGGEST_STRATEGY=( completion history )
+
+# aliases
+alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
+alias vimdiff='nvim -d'
+
+# powerlevel10k theming
+if zmodload zsh/terminfo && (( terminfo[colors] >= 256 )); then
+    [[ ! -f $ZDOTDIR/.p10k.zsh ]] || source $ZDOTDIR/.p10k.zsh
+else
+    [[ ! -f $ZDOTDIR/.p10k-portable.zsh ]] || source $ZDOTDIR/.p10k-portable.zsh
+fi

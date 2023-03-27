@@ -1,0 +1,13 @@
+#!/bin/env bash
+
+volume() {
+    if [ $1 = "up" ]; then
+        playerctl volume 0.01+ --player=$2
+    elif [ $1 = "down" ]; then
+        playerctl volume 0.01- --player=$2
+    fi
+}
+
+if [ $1 = "volume" ]; then
+    volume $2 $3
+fi

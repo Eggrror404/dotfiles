@@ -1,0 +1,2 @@
+# Save videos under ~/Videos/yt-dlp
+-o ~/Videos/yt-dlp/%(title)s.%(ext)s

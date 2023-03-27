@@ -1,0 +1,128 @@
+{
+  "workspaces": [
+    {
+      "class": "firefox",
+      "exec": "firefox",
+      "fallback": [
+        {
+          "class": "firefox-nightly"
+        }
+      ]
+    },
+    {
+      "class": "thunar",
+      "exec": "thunar"
+    },
+    {
+      "class": "fakeapp.window",
+      "exec": "alacritty --working-directory ~",
+      "fallback": [
+        {
+          "class": "Alacritty"
+        }
+      ]
+    },
+    {
+      "class": "Spotify",
+      "exec": "LD_PRELOAD=/usr/lib/spotifywm.so spotify",
+      "fallback": [
+        {
+          "class": "firefox",
+          "title": "Now Playing | Gensokyo Radio — Mozilla Firefox"
+        }
+      ]
+    },
+    {
+      "class": "fakeapp.game",
+      "exec": "steam",
+      "fallback": [
+        {
+          "class": "Steam"
+        }
+      ]
+    },
+    {
+      "class": "WebCord",
+      "exec": "webcord --enable-features=UseOzonePlatform --ozone-platform=wayland"
+    }
+  ],
+  "_friendly_reminder": "In the `apps` array, latter elements take priority.",
+  "apps": [
+    {
+      "class": "firefox",
+      "icon": "",
+      "color": "flamingo"
+    },
+    {
+      "class": "firefox-nightly",
+      "icon": "",
+      "color": "sky"
+    },
+    {
+      "class": "thunar",
+      "icon": "",
+      "color": "mauve"
+    },
+    {
+      "class": "fakeapp.window",
+      "icon": "",
+      "color": "sapphire"
+    },
+    {
+      "class": "Alacritty",
+      "icon": "",
+      "color": "sky"
+    },
+    {
+      "class": "Spotify",
+      "icon": "",
+      "color": "green"
+    },
+    {
+      "class": "fakeapp.game",
+      "icon": "",
+      "color": "lavender"
+    },
+    {
+      "class": "WebCord",
+      "icon": "",
+      "color": "blue"
+    },
+    {
+      "class": "Steam",
+      "icon": "",
+      "color": "blue"
+    },
+    {
+      "class": "blueman-manager",
+      "icon": "",
+      "color": "blue"
+    },
+    {
+      "class": "blender",
+      "icon": "",
+      "color": "peach"
+    },
+    {
+      "class": "krita",
+      "icon": "",
+      "color": "mauve"
+    },
+    {
+      "class": "com.usebottles.bottles",
+      "icon": "",
+      "color": "red"
+    },
+    {
+      "class": "org.prismlauncher.PrismLauncher",
+      "icon": "",
+      "color": "teal"
+    },
+    {
+      "class": "firefox",
+      "title": "Now Playing | Gensokyo Radio — Mozilla Firefox",
+      "icon": "",
+      "color": "mauve"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+#!/usr/bin/sh
+
+updates=`checkupdates`
+aur=`yay -Qu`
+
+if [ -n "$aur" ]; then
+  updates+=$'\n'$aur
+fi
+
+updates=`echo "$updates" | sort | uniq | sed -r '/^\s*$/d'`
+
+if [ -n "$updates" ]; then
+  wc -l <<<$updates
+else
+  echo '0'
+fi
+
