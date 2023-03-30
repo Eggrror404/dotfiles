@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+volume() {
+    amixer -D pulse sset Master 5%$1
+
+    current=$(amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%')
+    notify-send -h int:value:$current -h string:hlcolor:#b7bdf8 -r 899 "Current Volume $current%"
+}
+
+mute() {
+    amixer -D pulse sset Master toggle
+
+    muted=$(amixer -D pulse sget Master | grep '\[on\]' -q && echo 'Unmuted' || echo 'Muted')
+    notify-send -r 899 "Audio $muted"
+}
+
+player() {
+    case $1 in
+        play)
+            playerctl play-pause
+            ;;
+        stop)
+            playerctl stop
+            ;;
+        next)
+            playerctl next
+            ;;
+        prev)
+            playerctl previous
+            ;;
+    esac
+}
+
+if [ $1 = "vol" ]; then
+    volume $2
+elif [ $1 = "mute" ]; then
+    mute
+elif [ $1 = "player" ]; then
+    player $2
+fi
