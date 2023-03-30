@@ -8,7 +8,6 @@
 ;; Launcher Widgets ;;
 (defwidget launcher []
     (button :class "launcher_icon"
-            :tooltip "Applications"
             :onclick "scripts/popup dashboard"  ""))
 
 (defwidget works []

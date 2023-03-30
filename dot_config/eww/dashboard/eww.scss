@@ -16,7 +16,7 @@
     border-radius: 0.4rem;
     box-shadow: 0 0 4px 4px rgba($mantle, 0.7);
 
-    padding: 0.4em;
+    padding: 0.5rem;
 
     .label {
       font-size: 14;
@@ -61,7 +61,7 @@
 
 .db-session {
   .pfp {
-    margin-right: 0.4em;
+    margin-right: 0.5rem;
     border-radius: 30%;
     background-size: cover;
     background-position: center;
@@ -74,6 +74,48 @@
 
   .session-uptime {
     font-size: 18;
+  }
+}
+
+.widget.db-player {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  padding: 0.6rem 0.7rem 0.4rem 0.7rem;
+
+  .player-state {
+    font-size: 16;
+    color: $subtext0;
+  }
+
+  .player-title {
+    font-size: 20;
+    font-weight: bold;
+    color: $text;
+  }
+
+  .player-artist {
+    font-size: 16;
+    color: $text;
+  }
+
+  .player-volume-icon {
+    margin-left: 0.1em;
+    font-size: 25;
+  }
+
+  .player-volume-label {
+    font-size: 18;
+    padding-top: 0.25em;
+  }
+
+  .player-playpause {
+    font-size: 30;
+    margin-right: 0.4em;
+  }
+
+  .bolt-pctl-status:hover {
+    color: $subtext1;
   }
 }
 
