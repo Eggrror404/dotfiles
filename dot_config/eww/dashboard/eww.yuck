@@ -57,19 +57,24 @@
        :hexpand false
        :space-evenly false
        :spacing 10
+       :height 150
        :style "background-image: radial-gradient(circle at center, rgba(30, 32, 48, 0.2), rgba(30, 32, 48, 0.8) 80%), url(\"${current.artUrl}\");"
     (box :class "player-upper"
+         :vexpand true
+         :valign "start"
          :orientation "v"
        (label :class "player-state"
               :halign "start"
               :text "${current.player} · ${current.status}")
        (label :class "player-title"
               :halign "start"
-              :text {current.title})
+              :text {player-title})
        (label :class "player-artist"
               :halign "start"
+              :limit-width 20
               :text {current.artist}))
     (box :class "player-lower"
+         :valign "end"
          :orientation "h"
       (eventbox :onscroll "scripts/control volume {} ${current.player}"
                 :halign "start"
@@ -83,7 +88,7 @@
                  :class "player-volume-label")))
       (button :halign "end"
               :onclick "playerctl play-pause --player ${current.player}"
-              :class "player-playpause" {current.status == "Playing" ? "󰐍" : "󰏦"}))))
+              :class "player-playpause" {current.status == "Playing" ? "󰏦" : "󰐍"}))))
 
 (defwidget systray []
   (box :class "widget db-systray"
