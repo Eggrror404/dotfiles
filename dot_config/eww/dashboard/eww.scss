@@ -119,6 +119,75 @@
   }
 }
 
+.widget.db-sysinfo .sysinfo-chart {
+  padding: 0.5rem;
+  border-radius: 0.4rem;
+  background-color: rgba($surface1, 0.8);
+
+  circular-progress {
+    color: $lavender;
+  }
+
+  // Show NAME on hover
+  .sysinfo-icon,
+  .sysinfo-name {
+    transition: opacity ease-out 0.2s;
+  }
+
+  .sysinfo-icon {
+    opacity: 1;
+  }
+  .sysinfo-name {
+    opacity: 0;
+  }
+
+  &:hover {
+    .sysinfo-icon {
+      opacity: 0;
+    }
+    .sysinfo-name {
+      opacity: 1;
+    }
+  }
+
+  // Font finetuning
+  &-cpu {
+    .sysinfo-icon {
+      font-size: 18;
+      margin-right: 0.3em;
+    }
+    .sysinfo-name {
+      font-size: 25;
+    }
+  }
+  &-ram {
+    .sysinfo-icon {
+      font-size: 23;
+      margin-right: 0.1em;
+    }
+    .sysinfo-name {
+      font-size: 24;
+    }
+  }
+  &-temp {
+    .sysinfo-icon {
+      font-size: 18;
+      margin-right: 0.36em;
+    }
+    .sysinfo-name {
+      font-size: 21;
+    }
+  }
+  &-disk {
+    .sysinfo-icon {
+      font-size: 20;
+    }
+    .sysinfo-name {
+      font-size: 23;
+    }
+  }
+}
+
 .db-systray {
   // context menu's customization
 

@@ -90,6 +90,27 @@
               :onclick "playerctl play-pause --player ${current.player}"
               :class "player-playpause" {current.status == "Playing" ? "󰏦" : "󰐍"}))))
 
+(defwidget sysinfo-chart [icon value name]
+  ; use button for hover effect
+  (button :class "sysinfo-chart sysinfo-chart-${name}"
+          :halign "center"
+    (overlay 
+      (circular-progress :width 40
+                         :height 40
+                         :value value
+                         :start-at 75
+                         :thickness 4)
+      (label :class "sysinfo-icon" :text icon)
+      (label :class "sysinfo-name" :markup "<span variant='petite-caps'>${name}</span>"))))
+
+(defwidget sysinfo []
+  (box :class "widget db-sysinfo"
+       :orientation "h"
+      (sysinfo-chart :name "cpu" :icon "" :value 100)
+      (sysinfo-chart :name "ram" :icon "󰍛" :value 100)
+      (sysinfo-chart :name "temp" :icon "󰏈" :value 100)
+      (sysinfo-chart :name "disk" :icon "󰋊" :value 100)))
+
 (defwidget systray []
   (box :class "widget db-systray"
        :orientation "v"
@@ -113,6 +134,7 @@
     (db-top)
     (session)
     (player :current {player[player_index % arraylength(player)]})
+    (sysinfo)
     (systray)))
 
 ; dashboard window
