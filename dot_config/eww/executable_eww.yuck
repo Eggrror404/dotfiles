@@ -15,6 +15,9 @@
 (defpoll muted :interval "1s"
   "amixer -D pulse sget Master | grep '\\[on\\]' -q && echo 'false' || echo 'true'")
 
+(defpoll temp :interval "2s"
+  "cat /sys/class/thermal/thermal_zone*/temp | awk '{s+=$1}END{print s/NR/1000}'")
+
 ; Some variables
 (defvar player_index 0)
 

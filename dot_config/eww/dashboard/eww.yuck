@@ -106,10 +106,10 @@
 (defwidget sysinfo []
   (box :class "widget db-sysinfo"
        :orientation "h"
-      (sysinfo-chart :name "cpu" :icon "" :value 100)
-      (sysinfo-chart :name "ram" :icon "󰍛" :value 100)
-      (sysinfo-chart :name "temp" :icon "󰏈" :value 100)
-      (sysinfo-chart :name "disk" :icon "󰋊" :value 100)))
+      (sysinfo-chart :name "cpu" :icon "" :value {EWW_CPU.avg})
+      (sysinfo-chart :name "ram" :icon "󰍛" :value {EWW_RAM.used_mem_perc})
+      (sysinfo-chart :name "temp" :icon "󰏈" :value temp)
+      (sysinfo-chart :name "disk" :icon "󰋊" :value {EWW_DISK["/"].used_perc})))
 
 (defwidget systray []
   (box :class "widget db-systray"
