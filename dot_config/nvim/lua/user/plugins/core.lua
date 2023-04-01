@@ -30,6 +30,12 @@ return {
       background_colour = "#000000",
     },
   },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    opts = {
+      show_trailing_blankline_indent = true,
+    },
+  },
   -- You can disable default plugins as follows:
   -- { "max397574/better-escape.nvim", enabled = false },
   --

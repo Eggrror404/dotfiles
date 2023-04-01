@@ -1,0 +1,11 @@
+{{- if eq .chezmoi.username "android" }}
+# ignore on termux
+.config/
+
+!.config/neofetch/
+!.config/nvim/
+!.config/yt-dlp/
+!.config/zsh/
+!.zgenom
+!.zshenv
+{{- end }}
