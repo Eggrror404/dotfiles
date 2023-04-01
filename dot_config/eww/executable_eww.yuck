@@ -14,7 +14,10 @@
   "amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
 (defpoll muted :interval "1s"
   "amixer -D pulse sget Master | grep '\\[on\\]' -q && echo 'false' || echo 'true'")
+(defpoll mic-muted :interval "1s"
+  "amixer -D pulse sget Capture | grep '\\[on\\]' -q && echo 'false' || echo 'true'")
 
+(defpoll dnd-enabled :interval "5s" "dunstctl is-paused")
 (defpoll temp :interval "2s"
   "cat /sys/class/thermal/thermal_zone*/temp | awk '{s+=$1}END{print s/NR/1000}'")
 

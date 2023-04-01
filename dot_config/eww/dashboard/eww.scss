@@ -119,6 +119,53 @@
   }
 }
 
+.db-quickset .quickset-button {
+  margin: 0.1rem 0.2rem;
+
+  button {
+    padding: 0.35rem 0.2rem;
+    background-color: rgba($surface1, 0.8);
+    font-size: 18;
+
+    transition: 0.5s ease-out;
+    transition-property: border-radius, background-color, color;
+
+    &.quickset-toggle {
+      border-radius: 0.5em 0 0 0.5em;
+      border-right: rgba($overlay0, 0.6) 1px solid;
+    }
+    &.quickset-more {
+      border-radius: 0 0.5em 0.5em 0;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+  }
+
+  &.active button {
+    background-color: rgba($lavender, 0.9);
+    color: rgba($base, 0.9);
+
+    &.quickset-toggle {
+      border-radius: 0.8em 0 0 0.8em;
+      border-right: rgba($text, 0.6) 1px solid;
+    }
+    &.quickset-more {
+      border-radius: 0 0.8em 0.8em 0;
+    }
+  }
+
+  // Icon font finetuning
+  &-net .quickset-button-icon,
+  &-dnd .quickset-button-icon {
+    padding-left: 0.35em;
+    padding-right: 0.55em;
+  }
+  &-bt .quickset-button-icon {
+    padding-left: 0.45em;
+    padding-right: 0.45em;
+  }
+}
+
 .widget.db-sysinfo .sysinfo-chart {
   padding: 0.5rem;
   border-radius: 0.4rem;
