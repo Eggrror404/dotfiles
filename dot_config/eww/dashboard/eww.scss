@@ -166,20 +166,37 @@
   }
 }
 
-.db-datetime {
-  .datetime-time {
-    font-size: 45;
+.db-quickset .quickset-divider {
+  margin: 0.4em 0.2em;
+  padding: 0.1em 0;
+  border-radius: 0.4rem;
+  background-color: rgba($overlay0, 0.6);
+}
+
+.db-quickset .quickset-scale {
+  font-size: 20;
+  padding: 0.5rem;
+
+  button {
+    margin: 0 0.6em;
+    color: rgba($base, 0.8);
+    transition: color 0.2s ease-out;
+
+    &:hover {
+      color: rgba($overlay0, 0.8);
+    }
   }
 
-  .divider {
-    padding: 0 1px;
-    background-image: linear-gradient($red, $mauve, $blue, $sky);
-    border-radius: 0.1rem;
-    margin: 0.2em;
-  }
+  scale trough {
+    background-color: $surface1;
+    border-radius: 0.8rem;
+    min-height: 1.5em;
 
-  .datetime-date {
-    font-size: 18;
+    highlight {
+      background-color: $lavender;
+      border-radius: 0.8rem;
+      box-shadow: 2px 0 4px 0 rgba($base, 0.6);
+    }
   }
 }
 

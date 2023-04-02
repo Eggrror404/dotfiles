@@ -5,22 +5,45 @@
 (defpoll calendar :interval "10h"
   `date +'{"day": "%d", "month": "%m", "year": "%y"}'`)
 
+(defwidget datetime []
+  (box :class "cal-datetime"
+       :orientation "v"
+       :space-evenly false
+    (box :class "datetime-time"
+         :orientation "h"
+         :halign "center"
+         :space-evenly false
+         :spacing 5
+      (label :class "datetime-hour"
+             :text {time.hour})
+      (box :class "divider")
+      (label :class "datetime-min"
+             :text {time.min}))
+    (box :class "datetime-date"
+         :orientation "v"
+         :space-evenly false
+         :spacing 2
+      (label :text {time.pretty}))))
+
 ;; Calendar Widgets ;;
 (defwidget cal []
   (box :class "cal-box" 
-       :orientation "v"
-   (box :class "cal-inner-box"
     (calendar :class "cal" 
               :day {calendar.day}
               :month {calendar.month}
-              :year {calendar.year}))))
+              :year {calendar.year})))
 
 ;; Calendar Windows ;;
 (defwindow calendar
   :monitor 0
-  :geometry (geometry :x "25px" 
-             :y "70%" 
-             :width "270px" 
-             :height "60px")
-  (cal))
+  :geometry (geometry :x "20px" 
+              :y "20px" 
+              :width "270px" 
+              :height "60px"
+              :anchor "bottom left")
+  (box :class "cal-win"
+       :orientation "v"
+       :space-evenly false
+    (datetime)
+    (cal)))
 

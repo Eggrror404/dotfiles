@@ -90,9 +90,17 @@ tooltip {
   }
 }
 
-.volbar trough highlight {
-  background-color: $teal;
+.volbar trough {
+  background-color: $surface1;
   border-radius: 5px;
+  min-height: 80px;
+  min-width: 10px;
+  margin: 0.3rem 0 0.3rem 0;
+
+  highlight {
+    background-color: $teal;
+    border-radius: 5px;
+  }
 }
 
 // Clock

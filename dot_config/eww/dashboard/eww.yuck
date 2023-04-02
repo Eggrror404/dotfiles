@@ -90,26 +90,6 @@
               :onclick "playerctl play-pause --player ${current.player}"
               :class "player-playpause" {current.status == "Playing" ? "󰏦" : "󰐍"}))))
 
-(defwidget datetime []
-  (box :class "widget db-datetime"
-       :orientation "v"
-       :space-evenly false
-    (box :class "datetime-time"
-         :orientation "h"
-         :halign "center"
-         :space-evenly false
-         :spacing 5
-      (label :class "datetime-hour"
-             :text {time.hour})
-      (box :class "divider")
-      (label :class "datetime-min"
-             :text {time.min}))
-    (box :class "datetime-date"
-         :orientation "v"
-         :space-evenly false
-         :spacing 2
-      (label :text {time.pretty}))))
-
 (defwidget quickset-button [icon-active icon-inactive active name label toggle-cmd more-cmd]
   (box :class "quickset-button quickset-button-${name} ${active ? 'active' : ''}"
        :orientation "h"
@@ -127,9 +107,21 @@
     (button :class "quickset-more"
             :onclick more-cmd "")))
 
+(defwidget quickset-scale [icon value name tooltip onchange toggle-cmd]
+  (overlay :class "quickset-scale quickset-scale-${name}"
+           :tooltip tooltip
+    (scale :orientation "h"
+           :hexpand true
+           :min 0 :max 101 :value value
+           :onchange onchange)
+    (button :valign "center"
+            :halign "start"
+            :onclick toggle-cmd icon)))
+
 (defwidget quickset []
   (box :class "widget db-quickset"
        :orientation "v"
+       :space-evenly false
        :spacing 10
     (box :orientation "h"
          :spacing 10
@@ -151,7 +143,48 @@
       (quickset-button :name "nope" :active false :label ""
                        :icon-active "" :icon-inactive ""
                        :toggle-cmd ""
-                       :more-cmd ""))))
+                       :more-cmd ""))
+    (box :class "quickset-divider")
+    (box :orientation "v"
+         :space-evenly false
+         :spacing 20
+      (quickset-scale :name "vol" :tooltip "Volume: ${vol}%"
+                      :icon {muted ? "󰖁" : vol <= 10 ? "󰕿" : vol <= 40 ? "󰖀" : "󰕾"}
+                      :value vol
+                      :onchange "amixer -D pulse sset Master {}% && eww update vol={}"
+                      :toggle-cmd "amixer -D pulse sset Master toggle && eww update muted=${!muted}")
+      (quickset-scale :name "mic" :tooltip "Mic: ${mic}%"
+                      :icon {mic-muted ? "󰍭" : "󰍬"}
+                      :value mic
+                      :onchange "amixer -D pulse sset Capture {}% && eww update mic={}"
+                      :toggle-cmd "amixer -D pulse sset Capture toggle && eww update mic-muted=${!mic-muted}"))))
+
+;; (defwidget quickslide-scale [icon value name tooltip onchange toggle-cmd]
+;;   (overlay :class "quickslide-scale quickslide-scale-${name}"
+;;            :tooltip tooltip
+;;     (scale :orientation "h"
+;;            :hexpand true
+;;            :min 0 :max 101 :value value
+;;            :onchange onchange)
+;;     (button :valign "center"
+;;             :halign "start"
+;;             :onclick toggle-cmd icon)))
+;;
+;; (defwidget quickslide []
+;;   (box :class "widget db-quickslide"
+;;        :orientation "v"
+;;        :space-evenly false
+;;        :spacing 20
+;;     (quickslide-scale :name "vol" :tooltip "Volume: ${vol}%"
+;;                       :icon {muted ? "󰖁" : vol <= 10 ? "󰕿" : vol <= 40 ? "󰖀" : "󰕾"}
+;;                       :value vol
+;;                       :onchange "amixer -D pulse sset Master {}% && eww update vol={}"
+;;                       :toggle-cmd "amixer -D pulse sset Master toggle && eww update muted=${!muted}")
+;;     (quickslide-scale :name "mic" :tooltip "Mic: ${mic}%"
+;;                       :icon {mic-muted ? "󰍭" : "󰍬"}
+;;                       :value mic
+;;                       :onchange "amixer -D pulse sset Capture {}% && eww update mic={}"
+;;                       :toggle-cmd "amixer -D pulse sset Capture toggle && eww update mic-muted=${!mic-muted}")))
 
 (defwidget sysinfo-chart [icon value name]
   ; use button for hover effect
@@ -197,8 +230,8 @@
     (db-top)
     (session)
     (player :current {player[player_index % arraylength(player)]})
-    (datetime)
     (quickset)
+    ;; (quickslide)
     (sysinfo)
     (systray)))
 

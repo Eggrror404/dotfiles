@@ -4,51 +4,66 @@
 */
 
 // Calendar
-.cal-box {
-  background-color: $surface0;
+.cal-win {
+  background-color: rgba($base, 0.9);
   font-family: "Comic Mono";
-  font-size: 1em;
-  font-weight: bold;
+  font-size: 18;
   color: $text;
   border-radius: 0.8rem;
+  padding: 1.2rem 1rem 0.2rem;
+}
 
-  .cal-inner-box {
-    padding: 1rem 1rem 0.2rem;
+.cal-datetime {
+  .datetime-time {
+    font-size: 45;
+  }
 
-    .cal {
-      &.highlight {
-          padding: 10rem;
-      }
+  .divider {
+    padding: 0 1px;
+    background-image: linear-gradient($red, $mauve, $blue, $sky);
+    border-radius: 0.1rem;
+    margin: 0.2em;
+  }
 
-      padding: 0.8rem 0.25rem 0rem;
-      margin-left: 10px;
+  .datetime-date {
+    font-size: 18;
+  }
+}
+
+.cal-box {
+  background-color: transparent;
+
+  .cal {
+    &.highlight {
+      padding: 10rem;
+    }
+
+    padding: 0.8rem 0.25rem 0rem;
+    margin-left: 10px;
+  }
+
+  calendar:selected {
+    color: $blue;
+  }
+
+  calendar.header {
+    color: $blue;
+  }
+
+  calendar.button {
+    color: $mauve;
+    border-radius: 0.2em;
+
+    &:hover {
+      background-color: $surface1;
     }
   }
-}
 
-calendar:selected {
-  color: $blue;
-}
+  calendar.highlight {
+    color: $mauve;
+  }
 
-calendar.header {
-  color: $blue;
-  font-weight: bold;
-}
-
-calendar.button {
-  color: $mauve;
-
-  &:hover {
-    background-color: $surface1;
+  calendar:indeterminate {
+    color: $overlay1;
   }
 }
-
-calendar.highlight {
-  color: $mauve;
-  font-weight: bold;
-}
-
-calendar:indeterminate {
-  color: $subtext0;
-}
-
