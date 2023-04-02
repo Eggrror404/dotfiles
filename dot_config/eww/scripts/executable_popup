@@ -33,7 +33,7 @@ if [ "$1" = "launcher" ]; then
 elif [ "$1" = "bluetooth" ]; then
     blueman-manager
 elif [ "$1" = "network" ]; then
-    kitty nmtui
+    alacritty -e nmtui
 elif [ "$1" = "audio" ]; then
     sh "$HOME/.config/rofi/scripts/applets/audio.sh"
 elif [ "$1" = "game" ]; then

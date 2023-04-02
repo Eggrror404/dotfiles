@@ -90,6 +90,26 @@
               :onclick "playerctl play-pause --player ${current.player}"
               :class "player-playpause" {current.status == "Playing" ? "󰏦" : "󰐍"}))))
 
+(defwidget datetime []
+  (box :class "widget db-datetime"
+       :orientation "v"
+       :space-evenly false
+    (box :class "datetime-time"
+         :orientation "h"
+         :halign "center"
+         :space-evenly false
+         :spacing 5
+      (label :class "datetime-hour"
+             :text {time.hour})
+      (box :class "divider")
+      (label :class "datetime-min"
+             :text {time.min}))
+    (box :class "datetime-date"
+         :orientation "v"
+         :space-evenly false
+         :spacing 2
+      (label :text {time.pretty}))))
+
 (defwidget quickset-button [icon-active icon-inactive active name label toggle-cmd more-cmd]
   (box :class "quickset-button quickset-button-${name} ${active ? 'active' : ''}"
        :orientation "h"
@@ -125,7 +145,7 @@
     (box :orientation "h"
          :spacing 10
       (quickset-button :name "dnd" :active {dnd-enabled} :label {dnd-enabled ? "No Disturb" : "Notification"}
-                       :icon-active "ﮖ" :icon-inactive "ﮗ"
+                       :icon-active "󰂛" :icon-inactive "󰂞"
                        :toggle-cmd "dunstctl set-paused toggle && eww update dnd-enabled=${!dnd-enabled}"
                        :more-cmd "")
       (quickset-button :name "nope" :active false :label ""
@@ -177,6 +197,7 @@
     (db-top)
     (session)
     (player :current {player[player_index % arraylength(player)]})
+    (datetime)
     (quickset)
     (sysinfo)
     (systray)))

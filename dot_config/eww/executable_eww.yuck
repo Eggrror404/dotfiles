@@ -6,7 +6,7 @@
 (deflisten player :initial "[]" "scripts/playerctl.py")
 (deflisten player-title :initial "" "zscroll -u true -e true -l 35 -d 0.8 -p ' / ' 'jq -nrcM \"$(eww get player)[$(eww get player_index)].title\"'")
 
-(defpoll time :interval "1s" `date +'{"hour":"%H","min":"%M","sec":"%S","pretty":"%a, %e %b","day":"%A","month":"%B","month_short":"%b","dom":"%e","year":"%Y","day_num":"%d","month_num":"%m","year_num":"%y"}'`)
+(defpoll time :interval "1s" `date +'{"hour":"%H","min":"%M","sec":"%S","pretty":"%A, %e %B","day":"%A","month":"%B","month_short":"%b","dom":"%e","year":"%Y","day_num":"%d","month_num":"%m","year_num":"%y"}'`)
 (defpoll session :interval "48h" "scripts/session")
 (defpoll uptime :interval "48h" "uptime --pretty | ./scripts/uptime.awk")
 

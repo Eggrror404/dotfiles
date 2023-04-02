@@ -166,6 +166,23 @@
   }
 }
 
+.db-datetime {
+  .datetime-time {
+    font-size: 45;
+  }
+
+  .divider {
+    padding: 0 1px;
+    background-image: linear-gradient($red, $mauve, $blue, $sky);
+    border-radius: 0.1rem;
+    margin: 0.2em;
+  }
+
+  .datetime-date {
+    font-size: 18;
+  }
+}
+
 .widget.db-sysinfo .sysinfo-chart {
   padding: 0.5rem;
   border-radius: 0.4rem;
