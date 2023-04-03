@@ -127,7 +127,9 @@
     (box :orientation "h"
          :spacing 10
       (quickset-button :name "net" :active {net.device != "NONE"} :label {net.name}
-                       :icon-active {net.device == "ETHERNET" ? "󰌗" : net.signal < 26 ? "󰤟" : net.signal < 51 ? "󰤢" : net.signal < 76 ? "󰤥" : "󰤨"}
+                       :icon-active {net.device == "ETHERNET" ? "󰌗" :
+                                     net.signal == 0 ? "󰤮" : net.signal < 26 ? "󰤟" :
+                                     net.signal < 51 ? "󰤢" : net.signal < 76 ? "󰤥" : "󰤨"}
                        :icon-inactive "󰌙"
                        :toggle-cmd {net.device == "WIFI" ? "nmcli radio wifi off" : net.device == "NONE" ? "nmcli radio wifi on" : ""}
                        :more-cmd "scripts/popup network")

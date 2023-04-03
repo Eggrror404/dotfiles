@@ -22,6 +22,18 @@
               :onmiddleclick "hyprctl dispatch workspace ${ws.id} & hyprctl dispatch exec '${ws.exec ?: ":"}'" 
               :class "${ws.clients != "" ? "occupied" : ""} ${ws.active ? "active" : ""} ${ws.color}" "${ws.icon}"))))
 
+;; Wifi Widgets ;;
+(defwidget wifi []
+  (box :orientation "v"  
+       :tooltip {net.device == "NONE" ? "No Connection" :
+                 net.device == "ETHERNET" ? "Connected to Ethernet" : 
+                 net.signal > 0 ? "Connected to ${net.name}" : "Wifi not connected"}
+  (button :onclick "scripts/popup wifi" 
+          :class "wifi-icon" {net.device == "NONE" ? "󰌙" :
+                              net.device == "ETHERNET" ? "󰌗" :
+                              net.signal == 0 ? "󰤮" : net.signal < 26 ? "󰤟" :
+                              net.signal < 51 ? "󰤢" : net.signal < 76 ? "󰤥" : "󰤨"})))
+
 ;; Volume Widget ;;
 (defwidget volume []
   (eventbox :onhover "${EWW_CMD} update volhover=true"
@@ -45,15 +57,6 @@
             :onrightclick "scripts/popup audio" {muted ? "󰖁" : vol == 0 ? "󰕿" : vol <= 40 ? "󰖀" : "󰕾"}))))
 (defvar volhover false)
 
-;; Network Widget ;;
-(defwidget network []
-  (revealer :transition "slideup"
-            :reveal {net.device == "NONE"}
-            :duration "550ms"
-    (button :class "network-icon"
-            :tooltip "No connection"
-            :onrightclick "scripts/popup network" "󰲛")))
-
 ;; Bluetooth Widget ;;
 (defwidget bluetooth []
   (button :class "bluetooth-icon"
@@ -61,29 +64,14 @@
           :onclick {bt.power ? "bluetoothctl power off" : "bluetoothctl power on"}
           :onrightclick "scripts/popup bluetooth" {bt.power ? "" : "󰂲"}))
 
-;; Player Widget ;;
-; (defwidget player []
-;   (revealer :transition "slideup" 
-;             :reveal {player[player_index % arraylength(player)].player != "none"}        
-;             :duration "550ms"
-;     (button :class "player-icon"
-;             :tooltip "Now Playing ${player[player_index % arraylength(player)].title}" "")))
-
-;; More Popup Widget ;;
-(defwidget more []
-  (button :class "more-icon"
-          :tooltip "More Options"
-          :onclick "scripts/popup more" ""))
-
 ;; Control Panel Widgets ;;  
 (defwidget control []
   (box :orientation "v" 
        :space-evenly false  
        :class "control"
+   (wifi)
    (volume)
-   (network)
-   (bluetooth)
-   (more)))
+   (bluetooth)))
 
 ;; Clock Widgets ;;
 (defwidget time []

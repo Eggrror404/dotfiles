@@ -63,30 +63,25 @@ tooltip {
 
 // Control Panel
 .control {
-  padding: 0 0.5rem;
-  font-family: "JetBrainsMono Nerd Font", "Material Icons";
+  padding: 0.5rem;
+  font-family: "JetBrainsMono Nerd Font";
   font-size: 1.6em;
   background-color: $surface0;
   border-radius: 5px;
 
-  button {
+  .wifi-icon {
+    margin: 0 0.45rem 0 0.15rem;
+    color: $mauve;
+  }
+
+  .bluetooth-icon {
+    margin: 0 0.3rem;
+    color: $blue;
+  }
+
+  .volume-icon {
     margin: 0 0.4rem 0 0.2rem;
-
-    &.volume-icon {
-      color: $teal;
-    }
-
-    &.network-icon {
-      color: $maroon;
-    }
-
-    &.bluetooth-icon {
-      color: $blue;
-    }
-
-    &.more-icon {
-      color: $mauve;
-    }
+    color: $teal;
   }
 }
 

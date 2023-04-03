@@ -21,7 +21,7 @@ get() {
     wifienable=$(nmcli -t general | cut -f 4 -d ':')
     if [ "$wifienable" = "enabled" ]; then
         # wifi enabled, not connected
-        jq -ncM "{ device: \"WIFI\", name \"Wifi\", signal: 0 }"
+        jq -ncM "{ device: \"WIFI\", name: \"Wifi\", signal: 0 }"
         return
     fi
 
@@ -32,9 +32,8 @@ get() {
 get
 
 # https://github.com/waltinator/net-o-matic/blob/master/net-o-matic#L152
-ip monitor address | \
-    grep -E --line-buffered \
-    '[[:digit:]]+: [[:alnum:]]+[[:space:]]+inet[[:digit:]]*[[:space:]].* scope global ' | \
+ip monitor link | \
+    grep -E --line-buffered '[[:digit:]]+: [[:alnum:]]+: <.*>' | \
     while read line ; do
     get
 done
