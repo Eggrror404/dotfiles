@@ -34,6 +34,13 @@
                               net.signal == 0 ? "󰤮" : net.signal < 26 ? "󰤟" :
                               net.signal < 51 ? "󰤢" : net.signal < 76 ? "󰤥" : "󰤨"})))
 
+;; Bluetooth Widget ;;
+(defwidget bluetooth []
+  (button :class "bluetooth-icon"
+          :tooltip "${bt.devices}"
+          :onclick {bt.power ? "bluetoothctl power off" : "bluetoothctl power on"}
+          :onrightclick "scripts/popup bluetooth" {bt.power ? "" : "󰂲"}))
+
 ;; Volume Widget ;;
 (defwidget volume []
   (eventbox :onhover "${EWW_CMD} update volhover=true"
@@ -57,21 +64,14 @@
             :onrightclick "scripts/popup audio" {muted ? "󰖁" : vol == 0 ? "󰕿" : vol <= 40 ? "󰖀" : "󰕾"}))))
 (defvar volhover false)
 
-;; Bluetooth Widget ;;
-(defwidget bluetooth []
-  (button :class "bluetooth-icon"
-          :tooltip "${bt.devices}"
-          :onclick {bt.power ? "bluetoothctl power off" : "bluetoothctl power on"}
-          :onrightclick "scripts/popup bluetooth" {bt.power ? "" : "󰂲"}))
-
 ;; Control Panel Widgets ;;  
 (defwidget control []
   (box :orientation "v" 
        :space-evenly false  
        :class "control"
-   (wifi)
-   (volume)
-   (bluetooth)))
+    (wifi)
+    (bluetooth)
+    (volume)))
 
 ;; Clock Widgets ;;
 (defwidget time []

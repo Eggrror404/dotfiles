@@ -53,11 +53,9 @@
 (defwidget player [current]
   (box :class "widget db-player"
        :orientation "v"
-       :vexpand false
-       :hexpand false
        :space-evenly false
        :spacing 10
-       :height 150
+       :height 160
        :style "background-image: radial-gradient(circle at center, rgba(30, 32, 48, 0.2), rgba(30, 32, 48, 0.8) 80%), url(\"${current.artUrl}\");"
     (box :class "player-upper"
          :vexpand true
@@ -86,9 +84,25 @@
                  :class "player-volume-icon")
           (label :text "${round(current.volume * 100, 0)}%"
                  :class "player-volume-label")))
-      (button :halign "end"
-              :onclick "playerctl play-pause --player ${current.player}"
-              :class "player-playpause" {current.status == "Playing" ? "󰏦" : "󰐍"}))))
+      (eventbox :halign "end"
+                :onhover "eww update player_rev=true"
+                :onhoverlost "eww update player_rev=false"
+        (box :orientation "h"
+             :space-evenly false
+          (revealer :transition "slideleft"
+                    :reveal player_rev
+                    :duration "550ms"
+            (box :orientation "h"
+                 :space-evenly false
+              (button :onclick "playerctl previous --player ${current.player}"
+                      :class "player-prev" "󰼨")
+              (button :onclick "playerctl next --player ${current.player}"
+                      :class "player-next" "󰼧")
+              (button :onclick "playerctl stop --player ${current.player}"
+                      :class "player-stop" "󰓛")))
+          (button :onclick "playerctl play-pause --player ${current.player}"
+                  :class "player-playpause" {current.status == "Playing" ? "󰏦" : "󰐍"}))))))
+(defvar player_rev false)
 
 (defwidget quickset-button [icon-active icon-inactive active name label toggle-cmd more-cmd]
   (box :class "quickset-button quickset-button-${name} ${active ? 'active' : ''}"

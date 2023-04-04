@@ -83,6 +83,7 @@
   background-position: center;
   padding: 0.6rem 0.7rem 0.4rem 0.7rem;
 
+  // .player-upper
   .player-state {
     font-size: 16;
     color: $subtext0;
@@ -99,6 +100,7 @@
     color: $text;
   }
 
+  // .player-lower
   .player-volume-icon {
     margin-left: 0.1em;
     font-size: 23;
@@ -112,10 +114,22 @@
   .player-playpause {
     font-size: 30;
     margin-right: 0.4em;
+
+    &:hover {
+      color: $subtext0;
+    }
   }
 
-  .bolt-pctl-status:hover {
-    color: $subtext1;
+  .player-prev,
+  .player-next,
+  .player-stop {
+    font-size: 24;
+    margin-right: 0.3em;
+    opacity: 0.9;
+
+    &:hover {
+      color: $subtext0;
+    }
   }
 }
 
