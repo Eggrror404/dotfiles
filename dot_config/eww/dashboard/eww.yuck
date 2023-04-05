@@ -61,29 +61,29 @@
          :vexpand true
          :valign "start"
          :orientation "v"
-       (label :class "player-state"
-              :halign "start"
-              :text "${current.player} · ${current.status}")
-       (label :class "player-title"
-              :halign "start"
-              :text {player-title})
-       (label :class "player-artist"
-              :halign "start"
-              :limit-width 20
-              :text {current.artist}))
+         :space-evenly false
+      (box :class "player-player"
+           :orientation "h"
+        (label :class "player-state"
+               :halign "start"
+               :text "${current.player} · ${current.status}")
+        (button :class "player-next-player"
+                :halign "end"
+                :onclick "eww update player_index=${(player_index + 1) % arraylength(player)}" "⏵"))
+      (label :class "player-title"
+             :halign "start"
+             :text {player-title})
+      (label :class "player-artist"
+             :halign "start"
+             :limit-width 20
+             :text {current.artist}))
     (box :class "player-lower"
          :valign "end"
          :orientation "h"
       (eventbox :onscroll "scripts/control volume {} ${current.player}"
                 :halign "start"
-        (box :class "player-volume"
-             :orientation "h"
-             :space-evenly false
-             :spacing 10
-          (label :text "󰋎" 
-                 :class "player-volume-icon")
-          (label :text "${round(current.volume * 100, 0)}%"
-                 :class "player-volume-label")))
+        (label :class "player-volume"
+               :markup "<span size='18pt'>󰋎 </span><span size='14pt' rise='2pt'>${round(current.volume * 100, 0)}%</span>"))
       (eventbox :halign "end"
                 :onhover "eww update player_rev=true"
                 :onhoverlost "eww update player_rev=false"

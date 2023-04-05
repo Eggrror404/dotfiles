@@ -89,6 +89,18 @@
     color: $subtext0;
   }
 
+  .player-next-player {
+    font-size: 14;
+    color: $subtext0;
+    margin-right: 0.4em;
+    border-radius: 0.5rem;
+
+    &:hover {
+      color: $text;
+      background: rgba($surface0, 0.8);
+    }
+  }
+
   .player-title {
     font-size: 20;
     font-weight: bold;
@@ -101,15 +113,6 @@
   }
 
   // .player-lower
-  .player-volume-icon {
-    margin-left: 0.1em;
-    font-size: 23;
-  }
-
-  .player-volume-label {
-    font-size: 18;
-    padding-top: 0.2em;
-  }
 
   .player-playpause {
     font-size: 30;
@@ -125,7 +128,7 @@
   .player-stop {
     font-size: 24;
     margin-right: 0.3em;
-    opacity: 0.9;
+    opacity: 0.85;
 
     &:hover {
       color: $subtext0;
