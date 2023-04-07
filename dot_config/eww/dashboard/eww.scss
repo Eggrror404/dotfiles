@@ -156,6 +156,11 @@
       padding-left: 0.5rem;
       padding-right: 0.5rem;
     }
+
+    &:hover {
+      transition-duration: 0.1s;
+      background-color: mix($surface1, $text, 90%);
+    }
   }
 
   &.active button {
@@ -168,6 +173,10 @@
     }
     &.quickset-more {
       border-radius: 0 0.8em 0.8em 0;
+    }
+
+    &:hover {
+      background-color: mix($lavender, $text, 90%);
     }
   }
 

@@ -10,7 +10,7 @@
       (box :class "pfp"
            :width 25
            :halign "start"
-           :style "background-image: url(\"file:////home/eggrror404/Pictures/rosewater-cat.png\");")
+           :style "background-image: url(\"file:///var/lib/AccountsService/icons/${session.username}\");")
       (label :class "top-welcome"
              :hailgn "start"
              :text "Welcome ${session.fullname}"))
@@ -34,7 +34,7 @@
        :height 100
     (box :class "pfp"
          :width 85
-         :style "background-image: url(\"file:////home/eggrror404/Pictures/rosewater-cat.png\");")
+         :style "background-image: url(\"file:///var/lib/AccountsService/icons/${session.username}\");")
     (box :class "session-text"
          :orientation "v"
          :vexpand false
