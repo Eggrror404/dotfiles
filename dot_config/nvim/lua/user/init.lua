@@ -54,11 +54,8 @@ return {
       lua_ls = {
         settings = {
           Lua = {
-            workspace = {
-              library = {
-                vim.fn.expand "$VIMRUNTIME",
-                require("neodev.config").types(),
-              },
+            completion = {
+              callSnippet = "Replace",
             },
           },
         },

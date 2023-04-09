@@ -11,6 +11,11 @@ return {
     opts = {
       flavour = "macchiato",
       transparent_background = true,
+      custom_highlights = function(colors)
+        return {
+          Whitespace = { fg = colors.flamingo },
+        }
+      end,
     },
   },
   -- { import = "astrocommunity.pack.bash" },
