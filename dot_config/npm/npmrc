@@ -1,0 +1,5 @@
+prefix=/home/eggrror404/.local/share/npm
+cache=/home/eggrror404/.cache/npm
+init-module=/home/eggrror404/.config/npm/config/npm-init.js
+scripts-prepend-node-path=true
+node_gyp=
