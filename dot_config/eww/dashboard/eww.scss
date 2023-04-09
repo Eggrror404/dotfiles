@@ -28,10 +28,13 @@
 .db-top {
   font-size: 18;
 
-  .pfp {
-    border-radius: 45%;
-    background-size: cover;
-    background-position: center;
+  // .pfp {
+  //   border-radius: 45%;
+  //   background-size: cover;
+  //   background-position: center;
+  // }
+  .icon {
+    color: $yellow;
   }
 
   .btn {
