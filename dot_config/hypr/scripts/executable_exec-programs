@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+# Start daemons
+fcitx5 -d
+swww init
+eww daemon
+dunst &
+mpDris2 &
+/usr/lib/kdeconnectd &
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
+# Start programs
+webcord -m --enable-features=UseOzonePlatform --ozone-platform=wayland &
+firefox &
+
+# Wait for swww and eww daemon to start
+sleep 1
+
+swww query && sww img ~/Pictures/Wallpapr/PPTR54t.jpeg
+eww ping && \
+    eww open bar && \
+    eww open dashboard && eww close dashboard && \
+    keepassxc & openrgb -p 'Breath.' --startminimized
