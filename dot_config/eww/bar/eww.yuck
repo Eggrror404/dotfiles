@@ -27,7 +27,7 @@
   (box :orientation "v"  
        :tooltip {net.device == "NONE" ? "No Connection" :
                  net.device == "ETHERNET" ? "Connected to Ethernet" : 
-                 net.signal > 0 ? "Connected to ${net.name}" : "Wifi not connected"}
+                 net.signal > 0 ? "Connected to ${net.label}" : "Wifi not connected"}
   (button :onclick "scripts/popup wifi" 
           :class "wifi-icon" {net.device == "NONE" ? "󰌙" :
                               net.device == "ETHERNET" ? "󰌗" :

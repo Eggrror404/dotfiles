@@ -6,7 +6,7 @@ get() {
     ethernet=$(grep 'ethernet' <<< "$connection" | cut -f 1 -d ':')
     if [ -n "$ethernet" ]; then
         # connected to ethernet
-        jq -ncM "{ device: \"ETHERNET\", name: \"$ethernet\" }"
+        jq -ncM "{ device: \"ETHERNET\", label: \"$ethernet\" }"
         return
     fi
 
@@ -14,18 +14,18 @@ get() {
     if [ -n "$wifi" ]; then
         # connected to wifi
         signal=$(nmcli -t -fields ACTIVE,SIGNAL device wifi | awk -F ':' '{ if ($1 == "yes") print $2 }')
-        jq -ncM "{ device: \"WIFI\", name: \"$wifi\", signal: $signal }"
+        jq -ncM "{ device: \"WIFI\", label: \"$wifi\", signal: $signal }"
         return
     fi
 
     wifienable=$(nmcli -t general | cut -f 4 -d ':')
     if [ "$wifienable" = "enabled" ]; then
         # wifi enabled, not connected
-        jq -ncM "{ device: \"WIFI\", name: \"Wifi\", signal: 0 }"
+        jq -ncM "{ device: \"WIFI\", label: \"Wifi\", signal: 0 }"
         return
     fi
 
-    jq -ncM "{ device: \"NONE\" }"
+    jq -ncM "{ device: \"NONE\", label: \"No Connection\" }"
 }
 
 # initial value

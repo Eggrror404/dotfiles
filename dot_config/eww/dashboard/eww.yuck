@@ -139,7 +139,7 @@
        :spacing 10
     (box :orientation "h"
          :spacing 10
-      (quickset-button :name "net" :active {net.device != "NONE"} :label {net.name}
+      (quickset-button :name "net" :active {net.device != "NONE"} :label {net.label}
                        :icon-active {net.device == "ETHERNET" ? "󰌗" :
                                      net.signal == 0 ? "󰤮" : net.signal < 26 ? "󰤟" :
                                      net.signal < 51 ? "󰤢" : net.signal < 76 ? "󰤥" : "󰤨"}
@@ -225,10 +225,10 @@
 
 ; dashboard window
 (defwindow dashboard
-  :geometry (geometry :x "4" 
-                      :y "0" 
-                      :height "90%" 
-                      :width "350px"
+  :geometry (geometry :x "4"
+                      :y "0"
+                      :height "90%"
+                      :width "400px"
                       :anchor "left center")
   :monitor 0
   :hexpand "false"
