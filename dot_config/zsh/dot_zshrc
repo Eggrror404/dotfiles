@@ -1,67 +1,35 @@
+# Load plugins with miniplug
+source "$HOME/.local/share/miniplug/miniplug.zsh"
 
-# load zgenom
-source "${HOME}/.zgenom/zgenom.zsh"
+miniplug plugin 'ael-code/zsh-colored-man-pages'
+miniplug plugin 'reegnz/jq-zsh-plugin'
+miniplug plugin 'hlissner/zsh-autopair'
+miniplug plugin 'b4b4r07/emoji-cli'
 
-# Check for plugin and zgenom updates every 7 days
-# Does not increase the startup time.
-zgenom autoupdate
+miniplug plugin 'zsh-users/zsh-completions'
+miniplug plugin 'zsh-users/zsh-autosuggestions'
+miniplug plugin 'zsh-users/zsh-syntax-highlighting'
+# zsh-syntax-highlighting must be the last plugin sourced
 
-# if the init script doesn't exist
-if ! zgenom saved; then
-    echo "Creating a zgenom save"
+# load theme
+miniplug theme 'romkatv/powerlevel10k'
 
-    # Ohmyzsh base library
-    zgenom ohmyzsh
+miniplug load
 
-    # plugins
-    zgenom ohmyzsh plugins/git
-    zgenom ohmyzsh plugins/sudo
-    zgenom ohmyzsh plugins/command-not-found
+# Compinit
+autoload -Uz compinit && compinit -C
 
-    # completions
-    # zgenom load --completion
-
-    # Bulk load
-    zgenom loadall <<EOPLUGINS
-    zsh-users/zsh-syntax-highlighting
-    zsh-users/zsh-autosuggestions
-    zsh-users/zsh-completions
-
-    ael-code/zsh-colored-man-pages
-    reegnz/jq-zsh-plugin
-    hlissner/zsh-autopair
-    clavelm/yt-dlp-omz-plugin
-    b4b4r07/emoji-cli
-EOPLUGINS
-    # ^ Can't indent this EOPLUGINS
-
-    # add binaries
-
-    # theme
-    zgenom load romkatv/powerlevel10k powerlevel10k
-
-    # Save to init script
-    zgenom save
-
-    # Compile zsh files
-    zgenom compile "$XDG_CONFIG_HOME/.zshrc"
-    zgenom compile $ZDOTDIR
-fi
-
-### Configurations
-
-# ZSH options
-unsetopt HIST_VERIFY
-
+# Options
 ZSH_AUTOSUGGEST_STRATEGY=( completion history )
 
-# aliases
+# Aliases
 alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
 alias vimdiff='nvim -d'
 
-# powerlevel10k theming
-if zmodload zsh/terminfo && (( terminfo[colors] >= 256 )); then
-    [[ ! -f $ZDOTDIR/.p10k.zsh ]] || source $ZDOTDIR/.p10k.zsh
+# Powerlevel10k theming
+if [[ "$(tty)" =~ "/dev/tty[1-9]" ]]; then
+    echo "is on tty"
+    [[ ! -f $ZDOTDIR/.p10k-tty.zsh ]] || source $ZDOTDIR/.p10k-tty.zsh
 else
-    [[ ! -f $ZDOTDIR/.p10k-portable.zsh ]] || source $ZDOTDIR/.p10k-portable.zsh
+    [[ ! -f $ZDOTDIR/.p10k.zsh ]] || source $ZDOTDIR/.p10k.zsh
 fi
