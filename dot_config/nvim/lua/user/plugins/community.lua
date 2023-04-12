@@ -27,5 +27,8 @@ return {
   { import = "astrocommunity.pack.svelte" },
   { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.pack.yaml" },
+
+  { import = "astrocommunity.editing-support.nvim-ts-rainbow2" },
+
   -- { import = "astrocommunity.completion.copilot-lua-cmp" },
 }

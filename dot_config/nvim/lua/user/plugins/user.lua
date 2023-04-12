@@ -76,14 +76,6 @@ return {
   },
 
   {
-    "HiPhish/nvim-ts-rainbow2",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-    },
-    event = "User AstroFile",
-  },
-
-  {
     "frabjous/knap",
     ft = { "md", "tex" },
   },
