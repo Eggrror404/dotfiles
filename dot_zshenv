@@ -28,3 +28,6 @@ export EDITOR=nvim
 
 # PATH
 export PATH="$HOME/.local/bin:$HOME/.local/share/cargo/bin:$HOME/.spicetify:$PATH"
+
+# Others
+export RUSTC_WRAPPER=sccache
