@@ -3,9 +3,21 @@
 .config/
 
 !.config/neofetch/
+!.config/npm/
 !.config/nvim/
 !.config/yt-dlp/
 !.config/zsh/
-!.zgenom
+!.zshenv
+{{- end }}
+
+{{- if eq .chezmoi.hostname "DynaBook" }}
+# ignore on WSL (Dynabook)
+.config/
+
+!.config/neofetch/
+!.config/npm/
+!.config/nvim/
+!.config/yt-dlp/
+!.config/zsh/
 !.zshenv
 {{- end }}
