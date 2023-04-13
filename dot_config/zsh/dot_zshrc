@@ -14,6 +14,11 @@ miniplug plugin 'zsh-users/zsh-syntax-highlighting'
 # load theme
 miniplug theme 'romkatv/powerlevel10k'
 
+# Key binds
+# source omz's lib for common keys
+source "$ZDOTDIR/lib/key-bindings.zsh"
+
+# Source the plugins
 miniplug load
 
 # Compinit
@@ -28,7 +33,6 @@ alias vimdiff='nvim -d'
 
 # Powerlevel10k theming
 if [[ "$(tty)" =~ "/dev/tty[1-9]" ]]; then
-    echo "is on tty"
     [[ ! -f $ZDOTDIR/.p10k-tty.zsh ]] || source $ZDOTDIR/.p10k-tty.zsh
 else
     [[ ! -f $ZDOTDIR/.p10k.zsh ]] || source $ZDOTDIR/.p10k.zsh
