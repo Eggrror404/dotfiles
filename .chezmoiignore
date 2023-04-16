@@ -1,6 +1,6 @@
 {{- if eq .chezmoi.username "android" }}
 # ignore on termux
-.config/
+.config/*
 
 !.config/neofetch/
 !.config/npm/
@@ -12,7 +12,7 @@
 
 {{- if eq .chezmoi.hostname "DynaBook" }}
 # ignore on WSL (Dynabook)
-.config/
+.config/*
 
 !.config/neofetch/
 !.config/npm/

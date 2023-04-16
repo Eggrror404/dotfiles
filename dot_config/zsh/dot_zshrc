@@ -2,7 +2,9 @@
 # Sourcing files
 #
 source "$HOME/.local/share/miniplug/miniplug.zsh"
-source "$ZDOTDIR/lib/key-bindings.zsh"
+for file in $ZDOTDIR/lib/{*.zsh,*.sh}; do
+    [ -r $file ] && source $file
+done
 
 #
 # Load plugins with miniplug
