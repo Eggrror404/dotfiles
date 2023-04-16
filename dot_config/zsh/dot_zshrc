@@ -1,33 +1,36 @@
-# Load plugins with miniplug
+#
+# Sourcing files
+#
 source "$HOME/.local/share/miniplug/miniplug.zsh"
+source "$ZDOTDIR/lib/key-bindings.zsh"
 
+#
+# Load plugins with miniplug
+#
 miniplug plugin 'ael-code/zsh-colored-man-pages'
 miniplug plugin 'reegnz/jq-zsh-plugin'
 miniplug plugin 'hlissner/zsh-autopair'
 miniplug plugin 'b4b4r07/emoji-cli'
-
 miniplug plugin 'zsh-users/zsh-completions'
 miniplug plugin 'zsh-users/zsh-autosuggestions'
 miniplug plugin 'zsh-users/zsh-syntax-highlighting'
 # zsh-syntax-highlighting must be the last plugin sourced
-
-# load theme
 miniplug theme 'romkatv/powerlevel10k'
 
-# Key binds
-# source omz's lib for common keys
-source "$ZDOTDIR/lib/key-bindings.zsh"
-
-# Source the plugins
 miniplug load
 
-# Compinit
 autoload -Uz compinit && compinit -C
+zstyle -e ':autocomplete:*' list-lines 'reply=( $(( LINES / 8 )) )'
 
+#
 # Options
+#
+HISTSIZE=100000
 ZSH_AUTOSUGGEST_STRATEGY=( completion history )
 
+#
 # Aliases
+#
 alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
 alias vimdiff='nvim -d'
 
