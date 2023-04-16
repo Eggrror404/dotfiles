@@ -28,12 +28,12 @@ open_widget() {
 # don't launch immediately so eww doesn't freeze
 sleep 0.05
 
-if [ "$1" = "launcher" ]; then
-    sh "$HOME/.config/rofi/scripts/launcher.sh"
-elif [ "$1" = "bluetooth" ]; then
+if [ "$1" = "bluetooth" ]; then
     blueman-manager
 elif [ "$1" = "network" ]; then
-    alacritty -e nmtui
+    nm-connection-editor
+elif [ "$1" = "launcher" ]; then
+    sh "$HOME/.config/rofi/scripts/launcher.sh"
 elif [ "$1" = "audio" ]; then
     sh "$HOME/.config/rofi/scripts/applets/audio.sh"
 elif [ "$1" = "game" ]; then

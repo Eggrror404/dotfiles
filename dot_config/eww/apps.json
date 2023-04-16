@@ -38,6 +38,15 @@
       "fallback": [
         {
           "class": "Steam"
+        },
+        {
+          "class": "org.prismlauncher.PrismLauncher"
+        },
+        {
+          "class": "Minecraft\\*.*"
+        },
+        {
+          "class": "osu!"
         }
       ]
     },
@@ -100,7 +109,7 @@
     },
     {
       "class": "blender",
-      "icon": "",
+      "icon": "",
       "color": "peach"
     },
     {
@@ -117,6 +126,16 @@
       "class": "org.prismlauncher.PrismLauncher",
       "icon": "",
       "color": "teal"
+    },
+    {
+      "class": "Minecraft\\*.*",
+      "icon": "",
+      "color": "blue"
+    },
+    {
+      "class": "osu!",
+      "icon": "",
+      "color": "pink"
     },
     {
       "class": "firefox",
