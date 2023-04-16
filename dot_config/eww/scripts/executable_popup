@@ -35,11 +35,13 @@ elif [ "$1" = "network" ]; then
 elif [ "$1" = "launcher" ]; then
     sh "$HOME/.config/rofi/scripts/launcher.sh"
 elif [ "$1" = "audio" ]; then
-    sh "$HOME/.config/rofi/scripts/applets/audio.sh"
+    sh "$HOME/.config/rofi/scripts/audio.sh"
 elif [ "$1" = "game" ]; then
-    sh "$HOME/.config/rofi/scripts/launch-game-lib.sh"
+    sh "$HOME/.config/rofi/scripts/game-lib.sh"
 elif [ "$1" = "screenshot" ]; then
-    sh "$HOME/.config/rofi/scripts/applets/screenshot.sh"
+    sh "$HOME/.config/rofi/scripts/screenshot.sh"
+elif [ "$1" = "emoji" ]; then
+    rofi -modi emoji -show emoji -emoji-mode copy -theme "$HOME/.config/rofi/launchers/style-5.rasi" -theme-str 'configuration { show-icons: false; }'
 elif [ "$1" = "dashboard" ]; then
     open_widget dashboard
 elif [ "$1" = "more" ]; then
