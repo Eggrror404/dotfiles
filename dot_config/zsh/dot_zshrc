@@ -2,7 +2,7 @@
 # Sourcing files
 #
 source "$HOME/.local/share/miniplug/miniplug.zsh"
-for file in $ZDOTDIR/lib/{*.zsh,*.sh}; do
+for file in $ZDOTDIR/lib/{*.zsh,*.sh}(N); do
     [ -r $file ] && source $file
 done
 
