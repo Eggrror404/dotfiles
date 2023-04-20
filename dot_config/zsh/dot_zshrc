@@ -27,6 +27,8 @@ zstyle -e ':autocomplete:*' list-lines 'reply=( $(( LINES / 8 )) )'
 #
 # Options
 #
+setopt EXTENDED_HISTORY HIST_IGNORE_SPACE
+SAVEHIST=100000
 HISTSIZE=100000
 ZSH_AUTOSUGGEST_STRATEGY=( completion history )
 
