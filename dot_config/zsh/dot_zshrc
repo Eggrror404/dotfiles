@@ -22,7 +22,6 @@ miniplug theme 'romkatv/powerlevel10k'
 miniplug load
 
 autoload -Uz compinit && compinit
-zstyle -e ':autocomplete:*' list-lines 'reply=( $(( LINES / 8 )) )'
 
 #
 # Options
