@@ -1,28 +1,39 @@
 #!/usr/bin/env bash
 
-open_widget() {
-    WIDGET_NAME=$1
-    LOCK_FILE="$HOME/.cache/eww-$WIDGET_NAME.lock"
-    EWW_BIN="/usr/bin/eww"
-
-    run() {
-        ${EWW_BIN} open "$WIDGET_NAME"
-    }
+toggle_widget() {
+    WIDGET=$1
+    TOGGLE=$2 # "open" or "close" or empty
 
     # Run eww daemon if not running
     if [[ ! $(eww ping) ]]; then
-        ${EWW_BIN} daemon
+        eww daemon
         sleep 1
     fi
 
-    # Open widgets
-    if [[ ! -f "$LOCK_FILE" ]]; then
-        touch "$LOCK_FILE"
-        run
-    else
-        ${EWW_BIN} close "$WIDGET_NAME"
-        rm "$LOCK_FILE"
-    fi
+    close() {
+        [ "$TOGGLE" != "open" ] \
+            && eww close "$WIDGET" 2>/dev/null >/dev/null \
+            && echo "Closed $WIDGET"
+    }
+
+    open() {
+        [ "$TOGGLE" != "close" ] \
+            && eww open "$WIDGET" >/dev/null \
+            && echo "Opened $WIDGET"
+    }
+
+    close || open
+}
+
+toggle_dashboard() {
+    [ "$(toggle_widget dashboard "$1")" = "Opened dashboard" ] \
+        && (hyprctl dispatch submap dashboard && echo "Entered dashboard") \
+        || (hyprctl dispatch submap reset && echo "Left dashboard")
+}
+
+menu() {
+    toggle_dashboard close
+    sh "$HOME/.config/rofi/scripts/$1"
 }
 
 # don't launch immediately so eww doesn't freeze
@@ -33,23 +44,23 @@ if [ "$1" = "bluetooth" ]; then
 elif [ "$1" = "network" ]; then
     nm-connection-editor
 elif [ "$1" = "launcher" ]; then
-    sh "$HOME/.config/rofi/scripts/launcher.sh"
+    menu launcher.sh
 elif [ "$1" = "audio" ]; then
-    sh "$HOME/.config/rofi/scripts/audio.sh"
+    menu audio.sh
 elif [ "$1" = "game" ]; then
-    sh "$HOME/.config/rofi/scripts/game-lib.sh"
+    menu game-lib.sh
 elif [ "$1" = "screenshot" ]; then
-    sh "$HOME/.config/rofi/scripts/screenshot.sh"
+    menu screenshot.sh
 elif [ "$1" = "emoji" ]; then
-    sh "$HOME/.config/rofi/scripts/emoji.sh"
+    menu emoji.sh
 elif [ "$1" = "calc" ]; then
-    sh "$HOME/.config/rofi/scripts/calc.sh"
+    menu calc.sh
 elif [ "$1" = "dashboard" ]; then
-    open_widget dashboard
+    toggle_dashboard "$2"
 elif [ "$1" = "more" ]; then
-    open_widget controls
+    toggle_widget controls "$2"
 elif [ "$1" = "calendar" ]; then
-    open_widget calendar
+    toggle_widget calendar "$2"
 elif [ "$1" = "update" ]; then
     alacritty --hold -e sh -c 'yay; eww update updates=`~/.config/eww/scripts/updates`'
 fi
