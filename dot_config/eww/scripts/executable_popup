@@ -41,7 +41,9 @@ elif [ "$1" = "game" ]; then
 elif [ "$1" = "screenshot" ]; then
     sh "$HOME/.config/rofi/scripts/screenshot.sh"
 elif [ "$1" = "emoji" ]; then
-    rofi -modi emoji -show emoji -emoji-mode copy -theme "$HOME/.config/rofi/launchers/style-5.rasi" -theme-str 'configuration { show-icons: false; }'
+    sh "$HOME/.config/rofi/scripts/emoji.sh"
+elif [ "$1" = "calc" ]; then
+    sh "$HOME/.config/rofi/scripts/calc.sh"
 elif [ "$1" = "dashboard" ]; then
     open_widget dashboard
 elif [ "$1" = "more" ]; then

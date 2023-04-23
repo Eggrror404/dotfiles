@@ -23,6 +23,8 @@
               :onclick "scripts/popup game" "󰊗")
       (button :class "btn btn-emoji"
               :onclick "scripts/popup emoji" "󱗌")
+      (button :class "btn btn-calc"
+              :onclick "scripts/popup calc" "󰃬")
       (button :class "btn btn-screenshot"
               :onclick "scripts/popup screenshot" ""))))
 
