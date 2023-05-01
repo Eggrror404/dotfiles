@@ -31,3 +31,4 @@
 (include "calendar/eww.yuck")
 (include "controls/eww.yuck")
 (include "dashboard/eww.yuck")
+(include "idle/eww.yuck")

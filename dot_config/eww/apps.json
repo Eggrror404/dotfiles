@@ -27,6 +27,9 @@
       "exec": "LD_PRELOAD=/usr/lib/spotifywm.so spotify",
       "fallback": [
         {
+          "class": "YouTube Music"
+        },
+        {
           "class": "firefox",
           "title": "Now Playing | Gensokyo Radio — Mozilla Firefox"
         }
@@ -136,6 +139,11 @@
       "class": "osu!",
       "icon": "",
       "color": "pink"
+    },
+    {
+      "class": "YouTube Music",
+      "icon": "",
+      "color": "maroon"
     },
     {
       "class": "firefox",

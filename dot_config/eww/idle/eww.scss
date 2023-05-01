@@ -1,0 +1,15 @@
+.idle {
+  background-image: radial-gradient(
+    circle,
+    rgba($mantle, 0.01) 0,
+    rgba($mantle, 0.15) 90%,
+    rgba($mantle, 0.25) 100%
+  );
+}
+
+.idl-test {
+  font-size: 30;
+  font-weight: 600;
+  font-family: "Ink Free";
+  box-shadow: 0 0 0.1em 5px black;
+}
