@@ -1,3 +1,4 @@
+local null_ls = require "null-ls"
 return {
   "jose-elias-alvarez/null-ls.nvim",
   opts = function(_, config)
@@ -11,6 +12,9 @@ return {
       -- Set a formatter
       -- null_ls.builtins.formatting.stylua,
       -- null_ls.builtins.formatting.prettier,
+      null_ls.builtins.formatting.shfmt.with {
+        extra_args = { "-i", "2", "-ci" },
+      },
     }
     return config -- return final config table
   end,

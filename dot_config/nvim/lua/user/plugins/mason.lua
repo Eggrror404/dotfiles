@@ -1,5 +1,4 @@
-local utils = require "astrocommunity.utils"
-local null_ls = require "null-ls"
+local utils = require "astronvim.utils"
 -- customize mason plugins
 return {
   -- use mason-lspconfig to configure LSP installations
@@ -20,12 +19,6 @@ return {
       if not opts.ensure_installed then opts.ensure_installed = {} end
       -- Add to ensure_installed
       utils.list_insert_unique(opts.ensure_installed, { "shfmt" })
-
-      opts.handlers.shfmt = function(source_name, methods)
-        null_ls.register(null_ls.builtins.formatting.shfmt.with {
-          extra_args = { "-i", "2", "-ci" },
-        })
-      end
     end,
   },
   {
