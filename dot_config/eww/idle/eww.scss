@@ -5,11 +5,23 @@
     rgba($mantle, 0.15) 90%,
     rgba($mantle, 0.25) 100%
   );
+  font-family: "Quicksand Light";
 }
 
-.idl-test {
-  font-size: 30;
-  font-weight: 600;
-  font-family: "Ink Free";
-  box-shadow: 0 0 0.1em 5px black;
+.idl-clock {
+  font-size: 28;
+  font-weight: 400;
+
+  margin-right: 18rem;
+  margin-bottom: 8rem;
+
+  .idl-time {
+    font-size: 80;
+    font-weight: 900;
+  }
+}
+
+.idl-info {
+  font-size: 18;
+  margin-bottom: .6rem;
 }

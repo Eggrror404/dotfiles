@@ -1,10 +1,31 @@
-(defwidget idl-test []
-  (label :class "idl-test"
-         :text "hello"))
+(defwidget idl-clock []
+  (box :class "idl-clock"
+       :orientation "v"
+       :valign "end"
+       :halign "end"
+       :space-evenly false
+    (label :class "idl-time"
+           :halign "start"
+           :text "${time.hour}:${time.min}")
+    (label :class "idl-date"
+           :halign "start"
+           :text "${time.day_short},${time.dom} ${time.month_short}")))
+
+(defwidget idl-info []
+  (label :class "idl-info"
+         :valign "end"
+         :halign "center"
+         :text " Idle for ${idletime}"))
 
 (defwidget idl []
   (box :class "idle"
-    (idl-test)))
+       :orientation "v"
+    (box :class "idle-bot"
+         :orientation "v"
+         :valign "end"
+         :space-evenly false
+      (idl-clock)
+      (idl-info))))
 
 ; idle screen
 (defwindow idle

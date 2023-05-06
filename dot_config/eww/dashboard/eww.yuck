@@ -26,7 +26,7 @@
       (button :class "btn btn-calc"
               :onclick "scripts/popup calc" "󰃬")
       (button :class "btn btn-screenshot"
-              :onclick "scripts/popup screenshot" ""))))
+              :onclick "scripts/popup screenshot" "󰆞"))))
 
 (defwidget session []
   (box :class "widget db-session"
