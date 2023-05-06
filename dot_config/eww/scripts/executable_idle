@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+idletime() {
+  now=$(date +%s)
+  starttime=$(eww get idle_start)
+
+  date -ud "0 $now sec - $starttime sec" +"%-H hours, %-M minutes" |
+    awk -F ', ' '{ if ($1 == "0 hours") { sub("0 hours, ","") } else { sub(", 0 minutes","") }; print }' |
+    awk '{ sub("1 hours","1 hour"); sub("1 minutes","1 minute"); print }'
+}
+
+close() {
+  eww open bar
+  eww close idle
+}
+
+open() {
+  eww update idle_start=$(date +%s)
+  eww open idle
+  eww close bar
+}
+
+if [ "$1" = "time" ]; then
+  idletime
+elif [ "$1" = "close" ]; then
+  close
+else
+  open
+fi
