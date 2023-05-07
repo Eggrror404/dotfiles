@@ -1,5 +1,5 @@
-timeout 20 '$HOME/.config/eww/scripts/idle' resume '$HOME/.config/eww/scripts/idle close'
-timeout 40 '$HOME/.config/eww/scripts/idle lock'
-timeout 60 'systemctl suspend'
+timeout 300 '$HOME/.config/eww/scripts/idle' resume '$HOME/.config/eww/scripts/idle close'
+timeout 600 '$HOME/.config/eww/scripts/idle lock'
+timeout 1800 'systemctl suspend'
 
 after-resume '$HOME/.config/eww/scripts/idle lock'

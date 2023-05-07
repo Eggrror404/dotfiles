@@ -1,17 +1,22 @@
 #!/usr/bin/env bash
 
-volume() {
-    amixer -D pulse sset Master 5%$1
+notify() {
+    dunstify -h int:value:"$1" -h string:hlcolor:"$2" -h string:x-dunst-stack-tag:"$3" "$4"
+}
 
-    current=$(amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%')
-    notify-send -h int:value:$current -h string:hlcolor:#b7bdf8 -r 899 "Current Volume $current%"
+volume() {
+    current=$(amixer -D pulse sset Master 5%$1 \
+        | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%')
+
+    dunstify -h int:value:"$current" -h string:hlcolor:#b4bdf8 -h string:x-dunst-stack-tag:volume \
+        "Current Volume $current%"
 }
 
 mute() {
-    amixer -D pulse sset Master toggle
+    muted=$(amixer -D pulse sset Master toggle \
+        | grep '\[on\]' -q && echo "Unmuted" || echo "Muted")
 
-    muted=$(amixer -D pulse sget Master | grep '\[on\]' -q && echo 'Unmuted' || echo 'Muted')
-    notify-send -r 899 "Audio $muted"
+    dunstify -h string:x-dunst-stack-tag:volume "Audio $muted"
 }
 
 player() {
@@ -31,10 +36,10 @@ player() {
     esac
 }
 
-if [ $1 = "vol" ]; then
-    volume $2
-elif [ $1 = "mute" ]; then
+if [ "$1" = "vol" ]; then
+    volume "$2"
+elif [ "$1" = "mute" ]; then
     mute
-elif [ $1 = "player" ]; then
-    player $2
+elif [ "$1" = "player" ]; then
+    player "$2"
 fi
