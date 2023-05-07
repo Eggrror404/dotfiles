@@ -1,0 +1,46 @@
+# OPTIONS
+# daemonize
+show-failed-attempts
+
+# APPEARANCE
+indicator-caps-lock
+# indicator-idle-visible
+indicator-radius=75
+indicator-thickness=15
+
+font=FantasqueSansMono Nerd Font
+
+# COLORS
+color=ffffff00
+
+key-hl-color=b7bdf8
+caps-lock-key-hl-color=b7bdf8
+
+bs-hl-color=b7bdf8
+caps-lock-bs-hl-color=b7bdf8
+
+inside-color=8aadf4a8
+inside-clear-color=b7bdf8a8
+inside-caps-lock-color=8aadf4a8
+inside-ver-color=c6a0f6a8
+inside-wrong-color=8aadf4a8
+
+line-color=24273aa8
+line-clear-color=24273aa8
+line-caps-lock-color=24273aa8
+line-ver-color=24273aa8
+line-wrong-color=24273aa8
+
+ring-color=c6a0f6
+ring-clear-color=c6a0f6
+ring-caps-lock-color=c6a0f6
+ring-ver-color=c6a0f6
+ring-wrong-color=c6a0f6
+
+separator-color=24273a
+
+text-color=cad3f5
+text-clear-color=4dc4e4
+text-caps-lock-color=7dc4e4
+text-ver-color=7dc4e4
+text-wrong-color=ee99a0

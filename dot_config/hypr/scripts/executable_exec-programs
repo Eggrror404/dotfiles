@@ -6,6 +6,7 @@ swww init
 eww daemon
 dunst &
 mpDris2 &
+swayidle -w &
 /usr/lib/kdeconnectd &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
@@ -17,7 +18,8 @@ firefox &
 sleep 1
 
 swww query && sww img ~/Pictures/Wallpapr/PPTR54t.jpeg
-eww ping && \
-    eww open bar && \
-    eww open dashboard && eww close dashboard && \
-    keepassxc & openrgb -p 'Breath.' --startminimized
+eww ping &&
+  eww open bar &&
+  eww open dashboard && eww close dashboard &&
+  keepassxc &
+openrgb -p 'Breath.' --startminimized

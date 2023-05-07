@@ -9,19 +9,33 @@ idletime() {
     awk '{ sub("1 hours","1 hour"); sub("1 minutes","1 minute"); print }'
 }
 
+lock() {
+  open
+  # swaylock may fail if already running
+  swaylock &&
+    close
+}
+
 close() {
+  # don't close if swaylock is running
+  if pidof -q swaylock; then
+    return
+  fi
+
   eww open bar
-  eww close idle
+  eww close idle 2>/dev/null || true
 }
 
 open() {
   eww update idle_start=$(date +%s)
   eww open idle
-  eww close bar
+  eww close bar 2>/dev/null || true
 }
 
 if [ "$1" = "time" ]; then
   idletime
+elif [ "$1" = "lock" ]; then
+  lock
 elif [ "$1" = "close" ]; then
   close
 else
