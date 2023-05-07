@@ -1,3 +1,11 @@
+(defwidget idl-player [current]
+  (label :class "idl-player"
+         :valign "start"
+         :halign "center"
+         :limit-width 25
+         :show_truncated true
+         :text "${current.status == "Playing" ? "" : current.status == "Paused" ? "󰏤" : "󰓛"} ${current.title}"))
+
 (defwidget idl-clock []
   (box :class "idl-clock"
        :orientation "v"
@@ -15,11 +23,12 @@
   (label :class "idl-info"
          :valign "end"
          :halign "center"
-         :text " Idle for ${idletime}"))
+         :text "${locked ? " Locked": " Idle"} for ${idletime}"))
 
 (defwidget idl []
   (box :class "idle"
        :orientation "v"
+    (idl-player :current {player[player_index % arraylength(player)]})
     (box :class "idle-bot"
          :orientation "v"
          :valign "end"

@@ -12,8 +12,7 @@ idletime() {
 lock() {
   open
   # swaylock may fail if already running
-  swaylock &&
-    close
+  (swaylock && close) &
 }
 
 close() {
@@ -22,14 +21,14 @@ close() {
     return
   fi
 
-  eww open bar
-  eww close idle 2>/dev/null || true
+  eww open bar >/dev/null
+  eww close idle >/dev/null 2>/dev/null || true
 }
 
 open() {
   eww update idle_start=$(date +%s)
-  eww open idle
-  eww close bar 2>/dev/null || true
+  eww open idle >/dev/null
+  eww close bar >/dev/null 2>/dev/null || true
 }
 
 if [ "$1" = "time" ]; then

@@ -9,7 +9,7 @@
 (defpoll time :interval "1s" `date +'{"hour":"%H","min":"%M","sec":"%S","pretty":"%A, %-d %B","day":"%A","day_short":"%a","month":"%B","month_short":"%b","dom":"%e","year":"%Y","day_num":"%d","month_num":"%m","year_num":"%y"}'`)
 (defpoll session :interval "48h" "scripts/session")
 (defpoll uptime :interval "48h" "uptime --pretty | ./scripts/uptime.awk")
-(defpoll idletime :interval "1s" "scripts/idle time")
+(defpoll idletime :interval "5s" "scripts/idle time")
 
 (defpoll vol :interval "1s"
   "amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
@@ -20,6 +20,7 @@
 (defpoll mic-muted :interval "1s"
   "amixer -D pulse sget Capture | grep '\\[on\\]' -q && echo 'false' || echo 'true'")
 
+(defpoll locked :interval "5s" "pidof -q swaylock && echo 'true' || echo 'false'")
 (defpoll dnd-enabled :interval "5s" "dunstctl is-paused")
 (defpoll temp :interval "2s"
   "cat /sys/class/thermal/thermal_zone*/temp | awk '{s+=$1}END{print s/NR/1000}'")
