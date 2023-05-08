@@ -26,6 +26,10 @@ close() {
 }
 
 open() {
+  if pidof -q swaylock; then
+    return
+  fi
+
   eww update idle_start=$(date +%s)
   eww open idle >/dev/null
   eww close bar >/dev/null 2>/dev/null || true

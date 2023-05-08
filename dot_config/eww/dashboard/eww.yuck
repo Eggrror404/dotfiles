@@ -28,7 +28,7 @@
       (button :class "btn btn-screenshot"
               :onclick "scripts/popup screenshot" "󰆞"))))
 
-(defwidget session []
+(defwidget db-session []
   (box :class "widget db-session"
        :orientation "h"
        :vexpand false
@@ -53,7 +53,7 @@
              :wrap true
              :text {session.uptime}))))
 
-(defwidget player [current]
+(defwidget db-player [current]
   (box :class "widget db-player"
        :orientation "v"
        :space-evenly false
@@ -136,7 +136,7 @@
            :min 0 :max 101 :value value
            :onchange onchange)))
 
-(defwidget quickset []
+(defwidget db-quickset []
   (box :class "widget db-quickset"
        :orientation "v"
        :space-evenly false
@@ -191,7 +191,7 @@
       (label :class "sysinfo-icon" :text icon)
       (label :class "sysinfo-name" :markup "<span variant='petite-caps'>${name}</span>"))))
 
-(defwidget sysinfo []
+(defwidget db-sysinfo []
   (box :class "widget db-sysinfo"
        :orientation "h"
       (sysinfo-chart :name "cpu" :icon "" :value {EWW_CPU.avg})
@@ -199,7 +199,7 @@
       (sysinfo-chart :name "temp" :icon "󰏈" :value temp)
       (sysinfo-chart :name "disk" :icon "󰋊" :value {EWW_DISK["/"].used_perc})))
 
-(defwidget systray []
+(defwidget db-systray []
   (box :class "widget db-systray"
        :orientation "v"
        :vexpand false
@@ -209,8 +209,8 @@
     ;; (label :class "label"
     ;;        :halign "start"
     ;;        :text "System Tray")
-    (system-tray :class ""
-                 :pack-direction "ltr")))
+    (systray :class ""
+             :pack-direction "ltr")))
 
 (defwidget db []
   (box :class "db"
@@ -220,12 +220,12 @@
        :space-evenly false
        :spacing 10
     (db-top)
-    (session)
-    (player :current {player[player_index % arraylength(player)]})
-    (quickset)
+    (db-session)
+    (db-player :current {player[player_index % arraylength(player)]})
+    (db-quickset)
     ;; (quickslide)
-    (sysinfo)
-    (systray)))
+    (db-sysinfo)
+    (db-systray)))
 
 ; dashboard window
 (defwindow dashboard
