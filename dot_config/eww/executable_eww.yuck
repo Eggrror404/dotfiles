@@ -11,14 +11,7 @@
 (defpoll uptime :interval "48h" "uptime --pretty | ./scripts/uptime.awk")
 (defpoll idletime :interval "5s" "scripts/idle time")
 
-(defpoll vol :interval "1s"
-  "amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
-(defpoll muted :interval "1s"
-  "amixer -D pulse sget Master | grep '\\[on\\]' -q && echo 'false' || echo 'true'")
-(defpoll mic :interval "1s"
-    "amixer -D pulse sget Capture | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
-(defpoll mic-muted :interval "1s"
-  "amixer -D pulse sget Capture | grep '\\[on\\]' -q && echo 'false' || echo 'true'")
+(deflisten vol :initial "{}" "scripts/volume")
 
 (defpoll locked :interval "5s" "pidof -q swaylock && echo 'true' || echo 'false'")
 (defpoll dnd-enabled :interval "5s" "dunstctl is-paused")

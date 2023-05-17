@@ -361,13 +361,6 @@
     }
   }
 
-  menu menuitem arrow {
-    min-height: 16px;
-    min-width: 16px;
-    -gtk-icon-source: -gtk-icontheme("pan-end-symbolic");
-    margin-left: 4px;
-  }
-
   menu separator {
     margin: 4px 0;
     border-top: solid 1px rgba($overlay0, 0.7);

@@ -7,6 +7,7 @@
 @import "idle/eww.scss";
 
 // Global
-* {
+*:not(arrow):not(check):not(radio) {
+  // Exclude menu components
   all: unset;
 }

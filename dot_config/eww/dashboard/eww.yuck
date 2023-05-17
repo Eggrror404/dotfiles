@@ -166,17 +166,17 @@
                        :more-cmd ""))
     (box :class "quickset-divider")
     (quickset-scale :name "vol" :label "Volume"
-                    :icon-active {vol <= 10 ? "󰕿" : vol <= 40 ? "󰖀" : "󰕾"}
-                    :icon-inactive "󰖁" :active {!muted}
-                    :value vol
-                    :onchange "amixer -D pulse sset Master {}% && eww update vol={}"
-                    :toggle-cmd "amixer -D pulse sset Master toggle && eww update muted=${!muted}")
+                    :icon-active {vol.volume <= 10 ? "󰕿" : vol.volume <= 40 ? "󰖀" : "󰕾"}
+                    :icon-inactive "󰖁" :active {!vol.mute}
+                    :value {vol.volume}
+                    :onchange "amixer -D pulse sset Master {}%"
+                    :toggle-cmd "amixer -D pulse sset Master toggle")
     (quickset-scale :name "mic" :label "Mic"
                     :icon-active "󰍬" :icon-inactive "󰍭"
-                    :active {!mic-muted}
-                    :value mic
-                    :onchange "amixer -D pulse sset Capture {}% && eww update mic={}"
-                    :toggle-cmd "amixer -D pulse sset Capture toggle && eww update mic-muted=${!mic-muted}")))
+                    :active {!vol.mic_mute}
+                    :value {vol.mic}
+                    :onchange "amixer -D pulse sset Capture {}%"
+                    :toggle-cmd "amixer -D pulse sset Capture toggle")))
 
 (defwidget sysinfo-chart [icon value name]
   ; use button for hover effect

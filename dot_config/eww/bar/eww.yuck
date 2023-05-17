@@ -47,21 +47,21 @@
             :onhoverlost "${EWW_CMD} update volhover=false"
    (box :orientation "v"
         :space-evenly "false"
-        :tooltip "Volume: ${vol}%"
+        :tooltip "Volume: ${vol.volume}%"
         :spacing "2"
     (revealer :transition "slideup"
               :reveal volhover
               :duration "550ms"
      (scale :class "volbar"
-            :value vol
+            :value {vol.volume}
             :orientation "v"
             :flipped true
             :max 101
             :min 0
-            :onchange "amixer -D pulse sset Master {}% && eww update vol={}"))
+            :onchange "amixer -D pulse sset Master {}%"))
     (button :class "volume-icon"
-            :onclick "amixer -D pulse sset Master toggle && eww update muted=${!muted}"
-            :onrightclick "scripts/popup audio" {muted ? "󰖁" : vol == 0 ? "󰕿" : vol <= 40 ? "󰖀" : "󰕾"}))))
+            :onclick "amixer -D pulse sset Master toggle"
+            :onrightclick "scripts/popup audio" {vol.mute ? "󰖁" : vol.volume == 0 ? "󰕿" : vol.volume <= 40 ? "󰖀" : "󰕾"}))))
 (defvar volhover false)
 
 ;; Control Panel Widgets ;;  
