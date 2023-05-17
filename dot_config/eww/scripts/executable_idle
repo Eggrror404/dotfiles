@@ -29,8 +29,10 @@ open() {
   if pidof -q swaylock; then
     return
   fi
+  # add how many seconds to time counter
+  sec=${1-0}
 
-  eww update idle_start=$(date +%s)
+  eww update idle_start=$(($(date +%s) - (sec)))
   eww open idle >/dev/null
   eww close bar >/dev/null 2>/dev/null || true
 }
@@ -42,5 +44,5 @@ elif [ "$1" = "lock" ]; then
 elif [ "$1" = "close" ]; then
   close
 else
-  open
+  open "$1"
 fi
