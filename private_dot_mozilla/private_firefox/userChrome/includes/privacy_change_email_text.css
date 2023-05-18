@@ -1,0 +1,13 @@
+/* ----- Replace email address in hamburger menu */
+/* ----- to any text you want */
+#appMenu-fxa-label2 #appMenu-header-description {display: none !important;}
+
+#appMenu-popup #appMenu-fxa-label2::before {
+  white-space: nowrap;
+	content: 'Firefox account' !important; /* Write any text you want */
+  padding-left: 24px;
+  background-repeat: no-repeat;
+  background-position: center left;
+  line-height: 15px;
+}
+
