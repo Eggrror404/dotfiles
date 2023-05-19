@@ -2,16 +2,17 @@
 # passed in args: $workspaces, $clients, $monitors, $apps
 
 ### Set variables
-# extract app class names from $apps.apps
-($apps.apps | group_by(.class) | map({ key: .[0].class, value: (map(del(.class)) | sort_by(.title)) }) | from_entries) as $icons |
-# add window class property for each workspace
-($workspaces | map(.lastwindow as $last | .lastwindowclass = ($clients | map(select(.address == $last))[0].class))) as $workspaces |
-# map client titles to their workspace
-($clients | group_by(.workspace.id) | map({ key: (.[0].workspace.id|tostring), value: map(.title) }) | from_entries) as $clientTitles |
+# active display
+($monitors[] | select(.focused == true)) as $activeDp |
 # get active workspace
-($monitors[] | select(.focused == true) | .activeWorkspace.id ) as $activeId |
+($activeDp | .activeWorkspace.id) as $activeWs |
+# select workspaces in current screen
+($workspaces | map(select(.monitor == $activeDp.name)) |
+  # add window class property for each workspace
+  map(.lastwindow as $last | .lastwindowclass = ($clients[] | select(.address == $last).class // ""))) as $workspaces |
 
 ## Regex testing func
+# . -> regex; $class, $title -> actual window
 def matchClassTitle($class; $title):
   .class as $classReg | (.title // "") as $titleReg |
   (($class // "") | test($classReg)) and (($title // "") | test($titleReg));
@@ -19,20 +20,21 @@ def matchClassTitle($class; $title):
 ## Add current workspaces into array
 # $apps.workspaces as initial value
 reduce $workspaces[] as $work ($apps.workspaces;
-  { class: $work.lastwindowclass, title: $work.lastwindowtitle } as $workspaceApp |
-  if .[($work.id-1)] == null then
+  { class: $work.lastwindowclass, title: $work.lastwindowtitle } as $wsWindow |
+  ($work.id - $activeDp.id * 10 - 1) as $wsIndex |
+  if .[($wsIndex)] == null then
     # add in if not present
-    .[($work.id-1)] //= $workspaceApp
-  elif .[($work.id-1)].fallback // [] | any(matchClassTitle($workspaceApp.class; $workspaceApp.title)) then
+    .[($wsIndex)] //= $wsWindow
+  elif .[($wsIndex)].fallback // [] | any(matchClassTitle($wsWindow.class; $wsWindow.title)) then
     # replace original when one of the fallbacks matches
-    .[($work.id-1)] += $workspaceApp
+    .[($wsIndex)] += $wsWindow
   else . end
 ) |
 
 ## Set id & remove null values
 to_entries | map(
   if .value != null then
-    { id: (.key+1), active: (.key+1 == $activeId) } + .value
+    { id: (.key+1), active: (.key+1 == ($activeWs - $activeDp.id * 10)) } + .value
   else
     empty
   end |
@@ -43,9 +45,8 @@ to_entries | map(
   .icon = ($icon.icon // .id) |
   .color = ($icon.color // "blue") |
 
-  # set clients
-  .clients = ($clientTitles[.id|tostring] // [] | join("\n"))
+  .occupied = ([.id] | inside($clients | map(.workspace.id - $activeDp.id * 10))) |
 
   # cleanup
-  #delpaths([["class"], ["title"], ["fallback"]])
+  delpaths([["class"], ["title"], ["fallback"]])
 )

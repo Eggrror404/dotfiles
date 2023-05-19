@@ -20,7 +20,7 @@
     (for ws in workspace
       (button :onclick "hyprctl dispatch workspace ${ws.id}"
               :onmiddleclick "hyprctl dispatch workspace ${ws.id} & hyprctl dispatch exec '${ws.exec ?: ":"}'" 
-              :class "${ws.clients != "" ? "occupied" : ""} ${ws.active ? "active" : ""} ${ws.color}" "${ws.icon}"))))
+              :class "${ws.occupied ? "occupied" : ""} ${ws.active ? "active" : ""} ${ws.color}" "${ws.icon}"))))
 
 ;; Wifi Widgets ;;
 (defwidget wifi []
