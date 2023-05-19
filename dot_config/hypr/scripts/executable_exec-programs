@@ -17,7 +17,7 @@ firefox &
 # Wait for swww and eww daemon to start
 sleep 1
 
-swww query && sww img ~/Pictures/Wallpapr/PPTR54t.jpeg
+swww query && sh $HOME/.config/hypr/scripts/set-wallpapr
 eww ping &&
   eww open bar &&
   eww open dashboard && eww close dashboard &&
