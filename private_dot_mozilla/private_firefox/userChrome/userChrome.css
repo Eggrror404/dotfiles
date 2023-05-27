@@ -717,10 +717,10 @@ toolbar
 }
 
 /* Private browser icons remove and change main menu to purple */
-#private-browsing-indicator-with-label,
-.private-browsing-indicator {
-  display: none !important;
-}
+/* #private-browsing-indicator-with-label, */
+/* .private-browsing-indicator { */
+/*   display: none !important; */
+/* } */
 
 /* :root[privatebrowsingmode="temporary"] #PanelUI-menu-button { */
 /*   list-style-image: url("image/firefox.svg") !important; */
