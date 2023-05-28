@@ -17,10 +17,14 @@
 (defpoll dnd-enabled :interval "5s" "dunstctl is-paused")
 (defpoll temp :interval "2s"
   "cat /sys/class/thermal/thermal_zone*/temp | awk '{s+=$1}END{print s/NR/1000}'")
+(defpoll capslock :interval "0.5s"
+  "(($(cat /sys/class/leds/*caps*/brightness))) && echo 'true' || echo 'false'")
 
 ; Some variables
 (defvar player_index 0)
 (defvar idle_start 0)
+(defvar osd_open 0)
+;; (defvar capslock false)
 
 ; Include widgets
 (include "bar/eww.yuck")
@@ -28,3 +32,4 @@
 (include "controls/eww.yuck")
 (include "dashboard/eww.yuck")
 (include "idle/eww.yuck")
+(include "osd/eww.yuck")
