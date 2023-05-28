@@ -76,9 +76,9 @@ fi
 
 # notify and view screenshot
 notify_view() {
-    notify_cmd_shot='dunstify -u low --replace=699'
+    notify_cmd_shot="dunstify -u low -h string:image-path:$dir/$file -h string:x-dunst-stack-tag:scrshot"
     ${notify_cmd_shot} "Copied to clipboard."
-    viewnior ${dir}/"$file"
+    # viewnior ${dir}/"$file"
     if [[ -e "$dir/$file" ]]; then
         ${notify_cmd_shot} "Screenshot Saved."
     else
