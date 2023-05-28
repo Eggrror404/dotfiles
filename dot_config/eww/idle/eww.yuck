@@ -1,10 +1,13 @@
-(defwidget idl-player [current]
-  (label :class "idl-player"
-         :valign "start"
-         :halign "center"
-         :limit-width 25
-         :show_truncated true
-         :text "${current.status == "Playing" ? "" : current.status == "Paused" ? "󰏤" : "󰓛"} ${current.title}"))
+(defwidget idl-info [player]
+  (box :class "idl-info"
+       :orientation "v"
+       :valign "start"
+       :halign "center"
+       :space-evenly false
+    (label :class "idl-player"
+           :limit-width 25
+           :show_truncated true
+           :text "${player.status == "Playing" ? "" : player.status == "Paused" ? "󰏤" : "󰓛"} ${player.title}")))
 
 (defwidget idl-clock []
   (box :class "idl-clock"
@@ -19,8 +22,8 @@
            :halign "start"
            :text "${time.day_short},${time.dom} ${time.month_short}")))
 
-(defwidget idl-info []
-  (label :class "idl-info"
+(defwidget idl-timer []
+  (label :class "idl-timer"
          :valign "end"
          :halign "center"
          :text "${locked ? " Locked": " Idle"} for ${idletime}"))
@@ -28,13 +31,13 @@
 (defwidget idl []
   (box :class "idle"
        :orientation "v"
-    (idl-player :current {player[player_index % arraylength(player)]})
+    (idl-info :player {player[player_index % arraylength(player)]})
     (box :class "idle-bot"
          :orientation "v"
          :valign "end"
          :space-evenly false
       (idl-clock)
-      (idl-info))))
+      (idl-timer))))
 
 ; idle screen
 (defwindow idle

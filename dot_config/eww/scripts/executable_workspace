@@ -12,10 +12,13 @@ get() {
 # print initial value
 get
 
+catch=('activewindow' 'closewindow' 'workspace' 'focusedmon')
+
 # connect to hyprland socket
 nc -U /tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock | while read line; do
   event=$(echo $line | awk -F '>>' '{ print $1 }')
-  if [[ $event == 'activewindow' || $event == 'closewindow' || $event == 'workspace' ]]; then
+
+  if [[ "${catch[*]}" =~ "$event" ]]; then
     get
   fi
 done
