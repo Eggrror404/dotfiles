@@ -1,0 +1,37 @@
+(defwidget osdvol []
+  (box :class "osd-widget osd-volume"
+       :orientation "h"
+       :space-evenly false
+    (button :class "osd-volume-icon"
+            :onclick "amixer -D pulse sset Master toggle"
+            :onrightclick "scripts/popup audio" {vol.mute ? "󰖁" : vol.volume == 0 ? "󰕿" : vol.volume <= 40 ? "󰖀" : "󰕾"})
+    (scale :class "osd-volume-scale ${vol.mute ? "mute" : ""}"
+           :value {vol.volume}
+           :orientation "h"
+           :max 101
+           :min 0
+           :onchange "amixer -D pulse sset Master {}%")))
+
+(defwidget osdcaps []
+  (box :class "osd-widget osd-capslock"
+       :orientation "h"
+       :space-evenly false
+    (button :class "osd-capslock-icon" "󰪛")
+    (label :class "osd-capslock-state"
+           :text {capslock ? "CapsLock ON" : "CapsLock OFF"})))
+
+(defwindow osd-volume
+  :geometry (geometry :x "0"
+                      :y "10"
+                      :height "30"
+                      :anchor "top center")
+  :monitor 0
+  (osdvol))
+
+(defwindow osd-capslock
+  :geometry (geometry :x "0"
+                      :y "10"
+                      :height "30"
+                      :anchor "top center")
+  :monitor 0
+  (osdcaps))

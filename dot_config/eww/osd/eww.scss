@@ -1,0 +1,54 @@
+.osd-widget {
+  background-color: rgba($base, 0.4);
+  padding: 0.4rem 0.5rem;
+  border-radius: 3rem;
+
+  font-size: 20;
+  font-family: "Dosis";
+}
+
+.osd-volume {
+  &-icon {
+    font-size: 25;
+    padding: 0 0.7rem 0 0.5rem;
+    border-radius: 3rem;
+
+    &:hover {
+      background-color: rgba($surface1, 0.8);
+    }
+  }
+
+  &-scale trough {
+    background-color: $surface1;
+    border-radius: 3rem;
+    min-height: 10px;
+    min-width: 120px;
+    margin: 0.3rem;
+    margin-right: 0.4rem;
+
+    highlight {
+      background-image: linear-gradient(to right, $text, $lavender);
+      border-radius: 3rem;
+    }
+  }
+
+  &-scale.mute trough highlight {
+    background-image: linear-gradient(to right, mix($surface2, $text), $surface2);
+  }
+}
+
+.osd-capslock {
+  &-icon {
+    font-size: 25;
+    padding: 0 0.7rem 0 0.5rem;
+    border-radius: 3rem;
+
+    &:hover {
+      background-color: rgba($surface1, 0.8);
+    }
+  }
+
+  &-state {
+    margin-right: 0.4rem;
+  }
+}
