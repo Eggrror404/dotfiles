@@ -15,6 +15,11 @@ return {
       null_ls.builtins.formatting.shfmt.with {
         extra_args = { "-i", "2", "-ci" },
       },
+      null_ls.builtins.formatting.prettierd.with {
+        env = {
+          PRETTIERD_DEFAULT_CONFIG = vim.fn.expand "$HOME/.config/nvim/.prettierrc.json",
+        },
+      },
     }
     return config -- return final config table
   end,

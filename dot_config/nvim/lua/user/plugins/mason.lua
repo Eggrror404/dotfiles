@@ -1,6 +1,12 @@
 local utils = require "astronvim.utils"
 -- customize mason plugins
 return {
+  {
+    "williamboman/mason.nvim",
+    opts = {
+      log_level = vim.log.levels.DEBUG,
+    },
+  },
   -- use mason-lspconfig to configure LSP installations
   {
     "williamboman/mason-lspconfig.nvim",

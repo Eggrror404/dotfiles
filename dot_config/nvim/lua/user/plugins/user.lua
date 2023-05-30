@@ -13,16 +13,6 @@ return {
   -- Yuck language support
   { "elkowar/yuck.vim", ft = "yuck" },
 
-  -- Project utilities ( auto cd & stuff )
-  {
-    "ahmedkhalf/project.nvim",
-    event = "User AstroFile",
-    config = function() require("project_nvim").setup {} end,
-  },
-
-  -- Neovim lua dev
-  { "folke/neodev.nvim" },
-
   -- Surround chars
   {
     "kylechui/nvim-surround",
