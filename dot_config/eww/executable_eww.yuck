@@ -22,6 +22,7 @@
 
 ; Some variables
 (defvar player_index 0)
+(defvar caffeine false)
 (defvar idle_start 0)
 (defvar osd_open 0)
 ;; (defvar capslock false)

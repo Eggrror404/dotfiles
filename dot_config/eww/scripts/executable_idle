@@ -15,6 +15,13 @@ lock() {
   (swaylock && close) &
 }
 
+suspend() {
+  caffeine=$(eww get caffeine)
+  if [ "$caffeine" = "false" ]; then
+    systemctl suspend
+  fi
+}
+
 close() {
   # don't close if swaylock is running
   if pidof -q swaylock; then
@@ -41,6 +48,8 @@ if [ "$1" = "time" ]; then
   idletime
 elif [ "$1" = "lock" ]; then
   lock
+elif [ "$1" = "suspend" ]; then
+  suspend
 elif [ "$1" = "close" ]; then
   close
 else

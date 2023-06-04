@@ -156,13 +156,13 @@
                        :more-cmd "scripts/popup bluetooth"))
     (box :orientation "h"
          :spacing 10
-      (quickset-button :name "dnd" :active {dnd-enabled} :label {dnd-enabled ? "No Disturb" : "Notification"}
+      (quickset-button :name "dnd" :active dnd-enabled :label {dnd-enabled ? "No Disturb" : "Notification"}
                        :icon-active "󰂛" :icon-inactive "󰂞"
                        :toggle-cmd "dunstctl set-paused toggle && eww update dnd-enabled=${!dnd-enabled}"
                        :more-cmd "")
-      (quickset-button :name "nope" :active false :label ""
-                       :icon-active "" :icon-inactive ""
-                       :toggle-cmd ""
+      (quickset-button :name "caff" :active caffeine :label {caffeine ? "Caffeine" : "Auto-Suspend"}
+                       :icon-active "" :icon-inactive "󰒲"
+                       :toggle-cmd "eww update caffeine=${!caffeine}"
                        :more-cmd ""))
     (box :class "quickset-divider")
     (quickset-scale :name "vol" :label "Volume"
