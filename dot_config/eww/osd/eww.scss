@@ -19,7 +19,7 @@
   }
 
   &-scale trough {
-    background-color: $surface1;
+    background-color: rgba($surface1, 0.5);
     border-radius: 3rem;
     min-height: 10px;
     min-width: 120px;
@@ -29,11 +29,16 @@
     highlight {
       background-image: linear-gradient(to right, $text, $lavender);
       border-radius: 3rem;
+      box-shadow: 0 0 3px 0 rgba($base, 0.6);
     }
   }
 
   &-scale.mute trough highlight {
-    background-image: linear-gradient(to right, mix($surface2, $text), $surface2);
+    background-image: linear-gradient(
+      to right,
+      mix($surface2, $text),
+      $surface2
+    );
   }
 }
 
