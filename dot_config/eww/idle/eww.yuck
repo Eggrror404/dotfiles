@@ -1,43 +1,64 @@
-(defwidget idl-info [player]
-  (box :class "idl-info"
-       :orientation "v"
-       :valign "start"
-       :halign "center"
+(defwidget idl-player [player]
+  (box :class "idl-player"
+       :orientation "h"
+       :valign "end"
        :space-evenly false
-    (label :class "idl-player"
-           :limit-width 25
-           :show_truncated true
-           :text "${player.status == "Playing" ? "" : player.status == "Paused" ? "󰏤" : "󰓛"} ${player.title}")))
+       :spacing 10
+    (box :class "idl-player-art"
+         :width 80
+         :height 80
+         :style "background-image: url(\"${player.artUrl}\");")
+    (box :class "idl-player-info"
+         :orientation "v"
+         :width 300
+         :space-evenly false
+      (label :class "idl-player-title"
+             :halign "start"
+             :limit-width 25
+             :show_truncated true
+             :text {player.title})
+      (label :class "idl-player-artist"
+             :halign "start"
+             :limit-width 20
+             :show_truncated true
+             :text {player.artist})
+      (progress :class "idl-player-progress"
+                :vexpand true
+                :valign "end"
+                :value {(player.position + (timestamp - player.timestamp) * (player.status == "Playing" ? 1000000 : 0)) / player.length * 100}))))
 
 (defwidget idl-clock []
   (box :class "idl-clock"
        :orientation "v"
        :valign "end"
        :halign "end"
+       :hexpand true
        :space-evenly false
     (label :class "idl-time"
            :halign "start"
            :text "${time.hour}:${time.min}")
     (label :class "idl-date"
            :halign "start"
-           :text "${time.day_short},${time.dom} ${time.month_short}")))
+           :text "${time.day_short}, ${time.dom} ${time.month_short}")))
 
 (defwidget idl-timer []
   (label :class "idl-timer"
          :valign "end"
          :halign "center"
-         :text "${locked ? " Locked": " Idle"} for ${idletime}"))
+         :text "${locked ? " Locked" : " Idle"} for ${idletime} ${caffeine ? "(Caffeine Mode)" : "" }"))
 
 (defwidget idl []
-  (box :class "idle"
-       :orientation "v"
-    (idl-info :player {player[player_index % arraylength(player)]})
-    (box :class "idle-bot"
-         :orientation "v"
-         :valign "end"
+  (centerbox :class "idle"
+             :orientation "h"
+    (box :class "idl-left"
          :space-evenly false
-      (idl-clock)
-      (idl-timer))))
+      (idl-player :player {player[player_index % arraylength(player)]}))
+    (box :class "idl-center"
+         :space-evenly false
+      (idl-timer))
+    (box :class "idl-right"
+         :space-evenly false
+      (idl-clock))))
 
 ; idle screen
 (defwindow idle

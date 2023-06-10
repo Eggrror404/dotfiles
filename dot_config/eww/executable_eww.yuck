@@ -7,6 +7,7 @@
 (deflisten player-title :initial "" "zscroll -u true -e true -l 34 -d 0.8 -p ' / ' 'jq -nrcM \"$(eww get player)[$(eww get player_index)].title\"'")
 
 (defpoll time :interval "1s" `date +'{"hour":"%H","min":"%M","sec":"%S","pretty":"%A, %-d %B","day":"%A","day_short":"%a","month":"%B","month_short":"%b","dom":"%e","year":"%Y","day_num":"%d","month_num":"%m","year_num":"%y"}'`)
+(defpoll timestamp :interval "1s" "date +%s")
 (defpoll session :interval "48h" "scripts/session")
 (defpoll uptime :interval "48h" "uptime --pretty | ./scripts/uptime.awk")
 (defpoll idletime :interval "5s" "scripts/idle time")
@@ -30,7 +31,8 @@
 ; Include widgets
 (include "bar/eww.yuck")
 (include "calendar/eww.yuck")
-(include "controls/eww.yuck")
 (include "dashboard/eww.yuck")
 (include "idle/eww.yuck")
 (include "osd/eww.yuck")
+
+(include "counter/eww.yuck")

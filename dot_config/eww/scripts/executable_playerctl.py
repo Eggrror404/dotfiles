@@ -2,6 +2,7 @@
 
 # fmt: off
 import json  # isort:skip
+import time
 import gi
 
 gi.require_version("Playerctl", "2.0")
@@ -53,6 +54,10 @@ def player_metadata(player):
     info["player"] = player.props.player_name or "none"
     info["status"] = player.props.status or "Stopped"
     info["volume"] = player.props.volume or "0"
+
+    info["position"] = player.get_position()
+
+    info["timestamp"] = int(time.time())
 
     # prettify artist list
     if type(info.get("artist")) == list:

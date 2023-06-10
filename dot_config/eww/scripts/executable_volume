@@ -15,5 +15,5 @@ pactl subscribe |
   grep --line-buffered "sink" | while read -r line; do
   get
 
-  "$HOME/.config/eww/scripts/osd_popup" volume
+  "$HOME/.config/eww/scripts/popup" osd-volume
 done

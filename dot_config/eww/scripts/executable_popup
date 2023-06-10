@@ -1,66 +1,100 @@
 #!/usr/bin/env bash
 
 toggle_widget() {
-    WIDGET=$1
-    TOGGLE=$2 # "open" or "close" or empty
+  WIDGET=$1
+  TOGGLE=$2 # "open" or "close" or empty
 
-    # Run eww daemon if not running
-    if [[ ! $(eww ping) ]]; then
-        eww daemon
-        sleep 1
-    fi
+  # Run eww daemon if not running
+  if [[ ! $(eww ping) ]]; then
+    eww daemon
+    sleep 1
+  fi
 
-    close() {
-        [ "$TOGGLE" != "open" ] \
-            && eww close "$WIDGET" 2>/dev/null >/dev/null \
-            && echo "Closed $WIDGET"
-    }
+  close() {
+    [ "$TOGGLE" != "open" ] &&
+      eww close "$WIDGET" 2>/dev/null >/dev/null &&
+      echo "Closed $WIDGET"
+  }
 
-    open() {
-        [ "$TOGGLE" != "close" ] \
-            && eww open "$WIDGET" >/dev/null \
-            && echo "Opened $WIDGET"
-    }
+  open() {
+    [ "$TOGGLE" != "close" ] &&
+      eww open "$WIDGET" >/dev/null &&
+      echo "Opened $WIDGET"
+  }
 
-    close || open
+  close || open
 }
 
 toggle_dashboard() {
-    [ "$(toggle_widget dashboard "$1")" = "Opened dashboard" ] \
-        && (hyprctl dispatch submap dashboard && echo "Entered dashboard") \
-        || (hyprctl dispatch submap reset && echo "Left dashboard")
+  [ "$(toggle_widget dashboard "$1")" = "Opened dashboard" ] &&
+    (hyprctl dispatch submap dashboard && echo "Entered dashboard") ||
+    (hyprctl dispatch submap reset && echo "Left dashboard")
 }
 
 menu() {
-    toggle_dashboard close
-    sh "$HOME/.config/rofi/scripts/$1"
+  toggle_dashboard close
+  sh "$HOME/.config/rofi/scripts/$1"
+}
+
+osd() {
+  type=${1:-volume}
+
+  # close all
+  types=(volume capslock caffeine)
+  for t in "${types[@]/$type/}"; do
+    eww close "osd-$t" >/dev/null 2>/dev/null
+  done
+
+  # update caps
+  eww update capslock="$( (($(cat /sys/class/leds/*caps*/brightness))) && echo 'true' || echo 'false')"
+
+  eww open "osd-$type" >/dev/null
+  eww update osd_open="$(date +%s)"
+
+  (
+    # close later
+    sleep 5
+
+    current="$(date +%s)"
+    open_time="$(eww get osd_open)"
+
+    if [[ $((current - open_time)) -ge 5 ]]; then
+      eww close "osd-$type" >/dev/null 2>/dev/null
+    fi
+  ) &
 }
 
 # don't launch immediately so eww doesn't freeze
 sleep 0.05
 
 if [ "$1" = "bluetooth" ]; then
-    blueman-manager
+  blueman-manager
 elif [ "$1" = "network" ]; then
-    nm-connection-editor
+  nm-connection-editor
 elif [ "$1" = "launcher" ]; then
-    menu launcher.sh
+  menu launcher.sh
 elif [ "$1" = "audio" ]; then
-    menu audio.sh
+  menu audio.sh
 elif [ "$1" = "game" ]; then
-    menu game-lib.sh
+  menu game-lib.sh
 elif [ "$1" = "screenshot" ]; then
-    menu screenshot.sh
+  menu screenshot.sh
 elif [ "$1" = "emoji" ]; then
-    menu emoji.sh
+  menu emoji.sh
 elif [ "$1" = "calc" ]; then
-    menu calc.sh
+  menu calc.sh
+elif [ "$1" = "osd-volume" ]; then
+  osd volume
+elif [ "$1" = "osd-capslock" ]; then
+  osd capslock
+elif [ "$1" = "osd-caffeine" ]; then
+  osd caffeine
 elif [ "$1" = "dashboard" ]; then
-    toggle_dashboard "$2"
+  toggle_dashboard "$2"
 elif [ "$1" = "more" ]; then
-    toggle_widget controls "$2"
+  toggle_widget controls "$2"
 elif [ "$1" = "calendar" ]; then
-    toggle_widget calendar "$2"
+  toggle_widget calendar "$2"
 elif [ "$1" = "update" ]; then
-    alacritty --hold -e sh -c 'yay; eww update updates=`~/.config/eww/scripts/updates`'
+  alacritty --hold -e sh -c 'yay; eww update updates=`~/.config/eww/scripts/updates`'
 fi

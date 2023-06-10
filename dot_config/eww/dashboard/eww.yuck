@@ -160,7 +160,7 @@
                        :icon-active "󰂛" :icon-inactive "󰂞"
                        :toggle-cmd "dunstctl set-paused toggle && eww update dnd-enabled=${!dnd-enabled}"
                        :more-cmd "")
-      (quickset-button :name "caff" :active caffeine :label {caffeine ? "Caffeine" : "Auto-Suspend"}
+      (quickset-button :name "caff" :active caffeine :label "Caffeine"
                        :icon-active "" :icon-inactive "󰒲"
                        :toggle-cmd "eww update caffeine=${!caffeine}"
                        :more-cmd ""))

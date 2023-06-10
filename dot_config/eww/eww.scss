@@ -2,10 +2,11 @@
 
 @import "bar/eww.scss";
 @import "calendar/eww.scss";
-@import "controls/eww.scss";
 @import "dashboard/eww.scss";
 @import "idle/eww.scss";
 @import "osd/eww.scss";
+
+@import "counter/eww.scss";
 
 // Global
 *:not(arrow):not(check):not(radio) {
