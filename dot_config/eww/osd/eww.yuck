@@ -1,4 +1,10 @@
-(defwidget osdvol []
+
+(defwindow osd-volume
+  :geometry (geometry :x "0"
+                      :y "10"
+                      :height "30"
+                      :anchor "top center")
+  :monitor 0
   (box :class "osd-widget osd-volume"
        :orientation "h"
        :space-evenly false
@@ -12,7 +18,12 @@
            :min 0
            :onchange "amixer -D pulse sset Master {}%")))
 
-(defwidget osdcaps []
+(defwindow osd-capslock
+  :geometry (geometry :x "0"
+                      :y "10"
+                      :height "30"
+                      :anchor "top center")
+  :monitor 0
   (box :class "osd-widget osd-capslock"
        :orientation "h"
        :space-evenly false
@@ -20,18 +31,15 @@
     (label :class "osd-capslock-state"
            :text {capslock ? "CapsLock ON" : "CapsLock OFF"})))
 
-(defwindow osd-volume
+(defwindow osd-caffeine
   :geometry (geometry :x "0"
                       :y "10"
                       :height "30"
                       :anchor "top center")
   :monitor 0
-  (osdvol))
-
-(defwindow osd-capslock
-  :geometry (geometry :x "0"
-                      :y "10"
-                      :height "30"
-                      :anchor "top center")
-  :monitor 0
-  (osdcaps))
+  (box :class "osd-widget osd-caffeine"
+       :orientation "h"
+       :space-evenly false
+    (button :calss "osd-caffeine-icon" "")
+    (label :calss "osd-caffeine-state"
+           :text {caffeine ? "Caffeine Consumed" : "Caffeine Taken"})))
