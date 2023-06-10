@@ -1,0 +1,11 @@
+(defvar count 0)
+
+(defwindow counter
+  :geometry (geometry :x "90"
+                      :y "100"
+                      :anchor "top right")
+  :monitor 0
+  :hexpand "false"
+  :vexpand "false"
+  (label :class "counter-label"
+         :text count))
