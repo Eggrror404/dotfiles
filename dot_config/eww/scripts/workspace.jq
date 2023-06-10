@@ -6,6 +6,8 @@
 ($monitors[] | select(.focused == true)) as $activeDp |
 # get active workspace
 ($activeDp | .activeWorkspace.id) as $activeWs |
+# remove negative pid
+($clients | map(select(.pid > 0))) as $clients |
 # select workspaces in current screen
 ($workspaces | map(select(.monitor == $activeDp.name)) |
   # add window class property for each workspace
