@@ -1,7 +1,9 @@
 {{- if eq .device "zenfone" }}
 # ignore on termux
 .config/*
+.mozilla
 
+!.config/starship.toml
 !.config/alacritty/
 !.config/neofetch/
 !.config/npm/
@@ -11,10 +13,12 @@
 !.zshenv
 {{- end }}
 
-{{- if eq .chezmoi.hostname "DynaBook" }}
+{{- if eq .device "dynabook" }}
 # ignore on WSL (Dynabook)
 .config/*
+.mozilla
 
+!.config/starship.toml
 !.config/neofetch/
 !.config/npm/
 !.config/nvim/

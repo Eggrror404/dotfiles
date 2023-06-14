@@ -30,9 +30,9 @@ export EDITOR=nvim
 # PATH
 export PATH="$HOME/.local/bin:$HOME/.local/share/cargo/bin:$HOME/.local/share/npm/bin:$HOME/.spicetify:$PATH"
 
-{{ if eq .chezmoi.hostname "DynaBook" -}}
+{{ if eq .device "dynabook" -}}
 # WSL-specific PATH
-export PATH="/mnt/c/Windows:/mnt/c/Windows/System32:/mnt/c/Windows/System32/WindowsPowerShell/v1.0:$PATH"
+export PATH="/mnt/c/Windows:/mnt/c/Windows/System32:/mnt/c/Windows/System32/WindowsPowerShell/v1.0:/mnt/c/Users/reron/AppData/Local/Programs/Microsoft VS Code/bin:$PATH"
 {{- end }}
 
 # Others
