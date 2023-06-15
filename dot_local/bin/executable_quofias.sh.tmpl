@@ -1,0 +1,100 @@
+{{ if not (eq .device "zenfone") }}
+#!/usr/bin/env bash
+{{ else }}
+#!/data/data/com.termux/files/usr/bin/env bash
+{{ end }}
+
+MAC=d8:bb:c1:de:38:44
+
+# Try connecting with SSH. Will show actions prompt afterwards.
+# Arguments: $1 -> Number of attempts to try
+ping() {
+  echo "Checking host availability..."
+  attempts=$1
+
+  # ssh jump to the machine
+  ssh -o ConnectTimeout=5 -o ConnectionAttempts="$attempts" \
+    -q -J rrhome quofias exit &&
+    actions on || actions off
+}
+
+# Perform wake-on-lan to Quofias via rrhome SSH.
+# Sleeps for 8 secs to boot, ping afterwards.
+wol() {
+  echo "Waking up Quofias (MAC: $MAC)"
+
+  ssh rrhome "~/.local/bin/wakeonlan $MAC"
+  echo "The magic packet has been sent."
+
+  echo "Waiting..."
+  sleep 8
+
+  ping 5
+}
+
+# Create a local SSH tunnel to Quofias with specified ports.
+tunnel() {
+  echo "Tunnel port: <local:remote>"
+  echo "(e.g. 8888:1234 or just 8888 for both)"
+  read -p "ports: " ports
+
+  local_port=$(echo $ports | cut -d ':' -f 1)
+  remote_port=$(echo $ports | cut -d ':' -f 2)
+
+  echo "Creating tunel. <Ctrl-C> to terminate process."
+  ssh -N -L "$local_port:localhost:$remote_port" -J rrhome quofias
+}
+
+# Show actions prompt depends on ping results.
+# Arguments: $1 -> on / off state of Quofias
+actions() {
+  if [ "$1" = "on" ]; then
+    echo "Quofias SSH is available."
+
+    while true; do
+      echo ""
+      echo "Perform an action:"
+      echo "  (1) SSH to Quofias"
+      echo "  (2) Create an SSH tunnel to Quofias"
+      echo "  (q) Exit"
+
+      read -p ": " action
+      case $action in
+        1)
+          ssh -J rrhome quofias
+          ;;
+        2)
+          tunnel
+          ;;
+        q)
+          exit
+          ;;
+      esac
+    done
+  else
+    echo "Quofias cannot be reached."
+
+    while true; do
+      echo ""
+      echo "Perform an action:"
+      echo "  (1) Do wake-on-lan"
+      echo "  (2) Try pinging again"
+      echo "  (q) Exit"
+
+      read -p ": " action
+      case $action in
+        1)
+          wol
+          ;;
+        2)
+          ping 1
+          ;;
+        q)
+          exit
+          ;;
+      esac
+    done
+  fi
+}
+
+ping 1
