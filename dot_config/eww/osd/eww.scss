@@ -27,18 +27,14 @@
     margin-right: 0.4rem;
 
     highlight {
-      background-image: linear-gradient(to right, $text, $lavender);
+      background-image: $accent-gradient;
       border-radius: 3rem;
       box-shadow: 0 0 3px 0 rgba($base, 0.6);
     }
   }
 
   &-scale.mute trough highlight {
-    background-image: linear-gradient(
-      to right,
-      mix($surface2, $text),
-      $surface2
-    );
+    background-image: $disabled-gradient;
   }
 }
 

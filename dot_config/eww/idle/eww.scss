@@ -49,13 +49,13 @@
   }
 
   &-progress trough {
-    background-color: $surface2;
+    background-image: $disabled-gradient;
     border-radius: 0.1rem;
     min-height: 0.2rem;
     margin: 0.4rem;
 
     progress {
-      background-color: $lavender;
+      background-image: $accent-gradient;
       border-radius: 0.15rem;
     }
   }

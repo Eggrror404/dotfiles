@@ -25,6 +25,11 @@ $base: #24273a;
 $mantle: #1e2030;
 $crust: #181926;
 
+$accent: $lavender;
+
+$accent-gradient: linear-gradient(to right, $text, $lavender);
+$disabled-gradient: linear-gradient(to right, mix($surface2, $text), $surface2);
+
 $colors: (
   "rosewater": $rosewater,
   "flamingo": $flamingo,

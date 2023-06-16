@@ -1,14 +1,14 @@
 .db {
   background-color: rgba($base, 0.9);
   border-radius: 0.6rem;
-  // border: 2px solid rgba($lavender, 0.2);
+  // border: 2px solid rgba($accent, 0.2);
   margin: 4px;
   padding: 1em;
 
   font-family: "Dosis", "JetBrainsMono Nerd Font";
   font-weight: 500;
 
-  box-shadow: 0 0 2px 2px rgba($lavender, 0.1);
+  box-shadow: 0 0 2px 2px rgba($accent, 0.1);
 
   .widget {
     color: $text;
@@ -84,7 +84,7 @@
 
   .session-name {
     font-size: 22;
-    color: $lavender;
+    color: $accent;
   }
 
   .session-uptime {
@@ -179,7 +179,7 @@
   }
 
   &.active button {
-    background-color: rgba($lavender, 0.9);
+    background-color: rgba($accent, 0.9);
     color: rgba($base, 0.9);
 
     &.quickset-toggle {
@@ -191,7 +191,7 @@
     }
 
     &:hover {
-      background-color: mix($lavender, $text, 90%);
+      background-color: mix($accent, $text, 90%);
     }
   }
 
@@ -220,7 +220,7 @@
   margin: 0.1em 0;
   padding: 0 0.5rem;
 
-  $active-color: $lavender;
+  $active-color: $accent;
   $inactive-opacity: 20%;
 
   button {
@@ -275,7 +275,7 @@
   background-color: rgba($surface1, 0.8);
 
   circular-progress {
-    color: $lavender;
+    color: $accent;
   }
 
   // Show NAME on hover
