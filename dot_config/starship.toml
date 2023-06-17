@@ -16,6 +16,7 @@ format = "[󱦟 $duration]($style) "
 [directory]
 read_only = " 󰌾"
 read_only_style = "bold cyan"
+repo_root_style = "bold underline cyan"
 truncation_symbol = "…/"
 fish_style_pwd_dir_length = 1
 

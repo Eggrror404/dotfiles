@@ -67,6 +67,16 @@ return {
           },
         },
       },
+      yamlls = {
+        yaml = {
+          schemas = {
+            ["https://json.schemastore.org/github-workflow.json"] = {
+              ".github/workflows/*.yml",
+              ".github/workflows/*.yaml",
+            },
+          },
+        },
+      },
     },
   },
   -- Configure require("lazy").setup() options

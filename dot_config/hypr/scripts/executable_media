@@ -3,11 +3,15 @@
 volume() {
   amixer -D pulse sset Master 5%$1 |
     grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'
+
+  "$HOME/.config/eww/scripts/popup" osd-volume
 }
 
 mute() {
   amixer -D pulse sset Master toggle |
     grep '\[on\]' -q && echo "Unmuted" || echo "Muted"
+
+  "$HOME/.config/eww/scripts/popup" osd-volume
 }
 
 player() {
