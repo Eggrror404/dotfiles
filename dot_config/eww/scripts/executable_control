@@ -1,13 +1,61 @@
 #!/bin/env bash
 
 volume() {
-    if [ $1 = "up" ]; then
-        playerctl volume 0.01+ --player=$2
-    elif [ $1 = "down" ]; then
-        playerctl volume 0.01- --player=$2
-    fi
+  amixer -D pulse sset Master "$1"
+
+  "$HOME/.config/eww/scripts/popup" osd-volume
 }
 
-if [ $1 = "volume" ]; then
-    volume $2 $3
+mute() {
+  amixer -D pulse sset Master toggle
+
+  "$HOME/.config/eww/scripts/scripts/popup" osd-volume
+}
+
+player() {
+  player=$(eww get player | jq -r --argjson i "$(eww get player_index)" '.[$i].player')
+  case $1 in
+    play)
+      playerctl play --player="$player"
+      ;;
+    pause)
+      playerctl pause --player="$player"
+      ;;
+    play-pause)
+      playerctl play-pause --player="$player"
+      ;;
+    stop)
+      playerctl stop --player="$player"
+      ;;
+    next)
+      playerctl next --player="$player"
+      ;;
+    prev)
+      playerctl previous --player="$player"
+      ;;
+    volume)
+      playerctl volume "$1" --player="$player"
+      ;;
+    volume-up)
+      playerctl volume 0.01+ --player="$player"
+      ;;
+    volume-down)
+      playerctl volume 0.01- --player="$player"
+      ;;
+  esac
+}
+
+next_player() {
+  next=$(eww get player | jq --argjson i "$(eww get player_index)" 'length as $len | ($i + 1) % $len')
+  eww update player_index="$next"
+}
+
+if [ "$1" = "volume" ]; then
+  volume "$2"
+elif [ "$1" = "mute" ]; then
+  mute
+elif [ "$1" = "player" ]; then
+  player "$2"
+elif [ "$1" = "next-player" ]; then
+  next_player
 fi

@@ -55,7 +55,12 @@
     },
     {
       "class": "WebCord",
-      "exec": "webcord --enable-features=UseOzonePlatform --ozone-platform=wayland"
+      "exec": "webcord --enable-features=UseOzonePlatform --ozone-platform=wayland",
+      "fallback": [
+        {
+          "class": "revolt-desktop"
+        }
+      ]
     }
   ],
   "_friendly_reminder": "In the `apps` array, latter elements take priority.",
@@ -144,6 +149,11 @@
       "class": "YouTube Music",
       "icon": "",
       "color": "maroon"
+    },
+    {
+      "class": "revolt-desktop",
+      "icon": "R",
+      "color": "red"
     },
     {
       "class": "firefox",

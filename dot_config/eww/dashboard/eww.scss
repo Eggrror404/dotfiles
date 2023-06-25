@@ -106,14 +106,20 @@
 
   .player-next-player {
     font-size: 14;
-    color: $subtext0;
     margin-right: 0.4em;
     border-radius: 0.5rem;
+    color: $subtext0;
+  }
 
+  .player-next-player:not(.disabled) {
     &:hover {
       color: $text;
       background: rgba($surface0, 0.8);
     }
+  }
+
+  .player-next-player.disabled {
+    color: $base;
   }
 
   .player-title {

@@ -70,9 +70,9 @@
         (label :class "player-state"
                :halign "start"
                :text "${current.player} · ${current.status}")
-        (button :class "player-next-player"
+        (button :class "player-next-player ${arraylength(player) > 1 ? "" : "disabled"}"
                 :halign "end"
-                :onclick "eww update player_index=${(player_index + 1) % arraylength(player)}" "⏵"))
+                :onclick "eww update player_index=${(player_index + 1) % arraylength(player)}" "🞂"))
       (label :class "player-title"
              :halign "start"
              :text {player-title})
@@ -83,7 +83,7 @@
     (box :class "player-lower"
          :valign "end"
          :orientation "h"
-      (eventbox :onscroll "scripts/control volume {} ${current.player}"
+      (eventbox :onscroll "scripts/control player volume-{}"
                 :halign "start"
         (label :class "player-volume"
                :markup "<span size='18pt'>󰋎 </span><span size='14pt' rise='2pt'>${round(current.volume * 100, 0)}%</span>"))

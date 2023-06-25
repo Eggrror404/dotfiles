@@ -11,7 +11,7 @@
 # select workspaces in current screen
 ($workspaces | map(select(.monitor == $activeDp.name)) |
   # add window class property for each workspace
-  map(.lastwindow as $last | .lastwindowclass = ($clients[] | select(.address == $last).class // ""))) as $workspaces |
+  map(.lastwindow as $last | .lastwindowclass = (($clients[] | select(.address == $last).class) // ""))) as $workspaces |
 
 ## Regex testing func
 # . -> regex; $class, $title -> actual window

@@ -118,6 +118,10 @@
        ;        :tooltip "Refresh Hyprland"
        ;        :onclick "hyprctl reload" "")
 
+       (button :class "button-lock"
+               :tooltip "Lock"
+               :onclick "scripts/idle lock" "")
+
        (button :class "button-quit"         
                :tooltip "Logout"      
                :onclick "hyprctl dispatch exit 0" "")
