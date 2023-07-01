@@ -2,26 +2,19 @@
 
 # Start daemons
 fcitx5 -d
-swww init
-eww daemon
 dunst &
-mpDris2 &
 swayidle -w &
 /usr/lib/kdeconnectd &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
+swww init && sleep 1 && swww query && sh "$HOME"/.config/hypr/scripts/set-wallpapr
+eww daemon && eww open bar &&
+  eww open dashboard && eww close dahsboard &&
+  keepassxc &
+openrgb -p 'Breath.' --startminimized
 
 # Start programs
 webcord -m --enable-features=UseOzonePlatform --ozone-platform=wayland &
 flatpak run chat.revolt.RevoltDesktop --enable-wayland-ime \
   --enable-features=UseOzonePlatform --ozone-platform=wayland &
 firefox &
-
-# Wait for swww and eww daemon to start
-sleep 1
-
-swww query && sh $HOME/.config/hypr/scripts/set-wallpapr
-eww ping &&
-  eww open bar &&
-  eww open dashboard && eww close dashboard &&
-  keepassxc &
-openrgb -p 'Breath.' --startminimized
