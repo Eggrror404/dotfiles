@@ -12,7 +12,8 @@ swayidle -w &
 
 # Start programs
 webcord -m --enable-features=UseOzonePlatform --ozone-platform=wayland &
-flatpak run chat.revolt.RevoltDesktop &
+flatpak run chat.revolt.RevoltDesktop --enable-wayland-ime \
+  --enable-features=UseOzonePlatform --ozone-platform=wayland &
 firefox &
 
 # Wait for swww and eww daemon to start
