@@ -7,7 +7,8 @@
   font-family: "Dosis", "JetBrainsMono Nerd Font";
 }
 
-.osd-volume {
+.osd-volume,
+.osd-mic {
   &-icon {
     font-size: 25;
     padding: 0 0.7rem 0 0.5rem;
@@ -33,7 +34,7 @@
     }
   }
 
-  &-scale.mute trough highlight {
+  &.mute &-scale trough highlight {
     background-image: $disabled-gradient;
   }
 }

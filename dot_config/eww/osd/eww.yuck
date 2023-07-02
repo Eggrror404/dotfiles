@@ -1,45 +1,83 @@
-
-(defwindow osd-volume
-  :geometry (geometry :x "0"
-                      :y "10"
-                      :height "30"
-                      :anchor "top center")
-  :monitor 0
-  (box :class "osd-widget osd-volume"
+(defwidget osd-scale [name class icon value onclick onrightclick onchange]
+  (box :class "osd-widget osd-${name} ${class}"
+       :halign "center"
        :orientation "h"
        :space-evenly false
-    (button :class "osd-volume-icon"
-            :onclick "amixer -D pulse sset Master toggle"
-            :onrightclick "scripts/popup audio" {vol.mute ? "󰖁" : vol.volume == 0 ? "󰕿" : vol.volume <= 40 ? "󰖀" : "󰕾"})
-    (scale :class "osd-volume-scale ${vol.mute ? "mute" : ""}"
-           :value {vol.volume}
+    (button :class "osd-${name}-icon"
+            :onclick onclick
+            :onrightclick onrightclick icon)
+    (scale :class "osd-${name}-scale"
+           :value value
            :orientation "h"
            :max 101
            :min 0
-           :onchange "amixer -D pulse sset Master {}%")))
+           :onchange onchange)))
 
-(defwindow osd-capslock
+(defwidget osd-toggle [name class icon text onclick onrightclick]
+  (box :class "osd-widget osd-${name} ${class}"
+       :halign "center"
+       :orientation "h"
+       :space-evenly false
+    (button :class "osd-${name}-icon"
+            :onclick onclick
+            :onrightclick onrightclick icon)
+    (label :class "osd-${name}-state"
+           :text text)))
+
+(defwidget osd-volume []
+  (osd-scale :name "volume" :class {vol.mute ? "mute" : ""}
+             :icon {vol.mute ? "󰖁" : vol.volume == 0 ? "󰕿" : vol.volume <= 40 ? "󰖀" : "󰕾"}
+             :value {vol.volume}
+             :onclick "amixer -D pulse sset Master toggle"
+             :onrightclick "scripts/popup audio"
+             :onchange "amixer -D pulse sset Master {}%"))
+
+(defwidget osd-mic []
+  (osd-scale :name "mic" :class {vol.mic_mute ? "mute" : ""}
+             :icon {vol.mic_mute ? "󰍭" : "󰍬"}
+             :value {vol.mic}
+             :onclick "amixer -D pulse sset Capture toggle"
+             :onrightclick ""
+             :onchange "amixer -D pulse sset Capture {}%"))
+
+(defwidget osd-capslock []
+  (osd-toggle :name "capslock" :class ""
+              :icon "󰪛"
+              :text {capslock ? "CapsLock ON" : "CapsLock OFF"}
+              :onclick ""
+              :onrightclick ""))
+
+(defwidget osd-caffeine []
+  (osd-toggle :name "caffeine" :class ""
+              :icon ""
+              :text {caffeine ? "Caffeine Consumed" : "Caffeine No More"}
+              :onclick ""
+              :onrightclick ""))
+
+(defwindow osd
   :geometry (geometry :x "0"
                       :y "10"
                       :height "30"
                       :anchor "top center")
   :monitor 0
-  (box :class "osd-widget osd-capslock"
-       :orientation "h"
+  (box :orientation "v"
+       :halign "center"
        :space-evenly false
-    (button :class "osd-capslock-icon" "󰪛")
-    (label :class "osd-capslock-state"
-           :text {capslock ? "CapsLock ON" : "CapsLock OFF"})))
-
-(defwindow osd-caffeine
-  :geometry (geometry :x "0"
-                      :y "10"
-                      :height "30"
-                      :anchor "top center")
-  :monitor 0
-  (box :class "osd-widget osd-caffeine"
-       :orientation "h"
-       :space-evenly false
-    (button :calss "osd-caffeine-icon" "")
-    (label :calss "osd-caffeine-state"
-           :text {caffeine ? "Caffeine Consumed" : "Caffeine Taken"})))
+       :spacing 10
+      ; osd #1
+      (revealer :transition "slidedown"
+                :reveal {osds?.[0]?.reveal}
+                :duration "550ms"
+        (literal :content {osds?.[0]?.widget}))
+      ; osd #2
+      (revealer :transition "slidedown"
+                :reveal {osds?.[1]?.reveal}
+                :duration "550ms"
+        (literal :content {osds?.[1]?.widget}))
+      ; osd #3
+      (revealer :transition "slidedown"
+                :reveal {osds?.[2]?.reveal}
+                :duration "550ms"
+        (literal :content {osds?.[2]?.widget}))
+      ; workaround for capslock to update
+      (label :visible false :text capslock)))

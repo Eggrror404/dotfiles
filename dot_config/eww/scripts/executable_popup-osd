@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+update_osds() {
+  # This function updates $osds in the calling parent.
+  # Probably because they happened to share the same name,
+  # I don't know why it works. It works though.
+
+  osds=$1
+  query=$2
+
+  osds=$(echo "$osds" | jq -Mc "$query")
+  eww update osds="$osds"
+
+  # echo $osds
+}
+
+open_osd() {
+  eww open osd >/dev/null
+
+  osds=$(eww get osds | sed 's/^$/[]/')
+  type=${1-:volume}
+  current=$(date +%s)
+
+  osdObj="{ type: \"$type\", widget: \"(osd-$type)\", open_time: $current }"
+
+  # not overriding .reveal so already-open ones wouldn't replay animation
+  update_osds "$osds" ".[index(map(select(.type == \"$type\"))) // length] += $osdObj"
+
+  update_osds "$osds" ".[length - 1].reveal = true"
+
+  clean_osds
+
+  sleep 5 && clean_osds &
+}
+
+close_osd() {
+  type=$1
+
+  osds=$(eww get osds)
+  update_osds "$osds" ".[index( map(select(.type = \"$type\"))[0] )].reveal = false"
+
+  sleep 0.55
+
+  osds=$(eww get osds)
+  update_osds "$osds" "del(.[index( map(select(.type = \"$type\"))[0] ) // empty])"
+
+  if [ "$osds" = "[]" ]; then
+    eww close osd >/dev/null 2>/dev/null || true
+  fi
+}
+
+clean_osds() {
+  osds=$(eww get osds)
+  current=$(date +%s)
+
+  # find outlived osds (over 5s) AND only preserve last two
+  echo "$osds" | jq -Mcr --argjson current "$current" \
+    '. as $osds | to_entries | # .key => index; .value => osdObj
+    map(select(.key < (length - 2) or ($current - .value.open_time) >=5 )) |
+    map(.value.type)[]' |
+    while read -r index; do
+      # echo "closing $index"
+      close_osd "$index" &
+    done
+}
+
+open_osd "$1"

@@ -36,34 +36,6 @@ menu() {
   sh "$HOME/.config/rofi/scripts/$1"
 }
 
-osd() {
-  type=${1:-volume}
-
-  # close all
-  types=(volume capslock caffeine)
-  for t in "${types[@]/$type/}"; do
-    eww close "osd-$t" >/dev/null 2>/dev/null
-  done
-
-  # update caps
-  eww update capslock="$( (($(cat /sys/class/leds/*caps*/brightness))) && echo 'true' || echo 'false')"
-
-  eww open "osd-$type" >/dev/null
-  eww update osd_open="$(date +%s)"
-
-  (
-    # close later
-    sleep 5
-
-    current="$(date +%s)"
-    open_time="$(eww get osd_open)"
-
-    if [[ $((current - open_time)) -ge 5 ]]; then
-      eww close "osd-$type" >/dev/null 2>/dev/null
-    fi
-  ) &
-}
-
 # don't launch immediately so eww doesn't freeze
 sleep 0.05
 
@@ -83,12 +55,6 @@ elif [ "$1" = "emoji" ]; then
   menu emoji.sh
 elif [ "$1" = "calc" ]; then
   menu calc.sh
-elif [ "$1" = "osd-volume" ]; then
-  osd volume
-elif [ "$1" = "osd-capslock" ]; then
-  osd capslock
-elif [ "$1" = "osd-caffeine" ]; then
-  osd caffeine
 elif [ "$1" = "dashboard" ]; then
   toggle_dashboard "$2"
 elif [ "$1" = "more" ]; then
