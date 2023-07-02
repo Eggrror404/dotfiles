@@ -11,9 +11,13 @@ get() {
 
 get
 
-pactl subscribe |
-  grep --line-buffered "sink" | while read -r line; do
+stdbuf -oL amixer sevents |
+  grep --line-buffered "value:" | while read -r line; do
   get
 
-  "$HOME/.config/eww/scripts/popup" osd-volume
+  if grep -q "Master" <<<"$line"; then
+    "$HOME/.config/eww/scripts/popup-osd" volume
+  elif grep -q "Capture" <<<"$line"; then
+    "$HOME/.config/eww/scripts/popup-osd" mic
+  fi
 done
