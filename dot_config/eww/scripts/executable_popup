@@ -25,14 +25,8 @@ toggle_widget() {
   close || open
 }
 
-toggle_dashboard() {
-  [ "$(toggle_widget dashboard "$1")" = "Opened dashboard" ] &&
-    (hyprctl dispatch submap dashboard && echo "Entered dashboard") ||
-    (hyprctl dispatch submap reset && echo "Left dashboard")
-}
-
 menu() {
-  toggle_dashboard close
+  toggle_dashboard close >/dev/null 2>/dev/null || true
   sh "$HOME/.config/rofi/scripts/$1"
 }
 
@@ -56,9 +50,7 @@ elif [ "$1" = "emoji" ]; then
 elif [ "$1" = "calc" ]; then
   menu calc.sh
 elif [ "$1" = "dashboard" ]; then
-  toggle_dashboard "$2"
-elif [ "$1" = "more" ]; then
-  toggle_widget controls "$2"
+  toggle_widget dashboard "$2"
 elif [ "$1" = "calendar" ]; then
   toggle_widget calendar "$2"
 elif [ "$1" = "update" ]; then

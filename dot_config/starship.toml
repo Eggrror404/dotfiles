@@ -8,7 +8,7 @@ $line_break\
 $character
 """
 
-right_format = "$cmd_duration$time"
+right_format = "$hostname$cmd_duration$time"
 
 [cmd_duration]
 format = "[󱦟 $duration]($style) "
@@ -29,6 +29,10 @@ format = '[\(󰜛$hash$tag\)]($style) '
 
 [git_status]
 stashed = "*"
+
+[hostname]
+format = "[$ssh_symbol$hostname]($style) "
+ssh_symbol = " "
 
 [os]
 disabled = false
@@ -100,8 +104,8 @@ symbol = "⌘ "
 [hg_branch]
 symbol = "󰘬 "
 
-[hostname]
-ssh_symbol = " "
+# [hostname]
+# ssh_symbol = " "
 
 [java]
 symbol = " "

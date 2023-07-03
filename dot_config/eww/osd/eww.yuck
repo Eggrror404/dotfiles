@@ -9,8 +9,6 @@
     (scale :class "osd-${name}-scale"
            :value value
            :orientation "h"
-           :max 101
-           :min 0
            :onchange onchange)))
 
 (defwidget osd-toggle [name class icon text onclick onrightclick]

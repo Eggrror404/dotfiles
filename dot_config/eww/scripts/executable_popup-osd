@@ -22,11 +22,12 @@ open_osd() {
   current=$(date +%s)
 
   osdObj="{ type: \"$type\", widget: \"(osd-$type)\", open_time: $current }"
+  index_of="index( map(select(.type == \"$type\"))[0] )"
 
   # not overriding .reveal so already-open ones wouldn't replay animation
-  update_osds "$osds" ".[index(map(select(.type == \"$type\"))) // length] += $osdObj"
+  update_osds "$osds" ".[$index_of // length] += $osdObj"
 
-  update_osds "$osds" ".[length - 1].reveal = true"
+  update_osds "$osds" ".[$index_of].reveal = true"
 
   clean_osds
 
@@ -35,14 +36,16 @@ open_osd() {
 
 close_osd() {
   type=$1
+  index_of="index( map(select(.type = \"$type\"))[0] )"
 
   osds=$(eww get osds)
-  update_osds "$osds" ".[index( map(select(.type = \"$type\"))[0] )].reveal = false"
+  update_osds "$osds" ".[$index_of].reveal = false"
 
   sleep 0.55
 
   osds=$(eww get osds)
-  update_osds "$osds" "del(.[index( map(select(.type = \"$type\"))[0] ) // empty])"
+  update_osds "$osds" ".[$index_of // empty] += { widget: \"\", reveal: true }"
+  update_osds "$osds" "del(.[$index_of // empty])"
 
   if [ "$osds" = "[]" ]; then
     eww close osd >/dev/null 2>/dev/null || true
@@ -55,12 +58,12 @@ clean_osds() {
 
   # find outlived osds (over 5s) AND only preserve last two
   echo "$osds" | jq -Mcr --argjson current "$current" \
-    '. as $osds | to_entries | # .key => index; .value => osdObj
-    map(select(.key < (length - 2) or ($current - .value.open_time) >=5 )) |
+    'length as $len | to_entries | # .key => index; .value => osdObj
+    map(select(.key < ($len - 2) or ($current - .value.open_time) >= 5 )) |
     map(.value.type)[]' |
-    while read -r index; do
-      # echo "closing $index"
-      close_osd "$index" &
+    while read -r type; do
+      # echo "closing $type"
+      close_osd "$type" &
     done
 }
 
