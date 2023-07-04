@@ -55,7 +55,10 @@ def player_metadata(player):
     info["status"] = player.props.status or "Stopped"
     info["volume"] = player.props.volume or "0"
 
-    info["position"] = player.get_position()
+    try:
+        info["position"] = player.get_position() or 0
+    except GLib.GError:
+        info["position"] = 0
 
     info["timestamp"] = int(time.time())
 

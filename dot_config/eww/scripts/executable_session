@@ -2,7 +2,16 @@
 
 username=$(whoami)
 fullname=$(getent passwd $username | cut -d ':' -f 5)
+shell=$(getent passwd $username | cut -d ':' -f 7)
+distrib=$(lsb_release -ds | sed 's/"//g')
+kernel=$(uname -r)
+profilepic="/var/lib/AccountsService/icons/$username"
+hostname=$(hostname)
 sessionname=$XDG_CURRENT_DESKTOP
 uptime=$(uptime -p)
+packages=$(pacman -Q | wc -l)
 
-jq -ncM "{ username: \"$username\", fullname: \"$fullname\", sessionName: \"$sessionname\", uptime: \"$uptime\" }"
+jq -ncM "{ username: \"$username\", fullname: \"$fullname\", shell: \"$shell\",
+           distrib: \"$distrib\", kernel: \"$kernel\", profilePic: \"$profilepic\",
+           hostname: \"$hostname\", sessionName: \"$sessionname\", uptime: \"$uptime\",
+           packages: \"$packages\" }"

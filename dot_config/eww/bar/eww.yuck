@@ -1,54 +1,37 @@
-;; Created   by https://github.com/rxyhn
-;; Designed  by https://github.com/rxyhn
-;; Maintaned by https://github.com/rxyhn
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;              Widget Section's               ;;  
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Launcher Widgets ;;
-(defwidget launcher []
-    (button :class "launcher_icon"
-            :onclick "scripts/popup dashboard"  ""))
-
-(defwidget works []
-  (box :class "workspace"
+(defwidget bar-workspace []
+  (box :class "bar-workspace"
        :orientation "v"
-       :halign "center"
        :valign "start"
-       :space-evenly "false"
-       :spacing "-5"
+       :space-evenly false
+       :spacing -5
     (for ws in workspace
       (button :onclick "hyprctl dispatch workspace ${ws.id}"
-              :onmiddleclick "hyprctl dispatch workspace ${ws.id} & hyprctl dispatch exec '${ws.exec ?: ":"}'" 
+              :onmiddleclick "hyprctl dispatch workspace ${ws.id} & hyprctl dispatch exec '${ws.exec ?: ":"}'"
               :class "${ws.occupied ? "occupied" : ""} ${ws.active ? "active" : ""} ${ws.color}" "${ws.icon}"))))
 
-;; Wifi Widgets ;;
-(defwidget wifi []
-  (box :orientation "v"  
-       :tooltip {net.device == "NONE" ? "No Connection" :
-                 net.device == "ETHERNET" ? "Connected to Ethernet" : 
-                 net.signal > 0 ? "Connected to ${net.label}" : "Wifi not connected"}
-  (button :onclick "scripts/popup wifi" 
-          :class "wifi-icon" {net.device == "NONE" ? "󰌙" :
-                              net.device == "ETHERNET" ? "󰌗" :
-                              net.signal == 0 ? "󰤮" : net.signal < 26 ? "󰤟" :
-                              net.signal < 51 ? "󰤢" : net.signal < 76 ? "󰤥" : "󰤨"})))
+(defwidget bar-wifi []
+  (button :class "bar-wifi"
+          :tooltip {net.device == "NONE" ? "No Connection" :
+                    net.device == "ETHERNET" ? "Connected to Ethernet" :
+                    net.signal > 0 ? "Connected to ${net.label}" : "Wifi not connected"}
+          :onclick "scripts/popup wifi" {net.device == "NONE" ? "󰌙" :
+                                         net.device == "ETHERNET" ? "󰌗" :
+                                         net.signal == 0 ? "󰤮" : net.signal < 26 ? "󰤟" :
+                                         net.signal < 51 ? "󰤢" : net.signal < 76 ? "󰤥" : "󰤨"}))
 
-;; Bluetooth Widget ;;
-(defwidget bluetooth []
-  (button :class "bluetooth-icon"
+(defwidget bar-bt []
+  (button :class "bar-bt"
           :tooltip "${bt.devices}"
           :onclick {bt.power ? "bluetoothctl power off" : "bluetoothctl power on"}
           :onrightclick "scripts/popup bluetooth" {bt.power ? "" : "󰂲"}))
 
-;; Volume Widget ;;
-(defwidget volume []
+(defwidget bar-volume []
   (eventbox :onhover "${EWW_CMD} update volhover=true"
             :onhoverlost "${EWW_CMD} update volhover=false"
    (box :orientation "v"
-        :space-evenly "false"
+        :space-evenly false
         :tooltip "Volume: ${vol.volume}%"
-        :spacing "2"
+        :spacing 2
     (revealer :transition "slideup"
               :reveal volhover
               :duration "550ms"
@@ -59,28 +42,26 @@
             :max 101
             :min 0
             :onchange "amixer -D pulse sset Master {}%"))
-    (button :class "volume-icon"
+    (button :class "bar-volume"
             :onclick "amixer -D pulse sset Master toggle"
             :onrightclick "scripts/popup audio" {vol.mute ? "󰖁" : vol.volume == 0 ? "󰕿" : vol.volume <= 40 ? "󰖀" : "󰕾"}))))
 (defvar volhover false)
 
-;; Control Panel Widgets ;;  
-(defwidget control []
-  (box :orientation "v" 
-       :space-evenly false  
-       :class "control"
-    (wifi)
-    (bluetooth)
-    (volume)))
+(defwidget bar-control []
+  (box :orientation "v"
+       :space-evenly false
+       :class "bar-control"
+    (bar-wifi)
+    (bar-bt)
+    (bar-volume)))
 
-;; Clock Widgets ;;
-(defwidget time []
+(defwidget bar-time []
   (eventbox :onhover "${EWW_CMD} update time_rev=true"
             :onhoverlost "${EWW_CMD} update time_rev=false"
     (box :orientation "v"
-         :space-evenly "false"
-      (box :orientation "v" 
-           :class "time" 
+         :space-evenly false
+      (box :orientation "v"
+           :class "bar-time"
            :valign "end"
            :space-evenly "false"
         (button :class "time-hour"
@@ -90,96 +71,83 @@
       (revealer :transition "slideup"
                 :reveal time_rev
                 :duration "550ms"
-        (box :orientation "v" 
-             :class "time" 
+        (box :orientation "v"
+             :class "bar-date"
              :valign "end"
-             :space-evenly "false"
+             :space-evenly false
           (button :class "time-month"
                   :onclick "scripts/popup calendar" {time.month_short})
           (button :class "time-day"
                   :onclick "scripts/popup calendar" {time.day_num}))))))
 (defvar time_rev false)
 
-;; Powermenu Widgets ;;
-(defwidget power []
-  (eventbox :onhover "${EWW_CMD} update power=true"  
-            :onhoverlost "${EWW_CMD} update power=false" 
-   (box :orientation "v"          
-        :space-evenly "false"    
-        :vexpand "false"   
-        :class "powermenu"
-    (revealer :transition "slideup"        
-              :reveal power       
+(defwidget bar-power []
+  (eventbox :onhover "${EWW_CMD} update power=true"
+            :onhoverlost "${EWW_CMD} update power=false"
+   (box :orientation "v"
+        :space-evenly false
+        :class "bar-power"
+    (revealer :transition "slideup"
+              :reveal power
               :duration "550ms"
-     (box :orientation "v"          
-          :space-evenly "false"
+     (box :orientation "v"
+          :space-evenly false
 
-       ;(button :class "button-ref"
-       ;        :tooltip "Refresh Hyprland"
-       ;        :onclick "hyprctl reload" "")
+        (button :class "bar-lock"
+                :tooltip "Lock"
+                :onclick "scripts/idle lock" "")
 
-       (button :class "button-lock"
-               :tooltip "Lock"
-               :onclick "scripts/idle lock" "")
+        (button :class "bar-quit"
+                :tooltip "Logout"
+                :onclick "hyprctl dispatch exit 0" "")
 
-       (button :class "button-quit"         
-               :tooltip "Logout"      
-               :onclick "hyprctl dispatch exit 0" "")
+        (button :class "bar-suspend"
+                :tooltip "Suspend"
+                :onclick "systemctl suspend"  "")
 
-       (button :class "button-sus"         
-               :tooltip "Suspend"
-               :onclick "systemctl suspend"  "")
+        (button :class "bar-reboot"
+                :tooltip "Reboot"
+                :onclick "reboot"  "")))
 
-       (button :class "button-reb"          
-               :tooltip "Reboot"     
-               :onclick "reboot"  "")))
-
-    (button :class "button-off"          
-            :tooltip "Shutdown"     
-            :onclick "shutdown now"  ""))))
+        (button :class "bar-off"
+                :tooltip "Shutdown"
+                :onclick "shutdown now"  ""))))
 (defvar power false)
 
-;; Top Widgets ;;
-(defwidget top []
-  (box :orientation "v" 
-       :space-evenly "false" 
-       :valign "start" 
-   (launcher)
-   (works)))
+(defwidget bar-top []
+  (box :orientation "v"
+       :space-evenly "false"
+       :valign "start"
+    (button :class "bar-launcher"
+            :onclick "scripts/popup dashboard"  "")
+    (bar-workspace)))
 
-;; Bottom Widgets ;;
-(defwidget bottom []
-  (box :orientation "v" 
-       :space-evenly false 
-   (time)
-   (power)))
-
-;; End Widgets ;;
-(defwidget end []
-  (box :orientation "v" 
-       :space-evenly "false" 
-       :valign "end" 
+(defwidget bar-end []
+  (box :orientation "v"
+       :space-evenly "false"
+       :valign "end"
        :spacing 5
-   (control)
-   (bottom)))
+    (bar-control)
+    (box :orientation "v"
+         :space-evenly false
+      (bar-time)
+      (bar-power))))
 
 ;; Bar Widgets ;;
 (defwidget bar []
-  (box :class "eww_bar" 
-       :orientation "v" 
-       :vexpand "false" 
-       :hexpand "false"
-   (top)
-   (end)))
+  (box :class "bar-widget"
+       :orientation "v"
+    (bar-top)
+    (bar-end)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;              Window Section's               ;;  
+;;              Window Section's               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Bar Windows ;;
 (defwindow bar
-  :geometry (geometry :x "0" 
-                      :y "0" 
-                      :height "100%" 
+  :geometry (geometry :x "0"
+                      :y "0"
+                      :height "100%"
                       :width "47px"
                       :anchor "left center")
   :monitor 0

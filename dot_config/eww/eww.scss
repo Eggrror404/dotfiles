@@ -5,11 +5,21 @@
 @import "dashboard/eww.scss";
 @import "idle/eww.scss";
 @import "osd/eww.scss";
-
 @import "counter/eww.scss";
 
 // Global
-*:not(arrow):not(check):not(radio) {
+*:not(arrow):not(check):not(radio):not(tooltip) {
   // Exclude menu components
   all: unset;
+}
+
+tooltip {
+  background-color: rgba($surface0, 0.8);
+  color: $text;
+  padding: 0.1rem;
+  font-weight: 500;
+  font-family: "Dosis";
+  font-size: 20;
+  border-radius: 0.6rem;
+  opacity: 0.8;
 }

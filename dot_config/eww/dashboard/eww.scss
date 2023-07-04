@@ -17,78 +17,56 @@
     box-shadow: 0 0 4px 4px rgba($mantle, 0.7);
 
     padding: 0.5rem;
-
-    .label {
-      font-size: 14;
-      color: $overlay2;
-    }
   }
 }
 
 .db-top {
   font-size: 18;
 
-  // .pfp {
-  //   border-radius: 45%;
-  //   background-size: cover;
-  //   background-position: center;
-  // }
+  .pfp {
+    border-radius: 45%;
+    background-size: cover;
+    background-position: center;
+  }
+
   .icon {
     color: $yellow;
-  }
-
-  .btn {
-    transition: background-color 100ms ease-out;
-    font-size: 16;
-    background-color: rgba($surface0, 0.5);
-    border-radius: 0.4em;
-  }
-
-  .btn:hover {
-    background-color: rgba($surface1, 0.6);
-  }
-
-  .btn-launcher {
-    color: $blue;
-    padding: 0 0.6em 0 0.3em;
-  }
-
-  .btn-game {
-    color: $mauve;
-    padding: 0 0.6em 0 0.3em;
-  }
-
-  .btn-emoji {
-    color: $peach;
-    padding: 0 0.55em 0 0.35em;
-  }
-
-  .btn-calc {
-    color: $rosewater;
-    padding: 0 0.45em 0 0.45em;
-  }
-
-  .btn-screenshot {
-    color: $teal;
-    padding: 0 0.6em 0 0.3em;
   }
 }
 
 .db-session {
   .pfp {
-    margin-right: 0.5rem;
-    border-radius: 30%;
+    margin: 0.8rem;
+    margin-right: 1.3rem;
+    border-radius: 40%;
     background-size: cover;
     background-position: center;
   }
 
-  .session-name {
+  .session-user {
     font-size: 22;
+    font-weight: 600;
+    color: $accent;
+  }
+
+  .session-name {
+    font-size: 20;
     color: $accent;
   }
 
   .session-uptime {
     font-size: 18;
+  }
+}
+
+.db-system {
+  &-icon {
+    font-size: 18;
+    color: $accent;
+  }
+
+  &-text {
+    font-size: 20;
   }
 }
 
@@ -265,7 +243,8 @@
 
   // Font finetuning
   &-vol button,
-  &-mic button {
+  &-mic button,
+  &-bright button {
     padding-left: 0.4em;
     padding-right: 0.5em;
   }

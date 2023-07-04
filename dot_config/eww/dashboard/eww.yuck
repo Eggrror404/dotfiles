@@ -1,3 +1,14 @@
+(defwidget db-label [icon text]
+  (box :class "widget-label"
+       :orientation "h"
+       :halign "start"
+       :space-evenly false
+       :spacing 15
+    (label :class "widget-label-icon"
+           :text icon)
+    (label :calss "widget-label-text"
+           :text text)))
+
 (defwidget db-top []
   (box :class "db-top"
        :orientation "h"
@@ -16,28 +27,21 @@
     (box :orientation "h"
          :space-evenly false
          :halign "end"
-         :spacing 5
-      (button :class "btn btn-launcher"
-              :onclick "scripts/popup launcher" "")
-      (button :class "btn btn-game"
-              :onclick "scripts/popup game" "󰊗")
-      (button :class "btn btn-emoji"
-              :onclick "scripts/popup emoji" "󱗌")
-      (button :class "btn btn-calc"
-              :onclick "scripts/popup calc" "󰃬")
-      (button :class "btn btn-screenshot"
-              :onclick "scripts/popup screenshot" "󰆞"))))
+         :spacing 10
+      (label :class "time"
+             :text "${time.hour}:${time.min}")
+      (box :class "pfp"
+           :width 25
+           :style "background-image: url(\"file://${session.profilePic}\");"))))
 
 (defwidget db-session []
   (box :class "widget db-session"
        :orientation "h"
-       :vexpand false
-       :hexpand false
        :space-evenly false
-       :height 100
+       :height 150
     (box :class "pfp"
-         :width 85
-         :style "background-image: url(\"file:///var/lib/AccountsService/icons/${session.username}\");")
+         :width 135
+         :style "background-image: url(\"file://${session.profilePic}\");")
     (box :class "session-text"
          :orientation "v"
          :vexpand false
@@ -45,13 +49,51 @@
          :valign "center"
          :space-evenly false
          :spacing 4
+      (label :class "session-user"
+             :halign "center"
+             :text "${session.username}@${session.hostname}")
       (label :class "session-name"
              :halign "center"
-             :text "${session.sessionName}@${session.username}")
+             :text "on ${session.sessionName}")
       (label :class "session-uptime"
              :halign "center"
              :wrap true
              :text {session.uptime}))))
+
+(defwidget db-system []
+  (box :class "widget db-system"
+       :orientation "v"
+       :space-evenly false
+       :spacing 8
+    (box :orientation "h"
+         :space-evenly false
+         :spacing 20
+      (label :class "db-system-icon"
+             :text "")
+      (label :class "db-system-text"
+             :text {session.distrib}))
+    (box :orientation "h"
+         :space-evenly false
+         :spacing 20
+      (label :class "db-system-icon"
+             :text "")
+      (label :class "db-system-text"
+             :text {session.kernel}))
+    (box :orientation "h"
+         :space-evenly false
+         :spacing 20
+      (label :class "db-system-icon"
+             :text "")
+      (label :class "db-system-text"
+             :text {session.shell}))
+    (box :orientation "h"
+         :space-evenly false
+         :spacing 20
+      (label :class "db-system-icon"
+             :text "󰏖")
+      (label :class "db-system-text"
+             :text "${session.packages} (pacman)"))))
+
 
 (defwidget db-player [current]
   (box :class "widget db-player"
@@ -75,7 +117,10 @@
                 :onclick "eww update player_index=${(player_index + 1) % arraylength(player)}" "🞂"))
       (label :class "player-title"
              :halign "start"
-             :text {player-title})
+             :limit-width 20
+             :show_truncated true
+             :tooltip {current.title}
+             :text {current.title})
       (label :class "player-artist"
              :halign "start"
              :limit-width 20
@@ -176,13 +221,19 @@
                     :active {!vol.mic_mute}
                     :value {vol.mic}
                     :onchange "amixer -D pulse sset Capture {}%"
-                    :toggle-cmd "amixer -D pulse sset Capture toggle")))
+                    :toggle-cmd "amixer -D pulse sset Capture toggle")
+    (quickset-scale :name "bright" :label "Brightness"
+                    :icon-active "󰃠" :icon-inactive ""
+                    :active true
+                    :value 100
+                    :onchange ""
+                    :toggle-cmd "")))
 
 (defwidget sysinfo-chart [icon value name]
   ; use button for hover effect
   (button :class "sysinfo-chart sysinfo-chart-${name}"
           :halign "center"
-    (overlay 
+    (overlay
       (circular-progress :width 40
                          :height 40
                          :value value
@@ -212,18 +263,32 @@
     (systray :class ""
              :pack-direction "ltr")))
 
+(defwidget db-left []
+  (box :class "db-left"
+       :orientation "v"
+       :space-evenly false
+       :spacing 15
+    (db-session)
+    (db-quickset)))
+
+(defwidget db-right []
+  (box :class "db-right"
+       :orientation "v"
+       :space-evenly false
+       :spacing 15
+    (db-system)
+    (db-player :current {player[player_index % arraylength(player)]})))
+
 (defwidget db []
   (box :class "db"
        :orientation "v"
-       :vexpand false
-       :hexpand false
        :space-evenly false
-       :spacing 10
+       :spacing 15
     (db-top)
-    (db-session)
-    (db-player :current {player[player_index % arraylength(player)]})
-    (db-quickset)
-    ;; (quickslide)
+    (box :orientation "h"
+         :spacing 15
+      (db-left)
+      (db-right))
     (db-sysinfo)
     (db-systray)))
 
@@ -231,8 +296,8 @@
 (defwindow dashboard
   :geometry (geometry :x "4"
                       :y "0"
-                      :height "90%"
-                      :width "400px"
+                      :height "95%"
+                      :width "40%"
                       :anchor "left center")
   :monitor 0
   :hexpand "false"
