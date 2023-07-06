@@ -1,5 +1,5 @@
 configuration {
-    font:                           "FantasqueSansMono Nerd Font 14";
+    font:                           "FantasqueSansM Nerd Font 14";
     hover-select:                   true;
     me-select-entry:                "";
     me-accept-entry:                "MousePrimary";

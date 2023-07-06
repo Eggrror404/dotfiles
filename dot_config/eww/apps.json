@@ -10,8 +10,8 @@
       ]
     },
     {
-      "class": "thunar",
-      "exec": "thunar"
+      "class": "org.gnome.Nautilus",
+      "exec": "nautilus --new-window"
     },
     {
       "class": "fakeapp.window",
@@ -74,6 +74,11 @@
       "class": "firefox-nightly",
       "icon": "",
       "color": "sky"
+    },
+    {
+      "class": "org.gnome.Nautilus",
+      "icon": "",
+      "color": "mauve"
     },
     {
       "class": "thunar",
