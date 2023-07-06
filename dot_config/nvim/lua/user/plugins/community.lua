@@ -28,8 +28,8 @@ return {
   { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.pack.yaml" },
 
-  { import = "astrocommunity.editing-support.nvim-ts-rainbow2" },
+  { import = "astrocommunity.editing-support.rainbow-delimiters-nvim" },
+  { import = "astrocommunity.editing-support.todo-comments-nvim" },
+  { import = "astrocommunity.motion.nvim-surround" },
   { import = "astrocommunity.project.project-nvim" },
-
-  -- { import = "astrocommunity.completion.copilot-lua-cmp" },
 }

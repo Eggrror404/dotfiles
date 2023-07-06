@@ -25,6 +25,10 @@ return {
       if not opts.ensure_installed then opts.ensure_installed = {} end
       -- Add to ensure_installed
       utils.list_insert_unique(opts.ensure_installed, { "shfmt" })
+
+      for i, v in ipairs(opts.ensure_installed) do
+        if v == "luacheck" then table.remove(opts.ensure_installed, i) end
+      end
     end,
   },
   {

@@ -10,25 +10,6 @@ return {
   --   end,
   -- },
 
-  -- Yuck language support
-  { "elkowar/yuck.vim", ft = "yuck" },
-
-  -- Surround chars
-  {
-    "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = "User AstroFile",
-    config = function() require("nvim-surround").setup {} end,
-  },
-
-  -- TODO comments
-  {
-    "folke/todo-comments.nvim",
-    dependencies = "nvim-lua/plenary.nvim",
-    event = "User AstroFile",
-    config = function() require("todo-comments").setup {} end,
-  },
-
   -- Grammar lsp (with ltex)
   {
     "brymer-meneses/grammar-guard.nvim",
@@ -40,12 +21,7 @@ return {
     config = function() require("grammar-guard").init() end,
   },
 
-  -- Rofi .rasi file support
-  {
-    "Fymyte/rasi.vim",
-    ft = "rasi",
-  },
-
+  -- Telescope Undo
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
@@ -68,5 +44,17 @@ return {
   {
     "frabjous/knap",
     ft = { "md", "tex" },
+  },
+
+  -- Regex support
+  {
+    "tomiis4/Hypersonic.nvim",
+    event = "CmdlineEnter",
+    cmd = "Hypersonic",
+    config = function()
+      require("hypersonic").setup {
+        -- config
+      }
+    end,
   },
 }
