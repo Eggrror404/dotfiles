@@ -1,8 +1,8 @@
-{{ if not (eq .device "zenfone") }}
+{{- if not (eq .device "zenfone") -}}
 #!/usr/bin/env bash
-{{ else }}
+{{- else }}
 #!/data/data/com.termux/files/usr/bin/env bash
-{{ end }}
+{{- end }}
 
 MAC=d8:bb:c1:de:38:44
 
@@ -23,7 +23,7 @@ ping() {
 wol() {
   echo "Waking up Quofias (MAC: $MAC)"
 
-  ssh rrhome "~/.local/bin/wakeonlan $MAC"
+  ssh rrhome "wakeonlan $MAC"
   echo "The magic packet has been sent."
 
   echo "Waiting..."
@@ -56,15 +56,20 @@ actions() {
       echo "Perform an action:"
       echo "  (1) SSH to Quofias"
       echo "  (2) Create an SSH tunnel to Quofias"
+      echo "  (3) Forward ports for Moonlight Streaming"
       echo "  (q) Exit"
 
-      read -p ": " action
+      read -r -p ": " action
       case $action in
         1)
           ssh -J rrhome quofias
           ;;
         2)
           tunnel
+          ;;
+        3)
+          "$HOME"/.local/bin/moonlight/moonlightssh.sh
+          ssh rrhome 'bash -s' <"$HOME"/.local/bin/moonlight/redirectudp.sh
           ;;
         q)
           exit
