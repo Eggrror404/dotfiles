@@ -94,7 +94,6 @@
       (label :class "db-system-text"
              :text "${session.packages} (pacman)"))))
 
-
 (defwidget db-player [current]
   (box :class "widget db-player"
        :orientation "v"
@@ -117,7 +116,7 @@
                 :onclick "eww update player_index=${(player_index + 1) % arraylength(player)}" "🞂"))
       (label :class "player-title"
              :halign "start"
-             :limit-width 20
+             :limit-width 16
              :show_truncated true
              :tooltip {current.title}
              :text {current.title})
@@ -229,6 +228,47 @@
                     :onchange ""
                     :toggle-cmd "")))
 
+(defwidget db-todo []
+  (box :class "widget db-todo"
+       :orientation "v"
+       :space-evenly false
+       :spacing 5
+    (box :class "db-todo-top"
+         :orientation "h"
+         :space-evenly false
+      (label :class "db-todo-label"
+             :halign "start"
+             :hexpand true
+             :text "Tasks")
+      (button :class "db-todo-add"
+              :tooltip "New Task"
+              :onclick "scripts/todo ask &" "󰌴")
+      (button :class "db-todo-clean"
+              :tooltip "Remove Finished Tasks"
+              :onclick "scripts/todo remove_finished" "󰱝"))
+    (scroll :height 200
+            :vscroll true
+      (box :orientation "v"
+           :space-evenly false
+           :spacing 2
+        (for task in todos
+          (box :orientation "h"
+               :space-evenly false
+            (button :class "db-todo-task"
+                    :hexpand true
+                    :onclick "scripts/todo ${task.finished ? "undo" : "do"} ${task.index}"
+              (box :orientation "h"
+                   :halign "start"
+                   :space-evenly false
+                   :spacing 10
+                (label :class "db-todo-icon"
+                       :text {task.finished ? "󰄵" : "󰄱"})
+                (label :class "db-todo-text"
+                       :halign "start"
+                       :text {task.content})))
+            (button :class "db-todo-remove"
+                    :onclick "scripts/todo remove ${task.index}" "󰖭")))))))
+
 (defwidget sysinfo-chart [icon value name]
   ; use button for hover effect
   (button :class "sysinfo-chart sysinfo-chart-${name}"
@@ -277,7 +317,8 @@
        :space-evenly false
        :spacing 15
     (db-system)
-    (db-player :current {player[player_index % arraylength(player)]})))
+    (db-player :current {player[player_index % arraylength(player)]})
+    (db-todo)))
 
 (defwidget db []
   (box :class "db"

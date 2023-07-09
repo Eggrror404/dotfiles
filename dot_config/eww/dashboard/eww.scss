@@ -254,6 +254,52 @@
   }
 }
 
+.db-todo {
+  font-size: 18;
+
+  &-top {
+    padding: 0 0.3rem;
+    font-size: 20;
+    font-weight: 600;
+  }
+
+  &-icon {
+    font-size: 20;
+  }
+
+  &-add,
+  &-clean {
+    border-radius: 0.5rem;
+    padding-left: 0.3em;
+    padding-right: 0.5em;
+  }
+
+  &-task {
+    border-radius: 0.5rem 0 0 0.5rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  &-remove {
+    border-radius: 0 0.5rem 0.5rem 0;
+    padding: 0 0.4rem;
+    color: rgba($text, 0.1);
+
+    &:hover {
+      color: $text;
+    }
+  }
+
+  button {
+    transition: 100ms ease-out;
+    transition-property: background-color, color;
+  }
+
+  button:hover,
+  &-task:hover + &-remove {
+    background-color: rgba($accent, 0.15);
+  }
+}
+
 .widget.db-sysinfo .sysinfo-chart {
   padding: 0.5rem;
   border-radius: 0.4rem;

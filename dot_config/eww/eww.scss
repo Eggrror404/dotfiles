@@ -8,7 +8,7 @@
 @import "counter/eww.scss";
 
 // Global
-*:not(arrow):not(check):not(radio):not(tooltip) {
+*:not(arrow):not(check):not(radio):not(scrollbar):not(tooltip) {
   // Exclude menu components
   all: unset;
 }

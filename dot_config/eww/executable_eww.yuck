@@ -19,6 +19,8 @@
 (defpoll capslock :interval "0.5s"
   "(($(cat /sys/class/leds/*caps*/brightness))) && echo 'true' || echo 'false'")
 
+(deflisten todos "scripts/todo subscribe")
+
 ; Some variables
 (defvar player_index 0)
 (defvar caffeine false)

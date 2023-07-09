@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+
+TODO='-'
+FIN='\*'
+SPACE=' *'
+
+add_task() {
+  echo "- $*" >>todos.txt
+}
+
+dialog_add_task() {
+  task=$(zenity --entry \
+    --width 500 \
+    --title "New Task" \
+    --text "Create a new To-Do task with the following label:")
+  if [ -n "$task" ]; then
+    add_task "$task"
+  fi
+}
+
+remove_task() {
+  sed -i "${*}d" todos.txt
+}
+
+remove_finished() {
+  sed -i "/^\* .*/d" todos.txt
+}
+
+do_task() {
+  sed -i "${*}s/^${SPACE}[$TODO$FIN]\\?$SPACE\\(.*\\)\$/$FIN \\1/" todos.txt
+}
+
+undo_task() {
+  sed -i "${*}s/^${SPACE}[$TODO$FIN]\\?$SPACE\\(.*\\)\$/$TODO \\1/" todos.txt
+}
+
+list_tasks() {
+  gawk '$0 != "" && $0 !~ "#.*" {
+    match($0, /^ *([-\*]?) *(.*)$/, group)
+    print NR, (group[1] == "*" ? "finished" : "unfinished"), group[2]
+  }' todos.txt |
+    jq -nRcM '[inputs | split(" ") | { index: .[0], finished: (.[1] == "finished"), content: (.[2:] | join(" ")) }]'
+}
+
+case $1 in
+  add)
+    add_task "${@:2}"
+    ;;
+  dialog_add | ask)
+    dialog_add_task
+    ;;
+  remove)
+    remove_task "${@:2}"
+    ;;
+  remove_finished)
+    remove_finished
+    ;;
+  do)
+    do_task "${@:2}"
+    ;;
+  undo)
+    undo_task "${@:2}"
+    ;;
+  list)
+    list_tasks
+    ;;
+  subscribe)
+    tail -F todos.txt | while read -r _line; do
+      list_tasks
+    done
+    ;;
+esac
