@@ -23,6 +23,12 @@ return {
     -- quick save
     -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
     ["<leader>fu"] = { "<cmd>Telescope undo<cr>", desc = "Undo tree" },
+
+    -- overrides the default lazygit setting.
+    -- still executes `lazygit`, needs a symbolic link
+    ["<leader>gg"] = { desc = "ToggleTerm gitui" },
+    ["<leader>tl"] = { desc = "ToggleTerm gitui" },
+
     ["<S-l>"] = {
       function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end,
       desc = "Next buffer",
@@ -35,7 +41,6 @@ return {
   t = {
     -- setting a mapping to false will disable it
     -- ["<esc>"] = false,
-    ["<esc>"] = [[<C-\><C-n>]],
     ["<C-h>"] = [[<Cmd>wincmd h<CR>]],
     ["<C-j>"] = [[<Cmd>wincmd j<CR>]],
     ["<C-k>"] = [[<Cmd>wincmd k<CR>]],
