@@ -92,7 +92,7 @@
       (label :class "db-system-icon"
              :text "󰏖")
       (label :class "db-system-text"
-             :text "${session.packages} (pacman)"))))
+             :text "${session.packages.pacman} (pacman), ${session.packages.flatpak} (flatpak)"))))
 
 (defwidget db-player [current]
   (box :class "widget db-player"
@@ -116,7 +116,7 @@
                 :onclick "eww update player_index=${(player_index + 1) % arraylength(player)}" "🞂"))
       (label :class "player-title"
              :halign "start"
-             :limit-width 16
+             :limit-width 25
              :show_truncated true
              :tooltip {current.title}
              :text {current.title})
@@ -309,7 +309,8 @@
        :space-evenly false
        :spacing 15
     (db-session)
-    (db-quickset)))
+    (db-quickset)
+    (db-sysinfo)))
 
 (defwidget db-right []
   (box :class "db-right"
@@ -330,7 +331,6 @@
          :spacing 15
       (db-left)
       (db-right))
-    (db-sysinfo)
     (db-systray)))
 
 ; dashboard window

@@ -52,15 +52,6 @@
           "class": "osu!"
         }
       ]
-    },
-    {
-      "class": "WebCord",
-      "exec": "webcord --enable-features=UseOzonePlatform --ozone-platform=wayland",
-      "fallback": [
-        {
-          "class": "revolt-desktop"
-        }
-      ]
     }
   ],
   "_friendly_reminder": "In the `apps` array, latter elements take priority.",
@@ -106,7 +97,12 @@
       "color": "lavender"
     },
     {
-      "class": "WebCord",
+      "class": "ArmCord",
+      "icon": "",
+      "color": "blue"
+    },
+    {
+      "class": "discord",
       "icon": "",
       "color": "blue"
     },

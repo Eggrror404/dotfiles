@@ -9,9 +9,11 @@ profilepic="/var/lib/AccountsService/icons/$username"
 hostname=$(uname -n)
 sessionname=$XDG_CURRENT_DESKTOP
 uptime=$(uptime -p)
-packages=$(pacman -Q | wc -l)
+
+pacman=$(pacman -Q | wc -l)
+flatpak=$(flatpak list --all | wc -l)
 
 jq -ncM "{ username: \"$username\", fullname: \"$fullname\", shell: \"$shell\",
            distrib: \"$distrib\", kernel: \"$kernel\", profilePic: \"$profilepic\",
            hostname: \"$hostname\", sessionName: \"$sessionname\", uptime: \"$uptime\",
-           packages: \"$packages\" }"
+           packages: { pacman: \"$pacman\", flatpak: \"$flatpak\" } }"
