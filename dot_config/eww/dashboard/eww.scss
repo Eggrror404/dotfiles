@@ -182,7 +182,8 @@
   // Icon font finetuning
   &-net .quickset-button-icon,
   &-dnd .quickset-button-icon,
-  &-caff .quickset-button-icon {
+  &-caff .quickset-button-icon,
+  &-night .quickset-button-icon {
     padding-left: 0.35em;
     padding-right: 0.55em;
   }
@@ -297,6 +298,40 @@
   button:hover,
   &-task:hover + &-remove {
     background-color: rgba($accent, 0.15);
+  }
+}
+
+.db-quickaction {
+  button {
+    background-color: rgba($accent, 0.9);
+    color: rgba($base, 0.9);
+    border-radius: 0.75em;
+    font-size: 26;
+
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+
+    transition: background-color 0.5s ease-out;
+
+    &:hover {
+      background-color: mix($accent, $text, 90%);
+    }
+  }
+
+  &-games {
+    padding-left: 0.55em;
+    padding-right: 0.55em;
+  }
+  &-incognito {
+    padding-left: 0.5em;
+    padding-right: 0.6em;
+  }
+  &-browser,
+  &-terminal,
+  &-screenshot,
+  &-ex-desktop {
+    padding-left: 0.4em;
+    padding-right: 0.7em;
   }
 }
 

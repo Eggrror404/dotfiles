@@ -14,6 +14,7 @@
 
 (defpoll locked :interval "5s" "pidof -q swaylock && echo 'true' || echo 'false'")
 (defpoll dnd-enabled :interval "5s" "dunstctl is-paused")
+(defpoll shader-enabled :interval "5s" `hyprctl getoption decoration:screen_shader | grep -q '"\\[\\[EMPTY\\]\\]"' && echo 'false' || echo 'true'`)
 (defpoll temp :interval "2s"
   "cat /sys/class/thermal/thermal_zone*/temp | awk '{s+=$1}END{print s/NR/1000}'")
 (defpoll capslock :interval "0.5s"

@@ -53,6 +53,14 @@ elif [ "$1" = "dashboard" ]; then
   toggle_widget dashboard "$2"
 elif [ "$1" = "calendar" ]; then
   toggle_widget calendar "$2"
+elif [ "$1" = "browser" ]; then
+  firefox
+elif [ "$1" = "incognito" ]; then
+  firefox --private-window
+elif [ "$1" = "terminal" ]; then
+  alacritty
+elif [ "$1" = "extern-desktop" ]; then
+  alacritty --hold -e sh -c 'extern-desktop.sh'
 elif [ "$1" = "update" ]; then
   alacritty --hold -e sh -c 'yay; eww update updates=`~/.config/eww/scripts/updates`'
 fi

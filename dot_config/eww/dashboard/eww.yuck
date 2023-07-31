@@ -200,13 +200,19 @@
                        :more-cmd "scripts/popup bluetooth"))
     (box :orientation "h"
          :spacing 10
-      (quickset-button :name "dnd" :active dnd-enabled :label {dnd-enabled ? "No Disturb" : "Notification"}
+      (quickset-button :name "dnd" :active dnd-enabled :label "No Disturb"
                        :icon-active "󰂛" :icon-inactive "󰂞"
                        :toggle-cmd "dunstctl set-paused toggle && eww update dnd-enabled=${!dnd-enabled}"
                        :more-cmd "")
       (quickset-button :name "caff" :active caffeine :label "Caffeine"
                        :icon-active "" :icon-inactive "󰒲"
                        :toggle-cmd "eww update caffeine=${!caffeine}"
+                       :more-cmd ""))
+    (box :orientation "h"
+         :spacing 10
+      (quickset-button :name "night" :active shader-enabled :label "Night Light"
+                       :icon-active "󰡭" :icon-inactive "󰡭"
+                       :toggle-cmd "hyprshade toggle blue-light-filter && eww update shader-enabled=${!shader-enabled}"
                        :more-cmd ""))
     (box :class "quickset-divider")
     (quickset-scale :name "vol" :label "Volume"
@@ -246,7 +252,7 @@
       (button :class "db-todo-clean"
               :tooltip "Remove Finished Tasks"
               :onclick "scripts/todo remove_finished" "󰱝"))
-    (scroll :height 200
+    (scroll :height 250
             :vscroll true
       (box :orientation "v"
            :space-evenly false
@@ -268,6 +274,37 @@
                        :text {task.content})))
             (button :class "db-todo-remove"
                     :onclick "scripts/todo remove ${task.index}" "󰖭")))))))
+
+(defwidget quickaction-button [name icon onclick]
+  (box :orientation "v"
+       :space-evenly false
+    (button :class "db-quickaction-${name}"
+            :halign "center"
+            :onclick onclick icon)
+    (label :class "quickaction-label"
+           :markup "<span text_transform='capitalize'>${name}</span>")))
+
+(defwidget db-quickaction []
+  (box :class "widget db-quickaction"
+       :orientation "h"
+    (quickaction-button :name "browser"
+                        :icon "󰈹"
+                        :onclick "scripts/popup browser")
+    (quickaction-button :name "incognito"
+                        :icon "󱀣"
+                        :onclick "scripts/popup incognito")
+    (quickaction-button :name "terminal"
+                        :icon "󰞷"
+                        :onclick "scripts/popup terminal")
+    (quickaction-button :name "screenshot"
+                        :icon ""
+                        :onclick "scripts/popup screenshot")
+    (quickaction-button :name "games"
+                        :icon "󱎓"
+                        :onclick "scripts/popup game")
+    (quickaction-button :name "ex-desktop"
+                        :icon "󱄄"
+                        :onclick "scripts/popup extern-desktop")))
 
 (defwidget sysinfo-chart [icon value name]
   ; use button for hover effect
@@ -310,6 +347,7 @@
        :spacing 15
     (db-session)
     (db-quickset)
+    (db-quickaction)
     (db-sysinfo)))
 
 (defwidget db-right []
