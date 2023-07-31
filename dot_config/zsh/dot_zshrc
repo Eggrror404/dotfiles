@@ -1,5 +1,5 @@
-# Load modules
-
+# Load compinit
+fpath+="$HOME/.config/zsh/zfunc"
 autoload -Uz compinit bashcompinit &&
     compinit && bashcompinit
 
@@ -22,7 +22,6 @@ miniplug plugin 'zsh-users/zsh-completions'
 miniplug plugin 'zsh-users/zsh-autosuggestions'
 miniplug plugin 'zsh-users/zsh-syntax-highlighting'
 # zsh-syntax-highlighting must be the last plugin sourced
-# miniplug theme 'romkatv/powerlevel10k'
 
 miniplug load
 
