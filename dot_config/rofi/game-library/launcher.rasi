@@ -6,7 +6,7 @@ window {
     location:                       south;
     anchor:                         south;
     transparency:                   "real";
-    background-color:               @background-transparent;
+    background-color:               @background;
     border:                         5px 3px 0px 3px;
     border-radius:                  20px 20px 0 0;
     border-color:                   @primary;

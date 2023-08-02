@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
-# Import Current Theme
-source "$HOME"/.config/rofi/applets/shared/theme.bash
-style="type-1/style-2"
-theme="$type/$style"
+theme="$HOME/.config/rofi/applets/audio-device.rasi"
 
 types='{
     "Unknown": "",
@@ -31,7 +28,7 @@ types='{
     "Analog": "󱡬"
 }'
 
-availability='{
+avail_prio='{
     "available": 0,
     "availability unknown": 1,
     "not available": 2
@@ -44,35 +41,37 @@ current=''
 active=''
 
 get_devices() {
-    pactl --format json list sinks |
-    jq -cM --argjson types "$types" --argjson avail "$availability" \
-        'map(.name as $sink_name | .ports |
-      map({ sink_name: $sink_name, name: ( $types[.type] + " " + .description ), avail: $avail[.availability], avail_text: .availability })) |
-    flatten | sort_by(.avail)'
+  pactl --format json list sinks |
+    jq -cM --argjson types "$types" --argjson avail "$avail_prio" \
+      'map(.name as $sink_name | .ports |
+      map({ sink_name: $sink_name, name: ( $types[.type] + " " + .description ), availability, avail_prio: $avail[.availability] })) |
+    flatten | sort_by(.avail_prio)'
 }
 
 # Return string: "$index $name"
 get_default_device() {
-    echo $devices | jq -r --arg default "$(pactl get-default-sink)" \
-        '(map(.sink_name) | index($default)) as $index | ($index | tostring) + .[$index].name'
+  echo $devices | jq -r --arg default "$(pactl get-default-sink)" \
+    '(map(.sink_name) | index($default)) as $index | ($index | tostring) + .[$index].name'
 }
 
 get_options() {
-    jq -cM \
-        'map( .avail_text as $avail | .name |
-    if $avail != "available" then . + " <span weight=\"light\" size=\"small\"><i>(" + $avail + ")</i></span>" else . end )'
-    # variant=title-caps isn't shown for some reason
+  jq -cM \
+    'map(
+      if .availability != "available"
+      then .name + " <span weight=\"light\" size=\"small\"><i>(" + .availability + ")</i></span>"
+      else .name end
+    )'
 }
 
 rofi_cmd() {
-    rofi -theme-str "listview {columns: 1;}" \
-        -theme-str 'textbox-prompt-colon {str: "";}' \
-        -dmenu \
-        -p "$prompt" \
-        -mesg "$mesg" \
-        ${active} \
-        -markup-rows \
-        -theme ${theme}
+  rofi -theme-str "listview {columns: 1;}" \
+    -theme-str 'textbox-prompt-colon {str: "";}' \
+    -dmenu \
+    -p "$prompt" \
+    -mesg "$mesg" \
+    ${active} \
+    -markup-rows \
+    -theme ${theme}
 }
 
 devices=$(get_devices)
@@ -89,13 +88,13 @@ active="-a $(echo "$current" | cut -d ' ' -f 1)"
 chosen=$(echo "$options" | jq -r 'join("\n")' | rofi_cmd)
 
 if [ -z "$chosen" ]; then
-    exit 0
+  exit 0
 fi
 
 # Extract sink_name & name from chosen option,
 # outputing as "$sink_name $name"
 chosen=$(echo $devices | jq -r --argjson options "$options" --arg chosen "$chosen" \
-    '.[$options | index($chosen)] | .sink_name + " " + .name')
+  '.[$options | index($chosen)] | .sink_name + " " + .name')
 
 pactl set-default-sink "$(echo $chosen | cut -d ' ' -f 1)"
 

@@ -46,5 +46,5 @@ get-display-width() {
 }
 
 ./update-game-banner.sh -w $(get-display-width) -h $HEIGHT -a $APPID
-SELECTION="$(list-icons | rofi -dmenu -theme game-splash-menu)"
+SELECTION="$(list-icons | rofi -dmenu -theme $HOME/.config/rofi/game-library/game-splash-menu)"
 handle-option $SELECTION &
