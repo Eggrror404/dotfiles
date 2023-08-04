@@ -19,6 +19,9 @@
       "fallback": [
         {
           "class": "Alacritty"
+        },
+        {
+          "class": "blender"
         }
       ]
     },

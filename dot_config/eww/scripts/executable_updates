@@ -1,17 +1,18 @@
-#!/usr/bin/sh
+#!/usr/bin/bash
 
-updates=`checkupdates`
-aur=`yay -Qu`
+updates=$(checkupdates)
+aur=$(yay -Qu)
 
 if [ -n "$aur" ]; then
-  updates+=$'\n'$aur
+  updates="$updates$aur"
 fi
 
-updates=`echo "$updates" | sort | uniq | sed -r '/^\s*$/d'`
+updates=$(echo "$updates" | sort | uniq)
 
 if [ -n "$updates" ]; then
-  wc -l <<<$updates
-else
-  echo '0'
-fi
+  count=$(echo "$updates" | wc -l)
 
+  jq -ncM "{ count: $count, packages: \"$updates\" }"
+else
+  jq -ncM '{ count: 0, packages: "Packages up-to-date! :)" }'
+fi

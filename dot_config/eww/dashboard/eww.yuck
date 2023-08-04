@@ -92,7 +92,15 @@
       (label :class "db-system-icon"
              :text "󰏖")
       (label :class "db-system-text"
-             :text "${session.packages.pacman} (pacman), ${session.packages.flatpak} (flatpak)"))))
+             :text "${session.packages.pacman} (pacman), ${session.packages.flatpak} (flatpak)"))
+    (box :orientation "h"
+         :space-evenly false
+         :tooltip "${updates.packages}"
+         :spacing 20
+      (label :class "db-system-icon"
+             :text "󰏕")
+      (label :class "db-system-text"
+             :text "${updates.count} updates"))))
 
 (defwidget db-player [current]
   (box :class "widget db-player"
