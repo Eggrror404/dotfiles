@@ -41,7 +41,14 @@
 (defwidget osd-capslock []
   (osd-toggle :name "capslock" :class ""
               :icon "󰪛"
-              :text {capslock ? "CapsLock ON" : "CapsLock OFF"}
+              :text {lockkeys.capslock ? "CapsLock ON" : "CapsLock OFF"}
+              :onclick ""
+              :onrightclick ""))
+
+(defwidget osd-numlock []
+  (osd-toggle :name "numlock" :class ""
+              :icon "󰎣"
+              :text {lockkeys.numlock ? "NumLock ON" : "NumLock OFF"}
               :onclick ""
               :onrightclick ""))
 
@@ -51,6 +58,38 @@
               :text {caffeine ? "Caffeine Consumed" : "Caffeine No More"}
               :onclick ""
               :onrightclick ""))
+
+; mostly copied from idl-player
+(defwidget osd-player-widget [player]
+  (box :class "osd-widget osd-player"
+       :halign "center"
+       :space-evenly false
+       :spacing 10
+    (box :class "osd-player-art"
+         :width 80
+         :height 80
+         :style "background-image: url(\"${player.artUrl}\");")
+    (box :class "osd-player-info"
+         :orientation "v"
+         :width 300
+         :space-evenly false
+      (label :class "osd-player-title"
+             :halign "start"
+             :limit-width 15
+             :show_truncated true
+             :text {player.title})
+      (label :class "osd-player-artist"
+             :halign "start"
+             :limit-width 20
+             :show_truncated true
+             :text {player.artist})
+      (progress :class "osd-player-progress"
+                :vexpand true
+                :valign "end"
+                :value {(player.position + (timestamp - player.timestamp) * (player.status == "Playing" ? 1000000 : 0)) / player.length * 100}))))
+
+(defwidget osd-player []
+  (osd-player-widget :player {player[player_index % arraylength(player)]}))
 
 (defwindow osd
   :geometry (geometry :x "0"
@@ -77,5 +116,6 @@
                 :reveal {osds?.[2]?.reveal}
                 :duration "550ms"
         (literal :content {osds?.[2]?.widget}))
-      ; workaround for capslock to update
-      (label :visible false :text capslock)))
+      ; workaround for variables to update
+      (label :visible false :text lockkeys)
+      (label :visible false :text player)))

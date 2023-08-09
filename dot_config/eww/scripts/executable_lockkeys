@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+bool() {
+  (($(cat))) && echo "true" || echo "false"
+}
+
+caps=$(cat /sys/class/leds/*caps*/brightness | bool)
+num=$(cat /sys/class/leds/*num*/brightness | bool)
+
+jq -ncM "{ capslock: $caps, numlock: $num }"

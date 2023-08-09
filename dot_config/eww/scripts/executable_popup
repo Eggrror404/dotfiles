@@ -5,20 +5,20 @@ toggle_widget() {
   TOGGLE=$2 # "open" or "close" or empty
 
   # Run eww daemon if not running
-  if [[ ! $(eww ping) ]]; then
+  if ! eww ping &>/dev/null; then
     eww daemon
     sleep 1
   fi
 
   close() {
     [ "$TOGGLE" != "open" ] &&
-      eww close "$WIDGET" 2>/dev/null >/dev/null &&
+      eww close "$WIDGET" &>/dev/null &&
       echo "Closed $WIDGET"
   }
 
   open() {
     [ "$TOGGLE" != "close" ] &&
-      eww open "$WIDGET" >/dev/null &&
+      eww open "$WIDGET" &>/dev/null &&
       echo "Opened $WIDGET"
   }
 
@@ -26,41 +26,57 @@ toggle_widget() {
 }
 
 menu() {
-  toggle_dashboard close >/dev/null 2>/dev/null || true
   sh "$HOME/.config/rofi/scripts/$1"
 }
+
+if [[ "$1" =~ dashboard|calendar ]]; then
+  toggle_widget "$1" "$2"
+  exit
+fi
 
 # don't launch immediately so eww doesn't freeze
 sleep 0.05
 
-if [ "$1" = "bluetooth" ]; then
-  blueman-manager
-elif [ "$1" = "network" ]; then
-  nm-connection-editor
-elif [ "$1" = "launcher" ]; then
-  menu launcher.sh
-elif [ "$1" = "audio" ]; then
-  menu audio.sh
-elif [ "$1" = "game" ]; then
-  menu game-lib.sh
-elif [ "$1" = "screenshot" ]; then
-  menu screenshot.sh
-elif [ "$1" = "emoji" ]; then
-  menu emoji.sh
-elif [ "$1" = "calc" ]; then
-  menu calc.sh
-elif [ "$1" = "dashboard" ]; then
-  toggle_widget dashboard "$2"
-elif [ "$1" = "calendar" ]; then
-  toggle_widget calendar "$2"
-elif [ "$1" = "browser" ]; then
-  firefox
-elif [ "$1" = "incognito" ]; then
-  firefox --private-window
-elif [ "$1" = "terminal" ]; then
-  alacritty
-elif [ "$1" = "extern-desktop" ]; then
-  alacritty --hold -e sh -c 'extern-desktop.sh'
-elif [ "$1" = "update" ]; then
-  alacritty --hold -e sh -c 'yay; eww update updates=`~/.config/eww/scripts/updates`'
-fi
+toggle_widget dashboard close || true
+
+case "$1" in
+  browser)
+    firefox
+    ;;
+  incognito)
+    firefox --private-window
+    ;;
+  bluetooth)
+    blueman-manager
+    ;;
+  network)
+    nm-connection-editor
+    ;;
+  launcher)
+    menu launcher.sh
+    ;;
+  audio)
+    menu audio.sh
+    ;;
+  game)
+    menu game-lib.sh
+    ;;
+  screenshot)
+    menu screenshot.sh
+    ;;
+  emoji)
+    menu emoji.sh
+    ;;
+  calc)
+    menu calc.sh
+    ;;
+  terminal)
+    alacritty
+    ;;
+  extern-desktop)
+    alacritty -e sh -c 'extern-desktop.sh'
+    ;;
+  update)
+    alacritty --hold -e sh -c 'yay -Syu'
+    ;;
+esac

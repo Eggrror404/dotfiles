@@ -3,8 +3,10 @@
 updates=$(checkupdates)
 aur=$(yay -Qu)
 
-if [ -n "$aur" ]; then
-  updates="$updates$aur"
+if [ -n "$updates" ] && [ -n "$aur" ]; then
+  updates="$updates\n$aur"
+elif [ -n "$aur" ]; then
+  updates="$aur"
 fi
 
 updates=$(echo "$updates" | sort | uniq)

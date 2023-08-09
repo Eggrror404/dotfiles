@@ -40,6 +40,7 @@
 }
 
 .osd-capslock,
+.osd-numlock,
 .osd-caffeine {
   &-icon {
     font-size: 25;
@@ -53,5 +54,38 @@
 
   &-state {
     margin-right: 0.4rem;
+  }
+}
+
+.osd-player {
+  margin-left: 10rem;
+  margin-bottom: 6rem;
+
+  &-art {
+    border-radius: 1rem;
+    background-size: cover;
+    background-position: center;
+  }
+
+  &-title {
+    font-size: 20;
+    font-weight: 600;
+  }
+
+  &-artist {
+    font-size: 18;
+    color: $text;
+  }
+
+  &-progress trough {
+    background-image: $disabled-gradient;
+    border-radius: 0.1rem;
+    min-height: 0.2rem;
+    margin: 0.4rem;
+
+    progress {
+      background-image: $accent-gradient;
+      border-radius: 0.15rem;
+    }
   }
 }

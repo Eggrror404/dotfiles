@@ -17,8 +17,7 @@
 (defpoll shader-enabled :interval "5s" `hyprctl getoption decoration:screen_shader | grep -q '"\\[\\[EMPTY\\]\\]"' && echo 'false' || echo 'true'`)
 (defpoll temp :interval "5s"
   "cat /sys/class/thermal/thermal_zone*/temp | awk '{s+=$1}END{print s/NR/1000}'")
-(defpoll capslock :interval "0.5s"
-  "(($(cat /sys/class/leds/*caps*/brightness))) && echo 'true' || echo 'false'")
+(defpoll lockkeys :interval "0.5s" "scripts/lockkeys")
 
 (deflisten todos "scripts/todo subscribe")
 
@@ -27,7 +26,6 @@
 (defvar caffeine false)
 (defvar idle_start 0)
 (defvar osds "[]")
-;; (defvar capslock false)
 
 ; Include widgets
 (include "bar/eww.yuck")
