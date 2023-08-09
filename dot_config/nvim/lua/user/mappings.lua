@@ -23,6 +23,11 @@ return {
     -- quick save
     -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
     ["<leader>fu"] = { "<cmd>Telescope undo<cr>", desc = "Undo tree" },
+    ["<leader>ft"] = { "<cmd>TodoTelescope<cr>", desc = "Todo Comments" },
+    ["<leader>fT"] = {
+      function() require("telescope.builtin").colorscheme { enable_preview = true } end,
+      desc = "Find themes",
+    },
 
     -- overrides the default lazygit setting.
     -- still executes `lazygit`, needs a symbolic link
