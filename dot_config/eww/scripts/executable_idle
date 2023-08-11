@@ -11,6 +11,7 @@ idletime() {
 
 lock() {
   open
+  eww update locked=true
   # swaylock may fail if already running
   (swaylock && close) &
 }

@@ -13,7 +13,7 @@ mute() {
 }
 
 player() {
-  player=$(eww get player | jq -r --argjson i "$(eww get player_index)" '.[$i].player')
+  player=$(eww get player | jq -r --argjson i "$(eww get player_index)" '.[$i % length].player')
   case $1 in
     play)
       playerctl play --player="$player"
