@@ -23,7 +23,7 @@ ping() {
 wol() {
   echo "Waking up Quofias (MAC: $MAC)"
 
-  ssh rrhome "wakeonlan $MAC"
+  ssh rrhome "/opt/bin/wakeonlan $MAC"
   echo "The magic packet has been sent."
 
   echo "Waiting..."
