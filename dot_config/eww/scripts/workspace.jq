@@ -11,24 +11,22 @@
 # select workspaces in current screen
 ($workspaces | map(select(.monitor == $activeDp.name)) |
   # add window class property for each workspace
-  map(.lastwindow as $last | .lastwindowclass = (($clients[] | select(.address == $last).class) // ""))) as $workspaces |
+  map(.lastwindow as $last | .lastwindowclass = (($clients[] | select(.address == $last).class) // null))) as $workspaces |
 
 ## Regex testing func
 # . -> regex; $class, $title -> actual window
 def matchClassTitle($class; $title):
-  .class as $classReg | (.title // "") as $titleReg |
-  (($class // "") | test($classReg)) and (($title // "") | test($titleReg));
+  if $class != null then
+    .class as $classReg | (.title // "") as $titleReg |
+    (($class // "") | test($classReg)) and (($title // "") | test($titleReg))
+  else null end;
 
 ## Add current workspaces into array
 # $apps.workspaces as initial value
 reduce $workspaces[] as $work ($apps.workspaces;
   { class: $work.lastwindowclass, title: $work.lastwindowtitle } as $wsWindow |
   ($work.id - $activeDp.id * 10 - 1) as $wsIndex |
-  if .[($wsIndex)] == null then
-    # add in if not present
-    .[($wsIndex)] //= $wsWindow
-  elif .[($wsIndex)].fallback // [] | any(matchClassTitle($wsWindow.class; $wsWindow.title)) then
-    # replace original when one of the fallbacks matches
+  if $work.windows > 0 or .[($wsIndex)] == null then
     .[($wsIndex)] += $wsWindow
   else . end
 ) |
@@ -50,5 +48,5 @@ to_entries | map(
   .occupied = ([.id] | inside($clients | map(.workspace.id - $activeDp.id * 10))) |
 
   # cleanup
-  delpaths([["class"], ["title"], ["fallback"]])
+  delpaths([ ["class"], ["title"] ])
 )

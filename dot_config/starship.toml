@@ -29,7 +29,9 @@ format = '[\(󰜛$hash$tag\)]($style) '
 
 [git_status]
 stashed = "*"
-deleted = ""
+deleted = ""
+ahead = "↑"
+behind = "↓"
 
 [hostname]
 format = "[$ssh_symbol$hostname]($style) "

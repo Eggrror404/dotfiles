@@ -2,12 +2,7 @@
   "workspaces": [
     {
       "class": "firefox",
-      "exec": "firefox",
-      "fallback": [
-        {
-          "class": "firefox-nightly"
-        }
-      ]
+      "exec": "firefox"
     },
     {
       "class": "org.gnome.Nautilus",
@@ -15,50 +10,39 @@
     },
     {
       "class": "fakeapp.window",
-      "exec": "alacritty --working-directory ~",
-      "fallback": [
-        {
-          "class": "Alacritty"
-        },
-        {
-          "class": "blender"
-        }
-      ]
+      "exec": "alacritty --working-directory ~"
     },
     {
-      "class": "Spotify",
-      "exec": "LD_PRELOAD=/usr/lib/spotifywm.so spotify",
-      "fallback": [
-        {
-          "class": "YouTube Music"
-        },
-        {
-          "class": "firefox",
-          "title": "Now Playing | Gensokyo Radio — Mozilla Firefox"
-        }
-      ]
+      "class": "fakeapp.music",
+      "exec": "LD_PRELOAD=/usr/lib/spotifywm.so spotify"
     },
     {
       "class": "fakeapp.game",
-      "exec": "steam",
-      "fallback": [
-        {
-          "class": "Steam"
-        },
-        {
-          "class": "org.prismlauncher.PrismLauncher"
-        },
-        {
-          "class": "Minecraft\\*.*"
-        },
-        {
-          "class": "osu!"
-        }
-      ]
+      "exec": "steam"
     }
   ],
   "_friendly_reminder": "In the `apps` array, latter elements take priority.",
   "apps": [
+    {
+      "class": ".*",
+      "icon": "",
+      "color": "lavender"
+    },
+    {
+      "class": "fakeapp.window",
+      "icon": "",
+      "color": "sapphire"
+    },
+    {
+      "class": "fakeapp.game",
+      "icon": "",
+      "color": "lavender"
+    },
+    {
+      "class": "fakeapp.music",
+      "icon": "",
+      "color": "sapphire"
+    },
     {
       "class": "firefox",
       "icon": "",
@@ -70,7 +54,7 @@
       "color": "sky"
     },
     {
-      "class": "org.gnome.Nautilus",
+      "class": "org.gnome.Nautilus|thunar",
       "icon": "",
       "color": "mauve"
     },
@@ -80,24 +64,14 @@
       "color": "mauve"
     },
     {
-      "class": "fakeapp.window",
-      "icon": "",
-      "color": "sapphire"
-    },
-    {
       "class": "Alacritty",
       "icon": "",
-      "color": "sky"
+      "color": "teal"
     },
     {
       "class": "Spotify",
       "icon": "",
       "color": "green"
-    },
-    {
-      "class": "fakeapp.game",
-      "icon": "",
-      "color": "lavender"
     },
     {
       "class": "ArmCord",
@@ -110,7 +84,7 @@
       "color": "blue"
     },
     {
-      "class": "Steam",
+      "class": "steam",
       "icon": "",
       "color": "blue"
     },
