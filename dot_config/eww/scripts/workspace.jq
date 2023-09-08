@@ -26,7 +26,7 @@ def matchClassTitle($class; $title):
 reduce $workspaces[] as $work ($apps.workspaces;
   { class: $work.lastwindowclass, title: $work.lastwindowtitle } as $wsWindow |
   ($work.id - $activeDp.id * 10 - 1) as $wsIndex |
-  if $work.windows > 0 or .[($wsIndex)] == null then
+  if $wsWindow.class or .[($wsIndex)] == null then
     .[($wsIndex)] += $wsWindow
   else . end
 ) |
