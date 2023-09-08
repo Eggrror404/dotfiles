@@ -5,7 +5,7 @@
   margin: 4px;
   padding: 1em;
 
-  font-family: "Dosis", "JetBrainsMono Nerd Font";
+  font-family: "Dosis", "JetBrainsMono Nerd Font Propo";
   font-weight: 500;
 
   box-shadow: 0 0 2px 2px rgba($accent, 0.1);
@@ -178,19 +178,6 @@
       background-color: mix($accent, $text, 90%);
     }
   }
-
-  // Icon font finetuning
-  &-net .quickset-button-icon,
-  &-dnd .quickset-button-icon,
-  &-caff .quickset-button-icon,
-  &-night .quickset-button-icon {
-    padding-left: 0.35em;
-    padding-right: 0.55em;
-  }
-  &-bt .quickset-button-icon {
-    padding-left: 0.45em;
-    padding-right: 0.45em;
-  }
 }
 
 .db-quickset .quickset-divider {
@@ -241,18 +228,6 @@
       background-color: $active-color;
     }
   }
-
-  // Font finetuning
-  &-vol button,
-  &-mic button,
-  &-bright button {
-    padding-left: 0.4em;
-    padding-right: 0.5em;
-  }
-  &-mic.active button {
-    padding-left: 0.5em;
-    padding-right: 0.4em;
-  }
 }
 
 .db-todo {
@@ -271,8 +246,7 @@
   &-add,
   &-clean {
     border-radius: 0.5rem;
-    padding-left: 0.3em;
-    padding-right: 0.5em;
+    padding: 0 0.4em;
   }
 
   &-task {
@@ -308,30 +282,11 @@
     border-radius: 0.75em;
     font-size: 26;
 
-    padding-top: 0.2em;
-    padding-bottom: 0.2em;
-
     transition: background-color 0.5s ease-out;
 
     &:hover {
       background-color: mix($accent, $text, 90%);
     }
-  }
-
-  &-games {
-    padding-left: 0.55em;
-    padding-right: 0.55em;
-  }
-  &-incognito {
-    padding-left: 0.5em;
-    padding-right: 0.6em;
-  }
-  &-browser,
-  &-terminal,
-  &-screenshot,
-  &-ex-desktop {
-    padding-left: 0.4em;
-    padding-right: 0.7em;
   }
 }
 
@@ -345,16 +300,17 @@
   }
 
   // Show NAME on hover
-  .sysinfo-icon,
+  .sysinfo-icon {
+    transition: opacity ease-out 0.2s;
+    opacity: 1;
+
+    font-size: 20;
+  }
   .sysinfo-name {
     transition: opacity ease-out 0.2s;
-  }
-
-  .sysinfo-icon {
-    opacity: 1;
-  }
-  .sysinfo-name {
     opacity: 0;
+
+    font-size: 23;
   }
 
   &:hover {
@@ -363,43 +319,6 @@
     }
     .sysinfo-name {
       opacity: 1;
-    }
-  }
-
-  // Font finetuning
-  &-cpu {
-    .sysinfo-icon {
-      font-size: 18;
-      margin-right: 0.3em;
-    }
-    .sysinfo-name {
-      font-size: 25;
-    }
-  }
-  &-ram {
-    .sysinfo-icon {
-      font-size: 23;
-      margin-right: 0.1em;
-    }
-    .sysinfo-name {
-      font-size: 24;
-    }
-  }
-  &-temp {
-    .sysinfo-icon {
-      font-size: 18;
-      margin-right: 0.36em;
-    }
-    .sysinfo-name {
-      font-size: 21;
-    }
-  }
-  &-disk {
-    .sysinfo-icon {
-      font-size: 20;
-    }
-    .sysinfo-name {
-      font-size: 23;
     }
   }
 }

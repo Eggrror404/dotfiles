@@ -169,9 +169,10 @@
       (box :orientation "h"
            :space-evenly false
         (label :class "quickset-button-icon"
+               :width 25
                :text {active ? icon-active : icon-inactive})
         (label :class "quickset-button-label"
-               :limit-width 12
+               :limit-width 20
                :text label)))
     (button :class "quickset-more"
             :onclick more-cmd "")))
@@ -182,6 +183,8 @@
        :space-evenly false
        :tooltip "${label}: ${value}%"
     (button :class "quickset-scale-toggle"
+            :halign "center"
+            :width 32
             :onclick toggle-cmd {active ? icon-active : icon-inactive})
     (scale :orientation "h"
            :hexpand true
@@ -288,31 +291,53 @@
        :space-evenly false
     (button :class "db-quickaction-${name}"
             :halign "center"
+            :width 45 :height 45
             :onclick onclick icon)
     (label :class "quickaction-label"
            :markup "<span text_transform='capitalize'>${name}</span>")))
 
 (defwidget db-quickaction []
   (box :class "widget db-quickaction"
-       :orientation "h"
-    (quickaction-button :name "browser"
-                        :icon "󰈹"
-                        :onclick "scripts/popup browser")
-    (quickaction-button :name "incognito"
-                        :icon "󱀣"
-                        :onclick "scripts/popup incognito")
-    (quickaction-button :name "terminal"
-                        :icon "󰞷"
-                        :onclick "scripts/popup terminal")
-    (quickaction-button :name "screenshot"
-                        :icon ""
-                        :onclick "scripts/popup screenshot")
-    (quickaction-button :name "games"
-                        :icon "󱎓"
-                        :onclick "scripts/popup game")
-    (quickaction-button :name "ex-desktop"
-                        :icon "󱄄"
-                        :onclick "scripts/popup extern-desktop")))
+       :orientation "v"
+       :spacing 10
+    (box :orientation "h"
+      (quickaction-button :name "browser"
+                          :icon "󰈹"
+                          :onclick "scripts/popup browser")
+      (quickaction-button :name "incognito"
+                          :icon "󱀣"
+                          :onclick "scripts/popup incognito")
+      (quickaction-button :name "terminal"
+                          :icon "󰞷"
+                          :onclick "scripts/popup terminal")
+      (quickaction-button :name "screenshot"
+                          :icon ""
+                          :onclick "scripts/popup screenshot")
+      (quickaction-button :name "games"
+                          :icon "󱎓"
+                          :onclick "scripts/popup game")
+      (quickaction-button :name "tty-clock"
+                          :icon "󰅐"
+                          :onclick "scripts/popup clock"))
+    (box :orientation "h"
+      (quickaction-button :name "ex-desktop"
+                          :icon "󱄄"
+                          :onclick "scripts/popup extern-desktop")
+      (quickaction-button :name "cava"
+                          :icon "󰃂"
+                          :onclick "scripts/popup cava")
+      (quickaction-button :name "update"
+                          :icon "󰚰"
+                          :onclick "scripts/popup update")
+      (quickaction-button :name "github"
+                          :icon "󰊤"
+                          :onclick "scripts/popup github")
+      (quickaction-button :name "youtube"
+                          :icon "󰗃"
+                          :onclick "scripts/popup youtube")
+      (quickaction-button :name "nerd-fonts"
+                          :icon "󰂵"
+                          :onclick "scripts/popup nerd-fonts"))))
 
 (defwidget sysinfo-chart [icon value name]
   ; use button for hover effect

@@ -74,9 +74,24 @@ case "$1" in
     alacritty
     ;;
   extern-desktop)
-    alacritty -e sh -c 'extern-desktop.sh'
+    alacritty --hold -e sh -c 'extern-desktop.sh'
     ;;
   update)
     alacritty --hold -e sh -c 'yay -Syu'
+    ;;
+  clock)
+    alacritty -e tty-clock -Bbc -C $((RANDOM % 8))
+    ;;
+  cava)
+    alacritty -e cava
+    ;;
+  nerd-fonts)
+    firefox --new-window https://www.nerdfonts.com/cheat-sheet
+    ;;
+  youtube)
+    firefox --new-window https://www.youtube.com
+    ;;
+  github)
+    firefox --new-window https://github.com
     ;;
 esac

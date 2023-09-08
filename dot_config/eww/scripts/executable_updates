@@ -9,7 +9,7 @@ elif [ -n "$aur" ]; then
   updates="$aur"
 fi
 
-updates=$(echo "$updates" | sort | uniq)
+updates=$(echo "$updates" | uniq | sort)
 
 if [ -n "$updates" ]; then
   count=$(echo "$updates" | wc -l)
