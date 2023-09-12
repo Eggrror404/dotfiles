@@ -19,14 +19,14 @@ return {
     },
   },
 
-  { import = "astrocommunity.file-explorer.oil-nvim" },
-  {
-    "stevearc/oil.nvim",
-    event = "VeryLazy",
-    keys = {
-      { "<leader>e", function() require("oil").open_float() end, desc = "Open folder in Oil" },
-    },
-  },
+  -- { import = "astrocommunity.file-explorer.oil-nvim" },
+  -- {
+  --   "stevearc/oil.nvim",
+  --   event = "VeryLazy",
+  --   keys = {
+  --     { "<leader>e", function() require("oil").open_float() end, desc = "Open folder in Oil" },
+  --   },
+  -- },
 
   { import = "astrocommunity.pack.cpp" },
   { import = "astrocommunity.pack.json" },
