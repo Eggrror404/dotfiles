@@ -18,6 +18,16 @@ return {
       end,
     },
   },
+
+  { import = "astrocommunity.file-explorer.oil-nvim" },
+  {
+    "stevearc/oil.nvim",
+    event = "VeryLazy",
+    keys = {
+      { "<leader>e", function() require("oil").open_float() end, desc = "Open folder in Oil" },
+    },
+  },
+
   { import = "astrocommunity.pack.cpp" },
   { import = "astrocommunity.pack.json" },
   { import = "astrocommunity.pack.lua" },
@@ -29,8 +39,11 @@ return {
   { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.pack.yaml" },
 
+  { import = "astrocommunity.editing-support.hypersonic-nvim" },
   { import = "astrocommunity.editing-support.rainbow-delimiters-nvim" },
+  { import = "astrocommunity.editing-support.telescope-undo-nvim" },
   { import = "astrocommunity.editing-support.todo-comments-nvim" },
+
   { import = "astrocommunity.motion.nvim-surround" },
   { import = "astrocommunity.project.project-nvim" },
 }
