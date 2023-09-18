@@ -1,4 +1,0 @@
-#tabbrowser-tabs .tabbrowser-tab[selected][fadein]:not([pinned]) {
-    min-width: 145px !important;
-    max-width: 220px !important;
-}
