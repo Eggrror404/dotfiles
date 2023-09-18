@@ -539,9 +539,9 @@ about:config -> svg.context-properties.content.enabled -> true*/
   box-shadow: var(--firefoxcss-url-box-shadow-color) !important;
 }
 
-#PopupSearchAutoComplete {
-  --panel-background: var(--firefoxcss-url-breakout-bar-bg-color) !important;
-}
+/* #PopupSearchAutoComplete { */
+/*   --panel-background: var(--firefoxcss-url-breakout-bar-bg-color) !important; */
+/* } */
 
 /*=====================================================================
 ============================= T A B S =================================
@@ -874,13 +874,13 @@ menuseparator#context-sep-navigation {
 /* ----- Menu Colors -- border - rgba(82, 82, 94, 0.31) ----- */
 :not(#ContentSelectDropdown) > menupopup {
   --panel-border-color: var(--arrowpanel-border-color) !important;
-  --panel-background: var(--firefoxcss-main-bg-color) !important;
+  /* --panel-background: var(--firefoxcss-main-bg-color) !important; */
   --panel-padding: 5px 0 5px !important;
   --panel-border-radius: 8px !important;
 }
 
 #context-navigation:not([hidden]) {
-  background-color: var(--firefoxcss-context-menu-top-color) !important;
+  /* background-color: var(--firefoxcss-context-menu-top-color) !important; */
   padding: 1px 4px 1px !important;
   border-top-left-radius: 8px !important;
   border-top-right-radius: 8px !important;
@@ -1235,17 +1235,17 @@ toolbar
     transition: opacity 0.2s ease;
   } */
 
-#identity-box[pageproxystate="valid"].notSecureText > .identity-box-button,
-#identity-box[pageproxystate="valid"].extensionPage > .identity-box-button,
-#identity-box[pageproxystate="valid"].chromeUI > .identity-box-button,
-#urlbar-label-box,
-#urlbar-zoom-button {
-  background-color: var(--firefoxcss-item-bg-color) !important;
-}
-
-#urlbar-zoom-button:hover {
-  background-color: var(--firefoxcss-urlbar-zoom-button) !important;
-}
+/* #identity-box[pageproxystate="valid"].notSecureText > .identity-box-button, */
+/* #identity-box[pageproxystate="valid"].extensionPage > .identity-box-button, */
+/* #identity-box[pageproxystate="valid"].chromeUI > .identity-box-button, */
+/* #urlbar-label-box, */
+/* #urlbar-zoom-button { */
+/*   background-color: var(--firefoxcss-item-bg-color) !important; */
+/* } */
+/**/
+/* #urlbar-zoom-button:hover { */
+/*   background-color: var(--firefoxcss-urlbar-zoom-button) !important; */
+/* } */
 
 #urlbar-input-container #identity-box > .identity-box-button,
 #tracking-protection-icon-container,
