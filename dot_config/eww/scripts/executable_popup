@@ -85,13 +85,10 @@ case "$1" in
   cava)
     alacritty -e cava
     ;;
-  nerd-fonts)
-    firefox --new-window https://www.nerdfonts.com/cheat-sheet
+  nvim)
+    alacritty -e nvim
     ;;
-  youtube)
-    firefox --new-window https://www.youtube.com
-    ;;
-  github)
-    firefox --new-window https://github.com
+  url)
+    firefox --new-window "$2"
     ;;
 esac

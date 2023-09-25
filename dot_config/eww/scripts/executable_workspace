@@ -4,7 +4,7 @@ get() {
   workspaces=$(hyprctl workspaces -j)
   clients=$(hyprctl clients -j)
   monitors=$(hyprctl monitors -j)
-  apps=$(jq '' ./apps.json)
+  apps=$(jq '.' ./apps.json)
 
   jq -ncM -f 'scripts/workspace.jq' --argjson workspaces "$workspaces" --argjson clients "$clients" --argjson monitors "$monitors" --argjson apps "$apps"
 }

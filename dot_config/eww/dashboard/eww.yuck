@@ -310,34 +310,55 @@
       (quickaction-button :name "terminal"
                           :icon "󰞷"
                           :onclick "scripts/popup terminal")
+      (quickaction-button :name "launcher"
+                          :icon "󰨼"
+                          :onclick "scripts/popup launcher")
       (quickaction-button :name "screenshot"
                           :icon ""
                           :onclick "scripts/popup screenshot")
       (quickaction-button :name "games"
                           :icon "󱎓"
-                          :onclick "scripts/popup game")
+                          :onclick "scripts/popup game"))
+    (box :orientation "h"
       (quickaction-button :name "tty-clock"
                           :icon "󰅐"
-                          :onclick "scripts/popup clock"))
-    (box :orientation "h"
-      (quickaction-button :name "ex-desktop"
-                          :icon "󱄄"
-                          :onclick "scripts/popup extern-desktop")
+                          :onclick "scripts/popup clock")
       (quickaction-button :name "cava"
                           :icon "󰃂"
                           :onclick "scripts/popup cava")
+      (quickaction-button :name "btop"
+                          :icon "󰞯"
+                          :onclick "scripts/popup btop")
+      (quickaction-button :name "nvim"
+                          :icon "󱩼"
+                          :onclick "scripts/popup nvim")
+      (quickaction-button :name "ex-desktop"
+                          :icon "󱄄"
+                          :onclick "scripts/popup extern-desktop")
       (quickaction-button :name "update"
                           :icon "󰚰"
-                          :onclick "scripts/popup update")
+                          :onclick "scripts/popup update"))))
+
+(defwidget db-quicksites []
+  (box :class "widget db-quickaction"
+       :orientation "v"
+       :spacing 10
+    (box :orientation "h"
       (quickaction-button :name "github"
                           :icon "󰊤"
-                          :onclick "scripts/popup github")
+                          :onclick "scripts/popup url https://github.com")
       (quickaction-button :name "youtube"
                           :icon "󰗃"
-                          :onclick "scripts/popup youtube")
+                          :onclick "scripts/popup url https://youtube.com")
+      (quickaction-button :name "twitter"
+                          :icon "󰕄"
+                          :onclick "scripts/popup url https://twitter.com")
+      (quickaction-button :name "steam"
+                          :icon "󰓓"
+                          :onclick "scripts/popup url https://store.steampowered.com")
       (quickaction-button :name "nerd-fonts"
                           :icon "󰂵"
-                          :onclick "scripts/popup nerd-fonts"))))
+                          :onclick "scripts/popup url https://www.nerdfonts.com/cheat-sheet"))))
 
 (defwidget sysinfo-chart [icon value name]
   ; use button for hover effect
@@ -381,6 +402,7 @@
     (db-session)
     (db-quickset)
     (db-quickaction)
+    (db-quicksites)
     (db-sysinfo)))
 
 (defwidget db-right []
