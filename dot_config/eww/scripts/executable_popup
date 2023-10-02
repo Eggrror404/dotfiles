@@ -91,4 +91,7 @@ case "$1" in
   url)
     firefox --new-window "$2"
     ;;
+  lock)
+    scripts/idle lock
+    ;;
 esac

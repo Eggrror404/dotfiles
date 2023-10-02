@@ -272,14 +272,15 @@
           (box :orientation "h"
                :space-evenly false
             (button :class "db-todo-task"
+                    :style "margin-left: ${task.indent * 20}px;"
                     :hexpand true
-                    :onclick "scripts/todo ${task.finished ? "undo" : "do"} ${task.index}"
+                    :onclick "scripts/todo ${task.completed ? "undo" : "do"} ${task.index}"
               (box :orientation "h"
                    :halign "start"
                    :space-evenly false
                    :spacing 10
                 (label :class "db-todo-icon"
-                       :text {task.finished ? "󰄵" : "󰄱"})
+                       :text {task.completed ? "󰄵" : "󰄱"})
                 (label :class "db-todo-text"
                        :halign "start"
                        :text {task.content})))

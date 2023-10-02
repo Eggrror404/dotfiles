@@ -95,7 +95,7 @@
 
         (button :class "bar-lock"
                 :tooltip "Lock"
-                :onclick "scripts/idle lock" "")
+                :onclick "scripts/popup lock" "")
 
         (button :class "bar-quit"
                 :tooltip "Logout"

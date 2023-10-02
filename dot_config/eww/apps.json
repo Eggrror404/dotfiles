@@ -59,6 +59,11 @@
       "color": "mauve"
     },
     {
+      "class": "org.gnome.clocks",
+      "icon": "",
+      "color": "yellow"
+    },
+    {
       "class": "thunar",
       "icon": "",
       "color": "mauve"
@@ -74,12 +79,7 @@
       "color": "green"
     },
     {
-      "class": "ArmCord",
-      "icon": "",
-      "color": "blue"
-    },
-    {
-      "class": "discord",
+      "class": "ArmCord|WebCord|discord",
       "icon": "",
       "color": "blue"
     },

@@ -4,8 +4,10 @@ TODO='-'
 FIN='\*'
 SPACE=' *'
 
+FILE=/data/sync/stuff/markdeez/就做點事plz.md
+
 add_task() {
-  echo "- $*" >>todos.txt
+  echo "- [ ] $*" >>"$FILE"
 }
 
 dialog_add_task() {
@@ -19,27 +21,24 @@ dialog_add_task() {
 }
 
 remove_task() {
-  sed -i "${*}d" todos.txt
+  sed -i "${*}d" "$FILE"
 }
 
 remove_finished() {
-  sed -i "/^\* .*/d" todos.txt
+  sed -i "/^\* .*/d" "$FILE"
 }
 
 do_task() {
-  sed -i "${*}s/^${SPACE}[$TODO$FIN]\\?$SPACE\\(.*\\)\$/$FIN \\1/" todos.txt
+  sed -i "${*}s/^\\( *\\)- \\[ \\] *\\(.*\\)/\\1- [x] \\2/" "$FILE"
 }
 
 undo_task() {
-  sed -i "${*}s/^${SPACE}[$TODO$FIN]\\?$SPACE\\(.*\\)\$/$TODO \\1/" todos.txt
+  sed -i "${*}s/^\\( *\\)- \\[x\\] *\\(.*\\)/\\1- [ ] \\2/" "$FILE"
 }
 
 list_tasks() {
-  gawk '$0 != "" && $0 !~ "#.*" {
-    match($0, /^ *([-\*]?) *(.*)$/, group)
-    print NR, (group[1] == "*" ? "finished" : "unfinished"), group[2]
-  }' todos.txt |
-    jq -nRcM '[inputs | split(" ") | { index: .[0], finished: (.[1] == "finished"), content: (.[2:] | join(" ")) }]'
+  perl -nlwe '/( *)- \[([x ])\] (.*)/ && print join "\t", $., length($1) / 4, $2, $3' "$FILE" |
+    jq -nRcM '[inputs | split("\t") | { index: .[0], indent: .[1], completed: (.[2] == "x"), content: (.[3:] | join("\t")) }]'
 }
 
 case $1 in
@@ -65,7 +64,7 @@ case $1 in
     list_tasks
     ;;
   subscribe)
-    tail -F todos.txt | while read -r _line; do
+    tail -F "$FILE" | while read -r _line; do
       list_tasks
     done
     ;;
