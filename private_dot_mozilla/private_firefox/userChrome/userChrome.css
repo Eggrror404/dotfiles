@@ -330,11 +330,12 @@ Order of Toolbars
   border-inline-start: 0 !important;
 }
 
-/* Remove line between website content and top bar */
-#navigator-toolbox {
-  border-bottom: var(--firefoxcss-top-bar-border-bottom-size) solid
-    var(--firefoxcss-top-bar-border-bottom-color) !important;
-}
+/* /* Remove line between website content and top bar */
+*/
+/* #navigator-toolbox { */
+/*   border-bottom: var(--firefoxcss-top-bar-border-bottom-size) solid */
+/*     var(--firefoxcss-top-bar-border-bottom-color) !important; */
+/* } */
 
 /*=====================================================================
 ======================= H E I G H T   F I X E S =======================
@@ -490,10 +491,10 @@ about:config -> svg.context-properties.content.enabled -> true*/
     --firefoxcss-url-autocomplete-highlight
   ) !important;
   border: 0 !important;
-  background-color: var(--firefoxcss-url-bar-bg-color) !important;
-  border-bottom: var(--firefoxcss-url-border-bottom-color) !important;
-  border-top: var(--firefoxcss-url-border-top-color) !important;
-  box-shadow: var(--firefoxcss-url-box-shadow-color) !important;
+  /* background-color: var(--firefoxcss-url-bar-bg-color) !important; */
+  /* border-bottom: var(--firefoxcss-url-border-bottom-color) !important; */
+  /* border-top: var(--firefoxcss-url-border-top-color) !important; */
+  /* box-shadow: var(--firefoxcss-url-box-shadow-color) !important; */
 }
 
 .urlbarView:not([noresults]) > .search-one-offs:not([hidden]) {
@@ -506,9 +507,9 @@ about:config -> svg.context-properties.content.enabled -> true*/
 }
 
 #urlbar[breakout][breakout-extend][open] {
-  background-color: var(--firefoxcss-url-breakout-bar-bg-color) !important;
-  border-bottom: 1px solid var(--firefoxcss-url-breakout-border-bottom-color) !important;
-  border-top: var(--firefoxcss-url-border-top-color) !important;
+  /* background-color: var(--firefoxcss-url-breakout-bar-bg-color) !important; */
+  /* border-bottom: 1px solid var(--firefoxcss-url-breakout-border-bottom-color) !important; */
+  /* border-top: var(--firefoxcss-url-border-top-color) !important; */
   box-shadow: var(--firefoxcss-url-breakout-box-shadow) !important;
 }
 
@@ -533,10 +534,10 @@ about:config -> svg.context-properties.content.enabled -> true*/
   outline: 0 !important;
   border: 0 !important;
   border-radius: var(--firefoxcss-border-radius) !important;
-  background-color: var(--firefoxcss-url-bar-bg-color) !important;
-  border-bottom: var(--firefoxcss-url-border-bottom-color) !important;
-  border-top: var(--firefoxcss-url-border-top-color) !important;
-  box-shadow: var(--firefoxcss-url-box-shadow-color) !important;
+  /* background-color: var(--firefoxcss-url-bar-bg-color) !important; */
+  /* border-bottom: var(--firefoxcss-url-border-bottom-color) !important; */
+  /* border-top: var(--firefoxcss-url-border-top-color) !important; */
+  /* box-shadow: var(--firefoxcss-url-box-shadow-color) !important; */
 }
 
 /* #PopupSearchAutoComplete { */
@@ -627,7 +628,7 @@ about:config -> svg.context-properties.content.enabled -> true*/
   border: 0 !important;
   border-radius: var(--firefoxcss-border-radius) !important;
   background-image: none !important;
-  background-color: var(--firefoxcss-tab-bg-color) !important;
+  /* background-color: var(--firefoxcss-tab-bg-color) !important; */
   transition: background-color 250ms ease !important;
   box-shadow: var(--firefoxcss-normal-tabs-box-shadow) !important;
 }
@@ -640,7 +641,7 @@ about:config -> svg.context-properties.content.enabled -> true*/
   border: 0 !important;
   border-radius: var(--firefoxcss-border-radius) !important;
   background-image: none !important;
-  background-color: var(--firefoxcss-tab-hover-bg-color) !important;
+  /* background-color: var(--firefoxcss-tab-hover-bg-color) !important; */
   box-shadow: var(--firefoxcss-normal-tabs-box-shadow) !important;
 }
 
@@ -702,7 +703,7 @@ about:config -> svg.context-properties.content.enabled -> true*/
 .tab-icon-overlay:not([crashed])[activemedia-blocked]:hover {
   color: currentColor !important;
   stroke: var(--firefoxcss-tab-speaker-icon-small-background) !important;
-  background-color: var(--firefoxcss-tab-speaker-color) !important;
+  /* background-color: var(--firefoxcss-tab-speaker-color) !important; */
   fill-opacity: 0.95 !important;
 }
 
@@ -711,22 +712,22 @@ about:config -> svg.context-properties.content.enabled -> true*/
 .tabbrowser-tab[selected]
   .tab-icon-overlay:not([crashed])[activemedia-blocked]:hover {
   color: currentColor !important;
-  stroke: var(--firefoxcss-tab-speaker-color) !important;
-  background-color: var(--firefoxcss-tab-speaker-color) !important;
+  /* stroke: var(--firefoxcss-tab-speaker-color) !important; */
+  /* background-color: var(--firefoxcss-tab-speaker-color) !important; */
   fill-opacity: 0.95 !important;
 }
 
-#TabsToolbar .tab-icon-overlay:not([crashed])[soundplaying],
-#TabsToolbar .tab-icon-overlay:not([crashed])[muted],
-#TabsToolbar .tab-icon-overlay:not([crashed])[activemedia-blocked] {
-  color: var(--firefoxcss-tab-speaker-icon-color) !important;
-}
+/* #TabsToolbar .tab-icon-overlay:not([crashed])[soundplaying], */
+/* #TabsToolbar .tab-icon-overlay:not([crashed])[muted], */
+/* #TabsToolbar .tab-icon-overlay:not([crashed])[activemedia-blocked] { */
+/*   color: var(--firefoxcss-tab-speaker-icon-color) !important; */
+/* } */
 
-#TabsToolbar .tab-icon-overlay:not([crashed])[soundplaying]:hover,
-#TabsToolbar .tab-icon-overlay:not([crashed])[muted]:hover,
-#TabsToolbar .tab-icon-overlay:not([crashed])[activemedia-blocked]:hover {
-  color: var(--firefoxcss-tab-speaker-icon-hover-color) !important;
-}
+/* #TabsToolbar .tab-icon-overlay:not([crashed])[soundplaying]:hover, */
+/* #TabsToolbar .tab-icon-overlay:not([crashed])[muted]:hover, */
+/* #TabsToolbar .tab-icon-overlay:not([crashed])[activemedia-blocked]:hover { */
+/*   color: var(--firefoxcss-tab-speaker-icon-hover-color) !important; */
+/* } */
 
 /*=====================================================================
 ============ W I N D O W   C O N T R O L   B U T T O N S ==============
@@ -1033,12 +1034,12 @@ toolbar
   background-image: none !important;
   box-shadow: none !important;
   border-radius: var(--firefoxcss-border-radius) !important;
-  background-color: var(--firefoxcss-tab-hover-bg-color) !important;
+  /* background-color: var(--firefoxcss-tab-hover-bg-color) !important; */
 }
 
 #TabsToolbar #firefox-view-button[open] > .toolbarbutton-icon {
   background-image: none !important;
-  background-color: var(--firefoxcss-main-bg-color) !important;
+  /* background-color: var(--firefoxcss-main-bg-color) !important; */
   border-radius: var(--firefoxcss-border-radius) !important;
   box-shadow: none !important;
 }
@@ -1395,7 +1396,7 @@ toolbar
 /* Customize toolbar background color */
 #customization-container {
   background-image: none !important;
-  background-color: var(--firefoxcss-main-bg-color) !important;
+  /* background-color: var(--firefoxcss-main-bg-color) !important; */
 }
 
 #PersonalToolbar[customizing]
@@ -1419,9 +1420,9 @@ toolbar
   outline: 1px dashed var(--firefoxcss-customize-view-dashed-outline) !important;
 }
 
-.browserContainer > findbar .findbar-textbox {
-  background-color: var(--firefoxcss-item-bg-color) !important;
-}
+/* .browserContainer > findbar .findbar-textbox { */
+/*   background-color: var(--firefoxcss-item-bg-color) !important; */
+/* } */
 
 #customization-container #customization-footer {
   border-top: none !important;
@@ -1441,7 +1442,7 @@ toolbar
 
 /* Status URL change (bottom left when hovering a link)  */
 #statuspanel-label {
-  background-color: var(--firefoxcss-statuspanel-bg-color) !important;
+  /* background-color: var(--firefoxcss-statuspanel-bg-color) !important; */
   border-radius: 4px !important;
   border-color: transparent !important;
   color: currentColor !important;

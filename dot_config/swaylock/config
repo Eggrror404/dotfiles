@@ -8,7 +8,7 @@ indicator-caps-lock
 indicator-radius=75
 indicator-thickness=15
 
-font=FantasqueSansMono Nerd Font
+font=Quicksand Light
 
 # COLORS
 color=ffffff00
