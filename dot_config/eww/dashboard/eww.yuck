@@ -22,7 +22,7 @@
              :halign "start"
              :text "󰮯")
       (label :class "top-welcome"
-             :hailgn "start"
+             :halign "start"
              :text "Welcome ${session.fullname}"))
     (box :orientation "h"
          :space-evenly false
@@ -125,7 +125,7 @@
       (label :class "player-title"
              :halign "start"
              :limit-width 25
-             :show_truncated true
+             :show-truncated true
              :tooltip {current.title}
              :text {current.title})
       (label :class "player-artist"

@@ -103,19 +103,19 @@
        :spacing 10
       ; osd #1
       (revealer :transition "slidedown"
-                :reveal {osds?.[0]?.reveal}
+                :reveal {osds?.[0]?.reveal ?: false}
                 :duration "550ms"
-        (literal :content {osds?.[0]?.widget}))
+        (literal :content {osds?.[0]?.widget ?: ""}))
       ; osd #2
       (revealer :transition "slidedown"
-                :reveal {osds?.[1]?.reveal}
+                :reveal {osds?.[1]?.reveal ?: false}
                 :duration "550ms"
-        (literal :content {osds?.[1]?.widget}))
+        (literal :content {osds?.[1]?.widget ?: ""}))
       ; osd #3
       (revealer :transition "slidedown"
-                :reveal {osds?.[2]?.reveal}
+                :reveal {osds?.[2]?.reveal ?: false}
                 :duration "550ms"
-        (literal :content {osds?.[2]?.widget}))
+        (literal :content {osds?.[2]?.widget ?: ""}))
       ; workaround for variables to update
       (label :visible false :text lockkeys)
       (label :visible false :text player)))

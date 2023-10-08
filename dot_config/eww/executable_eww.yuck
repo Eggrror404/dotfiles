@@ -8,7 +8,7 @@
 (defpoll timestamp :interval "1s" "date +%s")
 (defpoll session :interval "1h" "scripts/session")
 (defpoll idletime :interval "5s" "scripts/idle time")
-(defpoll updates :initial '{ updates: "...", packages: "loading :P" }' :interval "1h" "scripts/updates")
+(defpoll updates :initial '{ "count": "...", "packages": "loading :P" }' :interval "1h" "scripts/updates")
 
 (deflisten vol :initial "{}" "scripts/volume")
 

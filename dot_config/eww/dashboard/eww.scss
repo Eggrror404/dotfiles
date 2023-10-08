@@ -21,7 +21,7 @@
 }
 
 .db-top {
-  font-size: 18;
+  font-size: 18px;
 
   .pfp {
     border-radius: 45%;
@@ -44,29 +44,29 @@
   }
 
   .session-user {
-    font-size: 22;
+    font-size: 22px;
     font-weight: 600;
     color: $accent;
   }
 
   .session-name {
-    font-size: 20;
+    font-size: 20px;
     color: $accent;
   }
 
-  .session-uptime {
-    font-size: 18;
+  .session-upxime {
+    font-size: 18px;
   }
 }
 
 .db-system {
   &-icon {
-    font-size: 18;
+    font-size: 18px;
     color: $accent;
   }
 
   &-text {
-    font-size: 20;
+    font-size: 20px;
   }
 }
 
@@ -78,12 +78,12 @@
 
   // .player-upper
   .player-state {
-    font-size: 16;
+    font-size: 16px;
     color: $subtext0;
   }
 
   .player-next-player {
-    font-size: 14;
+    font-size: 14px;
     margin-right: 0.4em;
     border-radius: 0.5rem;
     color: $subtext0;
@@ -101,20 +101,20 @@
   }
 
   .player-title {
-    font-size: 20;
+    font-size: 20px;
     font-weight: bold;
     color: $text;
   }
 
   .player-artist {
-    font-size: 16;
+    font-size: 16px;
     color: $text;
   }
 
   // .player-lower
 
   .player-playpause {
-    font-size: 30;
+    font-size: 30px;
     margin-right: 0.4em;
 
     &:hover {
@@ -125,7 +125,7 @@
   .player-prev,
   .player-next,
   .player-stop {
-    font-size: 24;
+    font-size: 24px;
     margin-right: 0.3em;
     opacity: 0.85;
 
@@ -141,7 +141,7 @@
   button {
     padding: 0.35rem 0.2rem;
     background-color: rgba($surface1, 0.8);
-    font-size: 18;
+    font-size: 18px;
 
     transition: 0.5s ease-out;
     transition-property: border-radius, background-color, color;
@@ -188,7 +188,7 @@
 }
 
 .db-quickset .quickset-scale {
-  font-size: 20;
+  font-size: 20px;
   margin: 0.1em 0;
   padding: 0 0.5rem;
 
@@ -231,16 +231,16 @@
 }
 
 .db-todo {
-  font-size: 18;
+  font-size: 18px;
 
   &-top {
     padding: 0 0.3rem;
-    font-size: 20;
+    font-size: 20px;
     font-weight: 600;
   }
 
   &-icon {
-    font-size: 20;
+    font-size: 20px;
   }
 
   &-add,
@@ -280,7 +280,7 @@
     background-color: rgba($accent, 0.9);
     color: rgba($base, 0.9);
     border-radius: 0.75em;
-    font-size: 26;
+    font-size: 26px;
 
     transition: background-color 0.5s ease-out;
 
@@ -304,13 +304,13 @@
     transition: opacity ease-out 0.2s;
     opacity: 1;
 
-    font-size: 20;
+    font-size: 20px;
   }
   .sysinfo-name {
     transition: opacity ease-out 0.2s;
     opacity: 0;
 
-    font-size: 23;
+    font-size: 23px;
   }
 
   &:hover {
