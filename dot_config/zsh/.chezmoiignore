@@ -1,3 +1,4 @@
 *.zwc
 **/*.zwc
 .zcompdump*
+zfunc/*

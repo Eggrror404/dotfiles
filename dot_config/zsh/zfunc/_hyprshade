@@ -1,7 +1,0 @@
-#compdef hyprshade
-
-_hyprshade_completion() {
-  eval $(env _TYPER_COMPLETE_ARGS="${words[1,$CURRENT]}" _HYPRSHADE_COMPLETE=complete_zsh hyprshade)
-}
-
-compdef _hyprshade_completion hyprshade
