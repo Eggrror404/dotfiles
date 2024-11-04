@@ -1,3 +1,4 @@
+[general]
 import = ["~/.config/alacritty/rose-pine.toml"]
 
 [font]
@@ -22,3 +23,4 @@ style = "Italic"
 [window]
 opacity = 0.95
 dimensions = { columns = 80, lines = 25 }
+
