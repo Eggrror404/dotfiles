@@ -1,20 +1,25 @@
-# Sourcing files
-source "$HOME/.local/share/miniplug/miniplug.zsh"
+# Sourcing lib scripts
 for file in $ZDOTDIR/lib/{*.zsh,*.sh}(N); do
     [ -r $file ] && source $file
 done
 
-# Load plugins with miniplug
-miniplug plugin 'ael-code/zsh-colored-man-pages'
-miniplug plugin 'reegnz/jq-zsh-plugin'
-miniplug plugin 'hlissner/zsh-autopair'
-miniplug plugin 'b4b4r07/emoji-cli'
-miniplug plugin 'zsh-users/zsh-completions'
-miniplug plugin 'zsh-users/zsh-autosuggestions'
-miniplug plugin 'zsh-users/zsh-syntax-highlighting'
-# zsh-syntax-highlighting must be the last plugin sourced
+if [ -f "$XDG_DATA_HOME/miniplug/miniplug.zsh" ]; then
+    source "$HOME/.local/share/miniplug/miniplug.zsh"
 
-miniplug load
+    # Load plugins with miniplug
+    miniplug plugin 'ael-code/zsh-colored-man-pages'
+    miniplug plugin 'reegnz/jq-zsh-plugin'
+    miniplug plugin 'hlissner/zsh-autopair'
+    miniplug plugin 'b4b4r07/emoji-cli'
+    miniplug plugin 'zsh-users/zsh-completions'
+    miniplug plugin 'zsh-users/zsh-autosuggestions'
+    miniplug plugin 'zsh-users/zsh-syntax-highlighting'
+    # zsh-syntax-highlighting must be the last plugin sourced
+
+    miniplug load
+else
+    print "Miniplug doesn't seem to be installed. It can be installed from its repo: https://git.sr.ht/~yerinalexey/miniplug"
+fi
 
 # Options
 SAVEHIST=100000
@@ -37,6 +42,3 @@ alias ls="eza --icons"
 
 # Starship prompt
 eval "$(starship init zsh)"
-
-# PATH
-export PATH=$PATH:/home/eggrror404/.spicetify
