@@ -34,8 +34,8 @@ row#match {
 }
 
 row#match:selected {
-  background: alpha(@theme_text_color, 0.15);
-  color: rgb(180, 190, 254);
+  background: alpha(@theme_text_color, 0.1);
+  color: #9ccfd8;
 }
 
 row#match:hover {
