@@ -1,6 +1,8 @@
 local wezterm = require("wezterm")
 local theme = wezterm.plugin.require("https://github.com/neapsix/wezterm").main
 
+local act = wezterm.action
+
 return {
 	-- appearence
 	colors = theme.colors(),
@@ -18,5 +20,21 @@ return {
 		right = 0,
 		top = 0,
 		bottom = 0,
+	},
+
+	-- fix scrolling
+	mouse_bindings = {
+		{
+			event = { Down = { streak = 1, button = { WheelUp = 1 } } },
+			mods = "NONE",
+			action = act.ScrollByLine(-3),
+			alt_screen = false,
+		},
+		{
+			event = { Down = { streak = 1, button = { WheelDown = 1 } } },
+			mods = "NONE",
+			action = act.ScrollByLine(3),
+			alt_screen = false,
+		},
 	},
 }
