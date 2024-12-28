@@ -34,11 +34,14 @@ fi
 if type sccache &>/dev/null; then
     export RUSTC_WRAPPER=sccache
 fi
+if type eza &>/dev/null; then
+    export EZA_ICONS_AUTO=1
+    alias ls="eza"
+fi
 
 # Aliases
 alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
 alias vimdiff='nvim -d'
-alias ls="eza --icons"
 
 # Starship prompt
 eval "$(starship init zsh)"
