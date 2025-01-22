@@ -10,7 +10,6 @@ if [ -f "$XDG_DATA_HOME/miniplug/miniplug.zsh" ]; then
     miniplug plugin 'ael-code/zsh-colored-man-pages'
     miniplug plugin 'reegnz/jq-zsh-plugin'
     miniplug plugin 'hlissner/zsh-autopair'
-    miniplug plugin 'b4b4r07/emoji-cli'
     miniplug plugin 'zsh-users/zsh-completions'
     miniplug plugin 'zsh-users/zsh-autosuggestions'
     miniplug plugin 'zsh-users/zsh-syntax-highlighting'
