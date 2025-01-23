@@ -1,0 +1,21 @@
+[[manager.prepend_keymap]]
+on = [ "g", "r" ]
+desc = "Goto git root"
+run = '''
+	shell 'ya emit cd "$(git rev-parse --show-toplevel)"'
+'''
+
+[[manager.prepend_keymap]]
+on = [ "i", "s" ]
+desc = "Calc size of selection or cwd"
+run = "plugin what-size"
+
+[[manager.prepend_keymap]]
+on = [ "<Enter>" ]
+desc = "Enter directory or open file"
+run = "plugin smart-enter"
+
+[[manager.prepend_keymap]]
+desc = "Start bunny.yazi"
+on = "'"
+run = "plugin bunny"
