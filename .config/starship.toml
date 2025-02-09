@@ -113,6 +113,9 @@ symbol = "󰘬 "
 [java]
 symbol = " "
 
+[jobs]
+symbol = "✦ "
+
 [julia]
 symbol = " "
 
