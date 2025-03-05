@@ -16,6 +16,11 @@ desc = "Enter directory or open file"
 run = "plugin smart-enter"
 
 [[manager.prepend_keymap]]
-desc = "Start bunny.yazi"
 on = "'"
+desc = "Start bunny.yazi"
 run = "plugin bunny"
+
+[[manager.prepend_keymap]]
+on = "M"
+desc = "Open mount.yazi"
+run = "plugin mount"

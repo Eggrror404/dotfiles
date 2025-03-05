@@ -11,6 +11,7 @@ require("bunny"):setup({
     { tag = "downloads", path = home.."/Downloads", key = "d" },
     { tag = "documents", path = home.."/Documents", key = "D" },
     { tag = "music", path = home.."/Music", key = "m" },
+    { tag = "pictures", path = home.."/Pictures", key = "p" },
     { tag = "data drive", path = "/data", key = "t" },
   },
 })

@@ -1,5 +1,32 @@
-[plugin]
-deps = [{ use = "yazi-rs/plugins:git", rev = "6418698" }, { use = "pirafrank/what-size", rev = "b23e3a4" }, { use = "yazi-rs/plugins:smart-enter", rev = "6418698" }, { use = "Rolv-Apneseth/starship", rev = "af8bf6f" }, { use = "stelcodes/bunny", rev = "49bd059" }]
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+rev = "beb586a"
+hash = "771f18427fb75fb19990ce602bb322f4"
+
+[[plugin.deps]]
+use = "pirafrank/what-size"
+rev = "b23e3a4"
+hash = "98e5f5af3efd3ba8bc2db0720187cc83"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-enter"
+rev = "beb586a"
+hash = "aef2b1a805b80cce573bb766f1459d88"
+
+[[plugin.deps]]
+use = "Rolv-Apneseth/starship"
+rev = "d1cd0a3"
+hash = "d1fee6d0f74cb52d4e031dc6b9207f31"
+
+[[plugin.deps]]
+use = "stelcodes/bunny"
+rev = "49bd059"
+hash = "2adf8bfe95004e63da0201dc0c2f365"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:mount"
+rev = "beb586a"
+hash = "5c4d8080367dd2561a18c1cf5a1dd295"
 
 [flavor]
 deps = []
