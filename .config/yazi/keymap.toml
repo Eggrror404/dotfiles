@@ -6,21 +6,6 @@ run = '''
 '''
 
 [[mgr.prepend_keymap]]
-on = [ "i", "s" ]
-desc = "Calc size of selection or cwd"
-run = "plugin what-size"
-
-[[mgr.prepend_keymap]]
 on = [ "<Enter>" ]
 desc = "Enter directory or open file"
 run = "plugin smart-enter"
-
-[[mgr.prepend_keymap]]
-on = "'"
-desc = "Start bunny.yazi"
-run = "plugin bunny"
-
-[[mgr.prepend_keymap]]
-on = "M"
-desc = "Open mount.yazi"
-run = "plugin mount"
