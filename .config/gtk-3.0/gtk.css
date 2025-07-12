@@ -209,3 +209,7 @@ tabbar tab:not(:backdrop):checked {
 .nautilus-window .sidebar:backdrop {
   background-color: @window_bg_color;
 }
+
+.navigation-sidebar {
+  background-color: @window_bg_color;
+}
