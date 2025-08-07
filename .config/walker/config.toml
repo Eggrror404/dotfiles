@@ -65,7 +65,7 @@ placeholder = "Hyprland Keybinds"
 switcher_only = true
 
 [builtins.applications]
-weight = 5
+weight = 10
 name = "applications"
 placeholder = "Applications"
 prioritize_new = true
@@ -159,7 +159,7 @@ placeholder = "Custom Commands"
 
 [builtins.emojis]
 exec = "wl-copy"
-weight = 5
+weight = 1
 name = "emojis"
 placeholder = "Emojis"
 switcher_only = false
