@@ -9,3 +9,7 @@ run = '''
 on = [ "<Enter>" ]
 desc = "Enter directory or open file"
 run = "plugin smart-enter"
+
+[[mgr.prepend_keymap]]
+on = "<C-n>"
+run = 'shell -- dragon-drop -x -i -T "$1"'
