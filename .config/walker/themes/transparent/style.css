@@ -1,0 +1,125 @@
+/*
+ * Using Adwaita public colors:
+ * https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-4-18/gtk/theme/Default/_colors-pubilc.scss
+ */
+
+* {
+  all: unset;
+}
+
+.normal-icons {
+  -gtk-icon-size: 16px;
+}
+
+.large-icons {
+  -gtk-icon-size: 32px;
+}
+
+scrollbar {
+  opacity: 0;
+}
+
+.box-wrapper {
+  border-radius: 8px;
+  background-color: alpha(@theme_bg_color, 0.75);
+  border: 1px solid @borders;
+  box-shadow: 0 0 6px 0 rgba(17, 17, 27, 0.6);
+  padding: 8px;
+  color: @theme_text_color;
+  font-family: "Quicksand";
+}
+
+.preview-box {
+}
+
+.box {
+}
+
+.search-container {
+  border-radius: 10px;
+}
+
+.input placeholder {
+  opacity: 0.5;
+}
+
+.input {
+  caret-color: @theme_fg_color;
+  padding: 8px;
+  color: @theme_fg_color;
+}
+
+.input:focus,
+.input:active {
+}
+
+.content-container {
+}
+
+.placeholder {
+}
+
+.scroll {
+}
+
+.list {
+  color: @theme_fg_color;
+  font-size: 18px;
+}
+
+child {
+}
+
+.item-box {
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+child:hover .item-box,
+child:selected .item-box {
+  color: @theme_select_fg_color;
+  background: alpha(@theme_selected_bg_color, 0.4);
+}
+
+.item-text-box {
+}
+
+.item-text {
+}
+
+.item-subtext {
+  font-size: 12px;
+  opacity: 0.5;
+}
+
+.item-image {
+  margin-right: 8px;
+}
+
+.keybind-hints {
+  opacity: 0.5;
+  color: @theme_fg_color;
+}
+
+.preview {
+  border: 1px solid alpha(@accent_bg_color, 0.25);
+  padding: 10px;
+  border-radius: 10px;
+  color: @theme_fg_color;
+}
+
+.calc .item-text {
+  font-size: 24px;
+}
+
+.calc .item-subtext {
+}
+
+.symbols .item-image {
+  font-size: 24px;
+}
+
+.preview .large-icons {
+  -gtk-icon-size: 64px;
+}
