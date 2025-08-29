@@ -28,5 +28,8 @@ export TERM=alacritty
 export EDITOR=nvim
 export DIFFPROG="nvim -d"
 
+# SSH agent
+export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
+
 # PATH
 export PATH="$HOME/.local/bin:$HOME/.local/share/cargo/bin:$HOME/.local/share/npm/bin:$HOME/.local/share/go/bin:$HOME/.spicetify:$PATH"

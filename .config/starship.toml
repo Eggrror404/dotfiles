@@ -204,3 +204,6 @@ symbol = " "
 
 [spack]
 symbol = "🅢 "
+
+[typst]
+symbol = " "
