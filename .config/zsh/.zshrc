@@ -4,10 +4,9 @@ for file in $ZDOTDIR/lib/{*.zsh,*.sh}(N); do
 done
 
 if [ -f "$XDG_DATA_HOME/miniplug/miniplug.zsh" ]; then
-    source "$HOME/.local/share/miniplug/miniplug.zsh"
+    source "$XDG_DATA_HOME/miniplug/miniplug.zsh"
 
     # Load plugins with miniplug
-    miniplug plugin 'ael-code/zsh-colored-man-pages'
     miniplug plugin 'reegnz/jq-zsh-plugin'
     miniplug plugin 'hlissner/zsh-autopair'
     miniplug plugin 'zsh-users/zsh-completions'
@@ -23,7 +22,7 @@ fi
 # Options
 SAVEHIST=100000
 HISTSIZE=100000
-ZSH_AUTOSUGGEST_STRATEGY=( completion history )
+ZSH_AUTOSUGGEST_STRATEGY=( completion )
 
 # Program Settings
 if type rg &>/dev/null; then
@@ -44,3 +43,5 @@ alias vimdiff='nvim -d'
 
 # Starship prompt
 eval "$(starship init zsh)"
+
+export PATH=$PATH:/home/eggrror404/.spicetify
