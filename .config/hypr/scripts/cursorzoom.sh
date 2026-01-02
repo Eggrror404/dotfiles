@@ -8,7 +8,7 @@ if [[ "$1" != "in" && "$1" != "out" ]]; then
 fi
 
 min=1
-max=2
+max=3
 steps=3
 dir="$1"
 
