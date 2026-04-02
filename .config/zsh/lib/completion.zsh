@@ -4,11 +4,19 @@ fpath+="$HOME/.config/zsh/zfunc"
 # Load compinit
 autoload -Uz compinit bashcompinit
 zstyle ':completion:*' menu select
-compinit
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+	compinit;
+else
+	compinit -C;
+fi;
 bashcompinit
 
-# app completions
+# python app completions
 if type register-python-argcomplete &>/dev/null; then
-  eval "$(register-python-argcomplete pipx)"
-  eval "$(register-python-argcomplete pmbootstrap)"
+  apps=(pipx pmbootstrap)
+  for app in "${apps[@]}"; do
+    if type "$app" &>/dev/null; then
+      eval "$(register-python-argcomplete "$app")"
+    fi
+  done
 fi

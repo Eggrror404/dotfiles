@@ -22,7 +22,7 @@ fi
 # Options
 SAVEHIST=100000
 HISTSIZE=100000
-ZSH_AUTOSUGGEST_STRATEGY=( completion )
+ZSH_AUTOSUGGEST_STRATEGY=(completion)
 
 # Program Settings
 if type rg &>/dev/null; then
@@ -43,5 +43,3 @@ alias vimdiff='nvim -d'
 
 # Starship prompt
 eval "$(starship init zsh)"
-
-export PATH=$PATH:/home/eggrror404/.spicetify
