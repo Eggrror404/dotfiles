@@ -1,7 +1,7 @@
 capslock=$(cat /sys/class/leds/*capslock*/brightness | head -n 1)
 
 if [ "$capslock" = "1" ]; then
-    quickshell ipc call osd openIcon "CapsLock On" "keyboard_capslock_badge"
+    quickshell -p $HOME/.config/noctalia-shell ipc call toast send '{"title": "CapsLock On", "icon": "xbox-a-filled"}'
 else
-    quickshell ipc call osd openIcon "CapsLock Off" "keyboard_capslock"
+    quickshell -p $HOME/.config/noctalia-shell ipc call toast send '{"title": "CapsLock Off", "icon": "xbox-a"}'
 fi
