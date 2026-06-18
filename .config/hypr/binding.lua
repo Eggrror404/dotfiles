@@ -60,16 +60,32 @@ bind {
 }
 
 -- resize window
+local function resize(relative)
+    return function()
+        local active = hl.get_active_window()
+        local mon = hl.get_active_monitor()
+        if active == nil then
+            return
+        end
+        if active.floating then
+            hl.dispatch(hl.dsp.window.resize { x = relative.x, y = relative.y, relative = true })
+        elseif mon ~= nil then
+            local ratio = relative.x / mon.size.width
+            local sign = ratio > 0 and "+" or ""
+            hl.dispatch(hl.dsp.layout("colresize " .. sign .. ratio))
+        end
+    end
+end
 local repeating = { repeating = true }
 bind {
-    { mod, "CTRL + left", hl.dsp.window.resize { x = -10, y = 0, relative = true }, flags = repeating },
-    { mod, "CTRL + right", hl.dsp.window.resize { x = 10, y = 0, relative = true }, flags = repeating },
-    { mod, "CTRL + up", hl.dsp.window.resize { x = 0, y = -10, relative = true }, flags = repeating },
-    { mod, "CTRL + down", hl.dsp.window.resize { x = 0, y = 10, relative = true }, flags = repeating },
-    { mod, "CTRL + H", hl.dsp.window.resize { x = -10, y = 0, relative = true }, flags = repeating },
-    { mod, "CTRL + L", hl.dsp.window.resize { x = 10, y = 0, relative = true }, flags = repeating },
-    { mod, "CTRL + K", hl.dsp.window.resize { x = 0, y = -10, relative = true }, flags = repeating },
-    { mod, "CTRL + J", hl.dsp.window.resize { x = 0, y = 10, relative = true }, flags = repeating },
+    { mod, "CTRL + left", resize { x = -10, y = 0 }, opts = repeating },
+    { mod, "CTRL + right", resize { x = 10, y = 0 }, opts = repeating },
+    { mod, "CTRL + up", resize { x = 0, y = -10 }, opts = repeating },
+    { mod, "CTRL + down", resize { x = 0, y = 10 }, opts = repeating },
+    { mod, "CTRL + H", resize { x = -10, y = 0 }, opts = repeating },
+    { mod, "CTRL + L", resize { x = 10, y = 0 }, opts = repeating },
+    { mod, "CTRL + K", resize { x = 0, y = -10 }, opts = repeating },
+    { mod, "CTRL + J", resize { x = 0, y = 10 }, opts = repeating },
 }
 
 -- switch workspaces
@@ -132,7 +148,7 @@ bind {
 
 -- misc
 bind {
-    { "CAPS + Caps_Lock", exec_script "capslock.sh", flags = { release = true, non_consuming = true } },
+    { "CAPS + Caps_Lock", exec_script "capslock.sh", opts = { release = true, non_consuming = true } },
     { mod, "KP_Add", exec_script "cursorzoom.sh in" },
     { mod, "KP_Subtract", exec_script "cursorzoom.sh out" },
 }
