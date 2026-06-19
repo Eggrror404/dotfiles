@@ -1,21 +1,18 @@
 require "animation"
 require "binding"
 require "env"
-require "monitors"
 require "start"
 require "window_rules"
+
+-- not-synced modules
+pcall(require, "monitors")
+pcall(require, "noctalia.noctalia-colors")
 
 hl.config {
     general = {
         gaps_in = 2,
         gaps_out = 4,
         border_size = 2,
-
-        -- TODO: use noctalia colors
-        col = {
-            active_border = { colors = { "rgb(9ccfd8)", "rgb(31748f)" }, angle = 10 },
-            inactive_border = { colors = { "rgb(908caa)", "rgb(6e6a86)" }, angle = 30 },
-        },
 
         resize_on_border = false,
         allow_tearing = false,
@@ -34,7 +31,7 @@ hl.config {
             enabled = true,
             range = 4,
             render_power = 2,
-            color = "rgba(191724cc)", -- TODO: color
+            color = hl.get_config("general.col.inactive_border").colors[0],
         },
 
         blur = {
