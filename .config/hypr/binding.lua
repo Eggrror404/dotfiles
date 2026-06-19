@@ -17,7 +17,7 @@ bind {
     { mod, "T", hl.dsp.exec_cmd "kitty" },
     { mod, "B", hl.dsp.exec_cmd "zen-browser" },
     { mod, "E", hl.dsp.exec_cmd "nautilus --new-window" },
-    { mod, "Space", hl.dsp.exec_cmd "vicinae toggle" },
+    { "ALT + Space", hl.dsp.exec_cmd "vicinae toggle" },
     { mod, "ALT + P", hl.dsp.exec_cmd "hyprpicker -a" },
     {
         mod,
