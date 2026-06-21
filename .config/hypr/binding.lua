@@ -146,6 +146,13 @@ bind {
     { "XF86MonBrightnessDown", noctalia_ipc "brightness decrease", opt = lock_repeat },
 }
 
+-- screenshot
+bind {
+    { "Print", hl.dsp.exec_cmd "grimblast --notify --cursor copy" },
+    { mod, "Print", hl.dsp.exec_cmd "grimblast --notify copy area" },
+    { "SHIFT + Print", hl.dsp.exec_cmd "grimblast --notify --cursor copy screen" },
+}
+
 -- misc
 bind {
     { "CAPS + Caps_Lock", exec_script "capslock.sh", opts = { release = true, non_consuming = true } },
