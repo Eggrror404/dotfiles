@@ -33,4 +33,6 @@ local function on_start()
     --  hl.exec_cmd("sleep 2 && openrgb -p 'Breath.' --startminimized")
 end
 
-hl.on("hyprland.start", on_start)
+hl.on("hyprland.start", function()
+    hl.timer(on_start, { timeout = 1, type = "oneshot" })
+end)

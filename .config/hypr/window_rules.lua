@@ -36,7 +36,7 @@ hl.window_rule {
     float = true,
     pin = true,
     move = { "monitor_w - window_w - 8", "monitor_h - window_h - 8" },
-    size = { "monitor_w / 3", "monitor_w / 3" },
+    size = { "monitor_w / 3", "monitor_h / 3" },
 }
 
 hl.window_rule {
@@ -46,6 +46,15 @@ hl.window_rule {
     },
     float = true,
     pin = true,
+}
+
+hl.window_rule {
+    name = "jetbrains welcome window",
+    match = {
+        class = "^jetbrains-.*",
+        title = "^Welcome to .*",
+    },
+    float = true,
 }
 
 --[ LAYER RULE ]--
