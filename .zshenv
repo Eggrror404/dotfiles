@@ -22,6 +22,8 @@ export CARGO_HOME=$XDG_DATA_HOME/cargo
 export TEXMFHOME=$XDG_DATA_HOME/texmf
 export TEXMFVAR=$XDG_CACHE_HOME/texlive/texmf-var
 export TEXMFCONFIG=$XDG_CONFIG_HOME/texlive/texmf-config
+export ANDROID_HOME=$XDG_DATA_HOME/Android/Sdk
+export FGVM_HOME=$XDG_DATA_HOME/fgvm
 
 # Applications
 export TERM=alacritty
