@@ -32,7 +32,8 @@ bind {
     { mod, "V", hl.dsp.window.float { action = "toggle" } },
     { mod, "P", hl.dsp.window.pin { action = "toggle" } },
     { mod, "F", hl.dsp.window.fullscreen { mode = "fullscreen", action = "toggle" } },
-    { mod, "SHIFT + F", hl.dsp.window.fullscreen { mode = "maximized", action = "toggle" } },
+    { mod, "CTRL + F", hl.dsp.window.fullscreen_state { internal = 1, client = 0, action = "toggle" } },
+    { mod, "SHIFT + F", hl.dsp.window.fullscreen_state { internal = 0, client = 2, action = "toggle" } },
 }
 
 -- move focus
