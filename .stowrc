@@ -1,2 +1,3 @@
 --ignore .stowrc
 --ignore README.md
+--ignore .config/fontconfig
