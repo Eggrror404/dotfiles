@@ -54,8 +54,8 @@ bind {
     { mod, "SHIFT + right", hl.dsp.window.move { direction = "r" } },
     { mod, "SHIFT + up", hl.dsp.window.move { direction = "u" } },
     { mod, "SHIFT + down", hl.dsp.window.move { direction = "d" } },
-    { mod, "SHIFT + H", hl.dsp.window.move { direction = "l" } },
-    { mod, "SHIFT + L", hl.dsp.window.move { direction = "r" } },
+    { mod, "SHIFT + H", hl.dsp.layout "swapcol l" },
+    { mod, "SHIFT + L", hl.dsp.layout "swapcol r" },
     { mod, "SHIFT + K", hl.dsp.window.move { direction = "u" } },
     { mod, "SHIFT + J", hl.dsp.window.move { direction = "d" } },
 }

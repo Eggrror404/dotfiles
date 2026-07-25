@@ -52,6 +52,7 @@ hl.config {
 
     scrolling = {
         fullscreen_on_one_column = true,
+        follow_min_visible = 0.1,
         column_width = 0.75,
     },
 
@@ -102,6 +103,13 @@ hl.config {
 
 hl.gesture {
     fingers = 3,
+    direction = "horizontal",
+    scale = 0.85,
+    action = "scroll_move",
+}
+
+hl.gesture {
+    fingers = 4,
     direction = "horizontal",
     action = "workspace",
 }
