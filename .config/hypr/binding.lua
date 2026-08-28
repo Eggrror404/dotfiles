@@ -130,21 +130,21 @@ bind {
 }
 
 -- utility with noctalia shell
-local function noctalia_ipc(command)
-    return hl.dsp.exec_cmd("qs -p $HOME/.config/noctalia-shell ipc call " .. command)
+local function noctalia(command)
+    return hl.dsp.exec_cmd("noctalia msg " .. command)
 end
 local lock_repeat = { locked = true, repeating = true }
 bind {
-    { "XF86AudioRaiseVolume", noctalia_ipc "volume increase", opt = lock_repeat },
-    { "XF86AudioLowerVolume", noctalia_ipc "volume decrease", opt = lock_repeat },
-    { "XF86AudioMute", noctalia_ipc "volume muteOutput", opt = lock_repeat },
-    { "XF86AudioPlay", noctalia_ipc "media playPause", opt = lock_repeat },
-    { "XF86AudioStop", noctalia_ipc "media toggle", opt = lock_repeat },
-    { "XF86AudioNext", noctalia_ipc "media next", opt = lock_repeat },
-    { "XF86AudioPrev", noctalia_ipc "media previous", opt = lock_repeat },
+    { "XF86AudioRaiseVolume", noctalia "volume-up", opt = lock_repeat },
+    { "XF86AudioLowerVolume", noctalia "volume-down", opt = lock_repeat },
+    { "XF86AudioMute", noctalia "volume-mute", opt = lock_repeat },
+    { "XF86AudioPlay", noctalia "media toggle", opt = lock_repeat },
+    { "XF86AudioStop", noctalia "media stop", opt = lock_repeat },
+    { "XF86AudioNext", noctalia "media next", opt = lock_repeat },
+    { "XF86AudioPrev", noctalia "media previous", opt = lock_repeat },
 
-    { "XF86MonBrightnessUp", noctalia_ipc "brightness increase", opt = lock_repeat },
-    { "XF86MonBrightnessDown", noctalia_ipc "brightness decrease", opt = lock_repeat },
+    { "XF86MonBrightnessUp", noctalia "brightness-up", opt = lock_repeat },
+    { "XF86MonBrightnessDown", noctalia "brightness-down", opt = lock_repeat },
 }
 
 -- screenshot
@@ -155,11 +155,11 @@ bind {
 }
 
 -- misc
-bind {
-    { "CAPS + Caps_Lock", exec_script "capslock.sh", opts = { release = true, non_consuming = true } },
-    { mod, "KP_Add", exec_script "cursorzoom.sh in" },
-    { mod, "KP_Subtract", exec_script "cursorzoom.sh out" },
-}
+-- bind {
+--     { "CAPS + Caps_Lock", exec_script "capslock.sh", opts = { release = true, non_consuming = true } },
+--     { mod, "KP_Add", exec_script "cursorzoom.sh in" },
+--     { mod, "KP_Subtract", exec_script "cursorzoom.sh out" },
+-- }
 
 -- power
 bind {

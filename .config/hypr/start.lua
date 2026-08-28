@@ -8,9 +8,9 @@ local function on_start()
     hl.exec_cmd "valent --gapplication-service"
     hl.exec_cmd "vicinae server"
     --  hl.exec_cmd("elephant & walker --gapplication-service")
-    hl.exec_cmd "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+    -- hl.exec_cmd "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
     --  hl.exec_cmd("nm-applet")
-    hl.exec_cmd "qs -p $HOME/.config/noctalia-shell &> /tmp/qs-current.log"
+    hl.exec_cmd "noctalia"
 
     -- Set cursor
     hl.exec_cmd "hyprctl setcursor Bibata-Modern-Ice 24"
