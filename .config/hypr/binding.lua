@@ -149,14 +149,16 @@ bind {
 
 -- screenshot
 bind {
-    { "Print", hl.dsp.exec_cmd "grimblast --notify --cursor copy" },
+    {
+        "Print",
+        hl.dsp.exec_cmd "grim - | satty -f - --copy-command wl-copy -o '~/Pictures/Screenshots/%Y%m%d_%H%M%S.png' --fullscreen --early-exit",
+    },
     { mod, "Print", hl.dsp.exec_cmd "grimblast --notify copy area" },
     { "SHIFT + Print", hl.dsp.exec_cmd "grimblast --notify --cursor copy screen" },
 }
 
 -- misc
 -- bind {
---     { "CAPS + Caps_Lock", exec_script "capslock.sh", opts = { release = true, non_consuming = true } },
 --     { mod, "KP_Add", exec_script "cursorzoom.sh in" },
 --     { mod, "KP_Subtract", exec_script "cursorzoom.sh out" },
 -- }

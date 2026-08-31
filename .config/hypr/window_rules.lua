@@ -11,6 +11,7 @@ match_class("[Ww]aydroid.*", { float = true })
 match_class("qalculate-gtk", { float = true })
 match_class("obsidian", { opacity = "0.95" })
 match_class("scrcpy", { tile = true })
+match_class("com.gabm.satty", { no_anim = true })
 
 hl.window_rule {
     -- Fix some dragging issues with XWayland
