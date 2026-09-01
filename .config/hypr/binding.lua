@@ -5,11 +5,6 @@ local function bind(specs)
     end
 end
 
-local HOME = os.getenv "HOME"
-local function exec_script(filename)
-    return hl.dsp.exec_cmd("sh " .. HOME .. "/.config/hypr/scripts/" .. filename)
-end
-
 local mod = "SUPER"
 
 -- apps
@@ -28,7 +23,7 @@ bind {
 
 -- window
 bind {
-    { mod, "X", exec_script "killactive.sh" },
+    { mod, "X", hl.dsp.window.close {} },
     { mod, "V", hl.dsp.window.float { action = "toggle" } },
     { mod, "P", hl.dsp.window.pin { action = "toggle" } },
     { mod, "F", hl.dsp.window.fullscreen { mode = "fullscreen", action = "toggle" } },
@@ -157,11 +152,31 @@ bind {
     { "SHIFT + Print", hl.dsp.exec_cmd "grimblast --notify --cursor copy screen" },
 }
 
--- misc
--- bind {
---     { mod, "KP_Add", exec_script "cursorzoom.sh in" },
---     { mod, "KP_Subtract", exec_script "cursorzoom.sh out" },
--- }
+-- cursor zoom
+local MIN_ZOOM = 1
+local MAX_ZOOM = 3
+local ZOOM_STEPS = 3
+
+---@param dir "in"|"out"
+local function cursor_zoom(dir)
+    return function()
+        local zoom = hl.get_config "cursor.zoom_factor"
+        local r = math.exp((math.log(MAX_ZOOM) - math.log(MIN_ZOOM)) / ZOOM_STEPS)
+        local new
+        if dir == "in" then
+            new = zoom * r
+        else
+            new = zoom / r
+        end
+        new = math.max(MIN_ZOOM, math.min(MAX_ZOOM, new))
+        new = math.floor(new * 1000 + 0.5) / 1000
+        hl.config { cursor = { zoom_factor = new } }
+    end
+end
+bind {
+    { mod, "KP_Add", cursor_zoom "in" },
+    { mod, "KP_Subtract", cursor_zoom "out" },
+}
 
 -- power
 bind {

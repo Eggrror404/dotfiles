@@ -1,7 +1,0 @@
-#!/usr/bin/env sh
-
-if [ "$(hyprctl activewindow -j | jq -r ".class")" = "Steam" ]; then
-    xdotool getactivewindow windowunmap
-else
-    hyprctl dispatch "hl.dsp.window.close()"
-fi
