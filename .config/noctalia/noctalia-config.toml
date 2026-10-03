@@ -151,24 +151,17 @@ widget_order = [
         layout = "horizontal"
         shadow = false
 
-[plugins]
-auto_update = false
-enabled = []
-
 [shell]
 font_family = "Quicksand"
 password_style = "random"
 polkit_agent = true
 settings_show_advanced = true
-ui_scale = 1.1500000096857548
 
     [shell.panel]
     open_near_click_session = true
 
     [shell.session]
     show_shortcuts = false
-
-[templates]
 
 [theme]
 source = "wallpaper"
@@ -215,13 +208,11 @@ hide_inactive = true
 color = "error"
 
 [widget.sysmon]
-show_label = false
 show_value = false
 
 [widget.volume]
 show_label = false
 
 [widget.workspaces]
-display = "none"
 pill_scale = 0.70000000000000007
 show_labels = false
