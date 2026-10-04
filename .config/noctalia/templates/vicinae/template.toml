@@ -1,0 +1,4 @@
+[theme.templates.user.vicinae]
+input_path = "templates/vicinae/vicinae.toml"
+output_path = "$XDG_DATA_HOME/vicinae/themes/noctalia.toml"
+post_hook = "bash '{{ config_dir }}/templates/vicinae/apply.sh'"

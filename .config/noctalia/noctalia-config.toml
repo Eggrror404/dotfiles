@@ -1,5 +1,5 @@
 [include]
-files = ["templates/fcitx5/"]
+files = ["templates/fcitx5/", "templates/vicinae/template.toml"]
 
 [accessibility]
 ui_scale = 1.1500000096857548
