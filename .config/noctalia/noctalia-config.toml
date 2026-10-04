@@ -1,3 +1,9 @@
+[include]
+files = ["templates/fcitx5/"]
+
+[accessibility]
+ui_scale = 1.1500000096857548
+
 [bar.default]
 background_opacity = 0.89999997988343239
 concave_edge_corners = true

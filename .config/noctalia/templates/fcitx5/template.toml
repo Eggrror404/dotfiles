@@ -1,0 +1,4 @@
+[theme.templates.user.fcitx5]
+input_path = "templates/fcitx5/theme.conf"
+output_path = "$XDG_DATA_HOME/fcitx5/themes/noctalia/theme.conf"
+post_hook = "bash '{{ config_dir }}/templates/fcitx5/apply.sh'"
