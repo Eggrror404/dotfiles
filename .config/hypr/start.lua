@@ -22,7 +22,7 @@ local function on_start()
     hl.exec_cmd "hyprpm reload -n"
 
     -- clipboard
-    hl.exec_cmd "wl-paste --watch cliphist store"
+    -- hl.exec_cmd "wl-paste --watch cliphist store"
 
     -- programs
     hl.exec_cmd "zen-browser"

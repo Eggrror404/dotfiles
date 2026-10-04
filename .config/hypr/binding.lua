@@ -17,7 +17,7 @@ bind {
     {
         mod,
         "CTRL + ALT + W",
-        hl.dsp.exec_cmd "qs -p $HOME/.config/noctalia-shell kill; qs -p $HOME/.config/noctalia-shell &> /tmp/qs-current.log",
+        hl.dsp.exec_cmd "pkill noctalia; noctalia",
     },
 }
 
