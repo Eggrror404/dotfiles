@@ -8,6 +8,16 @@ stow .
 
 ## notes
 
+- Noctalia templates
+
+  i'm using Noctalia to generate color-synced themes for GTK 3/4, QT, Hyprland (built-in), fcitx5, vicinae (copied from community).
+
+  to properly apply them:
+  - GTK3: use the `adw-gtk3` theme
+  - GTK4: use the default Adwaita theme
+  - QT: select the `noctalia` color palette in `qt5ct` and `qt6ct`
+  - fcitx5: no settings required, but the follow system light/dark color scheme option should be off.
+
 - GTK
 
   to remove the close button in gtk:
