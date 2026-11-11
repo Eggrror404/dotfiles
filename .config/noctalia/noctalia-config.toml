@@ -25,7 +25,7 @@ widget_spacing = 10
     accordion_direction = "end"
     border_width = 1.0
     enabled = true
-    fill = "surface_variant"
+    fill = "surface_container"
     id = "g1"
     members = [ "control-center", "btw" ]
     opacity = 0.0
@@ -37,6 +37,9 @@ enable_ddcutil = true
 minimum_brightness = 0.04999999888241291
 
 [config]
+
+[location]
+address = "Taipei, Taiwan"
 
 [lockscreen]
 blur_intensity = 0.29999999329447746
@@ -73,7 +76,7 @@ widget_order = [
     type = "login_box"
 
         [lockscreen_widgets.widget."lockscreen-login-box@DP-1".settings]
-        background_color = "surface_variant"
+        background_color = "surface_container"
         background_opacity = 0.0
         background_radius = 12.0
         center_password_text = true
@@ -84,6 +87,7 @@ widget_order = [
         show_keyboard_layout = true
         show_login_button = false
         show_media = true
+        show_password_reveal = true
         show_session_buttons = true
         show_unlock_hint = true
         show_weather = true
@@ -101,7 +105,7 @@ widget_order = [
     type = "login_box"
 
         [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
-        background_color = "surface_variant"
+        background_color = "surface_container"
         background_opacity = 0.88
         background_radius = 12.0
         center_password_text = false
@@ -129,7 +133,7 @@ widget_order = [
     type = "login_box"
 
         [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
-        background_color = "surface_variant"
+        background_color = "surface_container"
         background_opacity = 0.0
         background_radius = 12.0
         center_password_text = true
@@ -229,7 +233,7 @@ widget_order = [
 
 [plugins]
 auto_update = "none"
-enabled = [ "rylos/tailnet", "conqazht/share-wifi" ]
+enabled = [ "rylos/tailnet"]
 
 [shell]
 font_family = "Quicksand"
