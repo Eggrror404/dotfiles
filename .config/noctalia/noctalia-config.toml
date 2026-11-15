@@ -38,6 +38,24 @@ minimum_brightness = 0.04999999888241291
 
 [config]
 
+[idle]
+behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
+
+    [idle.behavior.lock]
+    action = "lock"
+    enabled = true
+    timeout = 600.0
+
+    [idle.behavior.lock-and-suspend]
+    action = "lock_and_suspend"
+    enabled = true
+    timeout = 900.0
+
+    [idle.behavior.screen-off]
+    action = "screen_off"
+    enabled = true
+    timeout = 660.0
+
 [location]
 address = "Taipei, Taiwan"
 
@@ -231,9 +249,13 @@ widget_order = [
         [lockscreen_widgets.widget.lockscreen-widget-0000000000000007.settings]
         background = false
 
+[nightlight]
+enabled = true
+temperature_night = 4300
+
 [plugins]
 auto_update = "none"
-enabled = [ "rylos/tailnet"]
+enabled = [ "rylos/tailnet" ]
 
 [shell]
 font_family = "Quicksand"
@@ -248,6 +270,9 @@ settings_show_advanced = true
     [shell.screen_corners]
     enabled = true
     size = 16
+
+    [shell.screenshot]
+    directory = "/home/eggrror404/Pictures/Screenshots"
 
     [shell.session]
     show_shortcuts = false
