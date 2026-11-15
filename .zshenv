@@ -26,7 +26,7 @@ export ANDROID_HOME=$XDG_DATA_HOME/Android/Sdk
 export FGVM_HOME=$XDG_DATA_HOME/fgvm
 
 # Applications
-export TERM=alacritty
+# export TERM=xterm-kitty
 export EDITOR=nvim
 export DIFFPROG="nvim -d"
 

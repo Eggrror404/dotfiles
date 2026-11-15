@@ -7,8 +7,8 @@ if [ -f "$XDG_DATA_HOME/miniplug/miniplug.zsh" ]; then
     source "$XDG_DATA_HOME/miniplug/miniplug.zsh"
 
     # Load plugins with miniplug
-    miniplug plugin 'reegnz/jq-zsh-plugin'
-    miniplug plugin 'hlissner/zsh-autopair'
+    # miniplug plugin 'reegnz/jq-zsh-plugin'
+    # miniplug plugin 'hlissner/zsh-autopair'
     miniplug plugin 'zsh-users/zsh-completions'
     miniplug plugin 'zsh-users/zsh-autosuggestions'
     miniplug plugin 'zsh-users/zsh-syntax-highlighting'
