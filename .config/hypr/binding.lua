@@ -144,12 +144,9 @@ bind {
 
 -- screenshot
 bind {
-    {
-        "Print",
-        hl.dsp.exec_cmd "grim - | satty -f - --copy-command wl-copy -o '~/Pictures/Screenshots/%Y%m%d_%H%M%S.png' --fullscreen --early-exit",
-    },
-    { mod, "Print", hl.dsp.exec_cmd "grimblast --notify copy area" },
-    { "SHIFT + Print", hl.dsp.exec_cmd "grimblast --notify --cursor copy screen" },
+    { "Print", noctalia "annotate" },
+    { mod, "Print", noctalia "screenshot-region" },
+    { "SHIFT + Print", noctalia "screenshot-fullscreen" },
 }
 
 -- cursor zoom
